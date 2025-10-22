@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -915,11 +914,7 @@
             <h4>Exemplos detalhados:</h4>
             <div class="code-block"><div class="code-content" id="code-0"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    
-                </div><div class="code-content" id="code-0"><div class="code-header">
-                    <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(0)">📋 Copiar</button>
-                </div><div class="code-content" id="code-0">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- OPTIMIZE: Compactar arquivos pequenos</span>
 OPTIMIZE events;
@@ -1109,10 +1104,9 @@ VACUUM events RETAIN 168 HOURS;
             </table>
 
             <h4>Caching e Performance:</h4>
-            <div class="code-block"><div class="code-content" id="code-1"><div class="code-content" id="code-1"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-1"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(1)">📋 Copiar</button>
-                </div><div class="code-content" id="code-1">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Cache table em memória</span>
 CACHE TABLE events;
@@ -1442,10 +1436,9 @@ EXPLAIN SELECT * FROM events WHERE date = '2024-01-01';
                 • <strong>Recomendação:</strong> Comece com Managed, depois parta para Standard se precisar de mais controle
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-2"><div class="code-content" id="code-2"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-2"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(2)">📋 Copiar</button>
-                </div><div class="code-content" id="code-2">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Exemplo: Managed Connector (Salesforce) via UI
 -- 1. No workspace: Data Engineering &gt; Lakeflow Connect &gt; Add Source
@@ -1510,10 +1503,9 @@ EXPLAIN SELECT * FROM events WHERE date = '2024-01-01';
 
             <h4>📝 Exemplos Práticos com Lakeflow Declarative Pipelines</h4>
 
-            <div class="code-block"><div class="code-content" id="code-3"><div class="code-content" id="code-3"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-3"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(3)">📋 Copiar</button>
-                </div><div class="code-content" id="code-3">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- EXEMPLO 1: Streaming Table (SQL)</span>
 CREATE OR REFRESH STREAMING TABLE customers_bronze
@@ -1552,10 +1544,9 @@ COLUMNS * EXCEPT (operation, timestamp);
 </div>
             </div></div></div></div>
 
-            <div class="code-block"><div class="code-content" id="code-4"><div class="code-content" id="code-4"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-4"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(4)">📋 Copiar</button>
-                </div><div class="code-content" id="code-4">
+                </div>
 <div class="code-section">
 <span class="code-comment"># EXEMPLO 4: Streaming Table (Python)</span>
 from pyspark import pipelines as dp
@@ -1672,10 +1663,9 @@ def historical_data():
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-5"><div class="code-content" id="code-5"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-5"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(5)">📋 Copiar</button>
-                </div><div class="code-content" id="code-5">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Instalar Databricks Connect</span>
 pip install databricks-connect
@@ -1729,10 +1719,9 @@ df = spark.table("catalog.schema.table")
                 </tbody>
             </table>
 
-            <div class="code-block"><div class="code-content" id="code-6"><div class="code-content" id="code-6"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-6"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(6)">📋 Copiar</button>
-                </div><div class="code-content" id="code-6">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Magic Commands - SQL</span>
 %sql
@@ -1791,10 +1780,9 @@ dbutils.fs.cp("/source", "/dest")
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-7"><div class="code-content" id="code-7"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-7"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(7)">📋 Copiar</button>
-                </div><div class="code-content" id="code-7">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Sintaxe Auto Loader - Python</span>
 df = (spark.readStream
@@ -1860,10 +1848,9 @@ AS SELECT * FROM cloud_files(
 
             <p><strong>O que é:</strong> Carregamento batch incremental de arquivos</p>
 
-            <div class="code-block"><div class="code-content" id="code-8"><div class="code-content" id="code-8"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-8"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(8)">📋 Copiar</button>
-                </div><div class="code-content" id="code-8">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- COPY INTO - Sintaxe básica</span>
 COPY INTO target_table
@@ -1935,10 +1922,9 @@ FORMAT_OPTIONS ('header' = 'true', 'inferSchema' = 'true');
                 </tbody>
             </table>
 
-            <div class="code-block"><div class="code-content" id="code-9"><div class="code-content" id="code-9"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-9"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(9)">📋 Copiar</button>
-                </div><div class="code-content" id="code-9">
+                </div>
 <div class="code-section">
 <span class="code-comment"># mergeSchema - Adicionar novas colunas</span>
 df.write \
@@ -1989,10 +1975,9 @@ df = spark.readStream \
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-10"><div class="code-content" id="code-10"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-10"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(10)">📋 Copiar</button>
-                </div><div class="code-content" id="code-10">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Streaming com checkpoint</span>
 (spark.readStream
@@ -2024,10 +2009,9 @@ df = spark.readStream \
 
             <h3>2.7 Notebooks - Comandos Avançados</h3>
 
-            <div class="code-block"><div class="code-content" id="code-11"><div class="code-content" id="code-11"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-11"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(11)">📋 Copiar</button>
-                </div><div class="code-content" id="code-11">
+                </div>
 <div class="code-section">
 <span class="code-comment"># %run - Executar outro notebook</span>
 %run /Shared/utils/common_functions
@@ -2071,10 +2055,9 @@ password = dbutils.secrets.get(scope="my-scope", key="db-password")
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-12"><div class="code-content" id="code-12"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-12"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(12)">📋 Copiar</button>
-                </div><div class="code-content" id="code-12">
+                </div>
 # Ver plano de execução
 df.explain(extended=True)
 
@@ -2348,10 +2331,9 @@ df.printSchema()
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-13"><div class="code-content" id="code-13"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-13"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(13)">📋 Copiar</button>
-                </div><div class="code-content" id="code-13">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Criar tabela Bronze (streaming)</span>
 CREATE OR REFRESH STREAMING TABLE bronze_events
@@ -2397,10 +2379,9 @@ GROUP BY DATE(event_timestamp), event_type
             <h3>3.4 SQL DDL/DML (⭐ MUITAS QUESTÕES)</h3>
             
             <h4>DDL (Data Definition Language):</h4>
-            <div class="code-block"><div class="code-content" id="code-14"><div class="code-content" id="code-14"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-14"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(14)">📋 Copiar</button>
-                </div><div class="code-content" id="code-14">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- CREATE OR REPLACE: Substitui se existe</span>
 CREATE OR REPLACE TABLE users (
@@ -2441,10 +2422,9 @@ DROP TABLE IF EXISTS users;
             </div></div></div></div>
 
             <h4>DML (Data Manipulation Language):</h4>
-            <div class="code-block"><div class="code-content" id="code-15"><div class="code-content" id="code-15"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-15"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(15)">📋 Copiar</button>
-                </div><div class="code-content" id="code-15">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- INSERT INTO (adiciona)</span>
 INSERT INTO users 
@@ -2512,10 +2492,9 @@ WHEN NOT MATCHED THEN
 
             <h4>SCD Type 2 - Implementação com MERGE (⭐ MUITO COBRADO!):</h4>
 
-            <div class="code-block"><div class="code-content" id="code-16"><div class="code-content" id="code-16"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-16"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(16)">📋 Copiar</button>
-                </div><div class="code-content" id="code-16">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Estrutura SCD Type 2</span>
 CREATE TABLE customers_history (
@@ -2571,10 +2550,9 @@ WHERE EXISTS (
 
             <h4>APPLY CHANGES INTO (DLT) - SCD Type 2 Simplificado (⭐⭐⭐ ESSENCIAL!):</h4>
 
-            <div class="code-block"><div class="code-content" id="code-17"><div class="code-content" id="code-17"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-17"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(17)">📋 Copiar</button>
-                </div><div class="code-content" id="code-17">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- APPLY CHANGES INTO - SCD Type 2 automático no DLT</span>
 CREATE OR REFRESH STREAMING TABLE customers_silver;
@@ -2622,10 +2600,9 @@ STORED AS SCD TYPE 2;
             <p><strong>Spark suporta tipos complexos:</strong> ARRAY, MAP, STRUCT</p>
 
             <h4>ARRAY:</h4>
-            <div class="code-block"><div class="code-content" id="code-18"><div class="code-content" id="code-18"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-18"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(18)">📋 Copiar</button>
-                </div><div class="code-content" id="code-18">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Criar array</span>
 SELECT array(1, 2, 3) as numbers;
@@ -2664,10 +2641,9 @@ GROUP BY user_id;
             </div></div></div></div>
 
             <h4>PySpark - Arrays:</h4>
-            <div class="code-block"><div class="code-content" id="code-19"><div class="code-content" id="code-19"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-19"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(19)">📋 Copiar</button>
-                </div><div class="code-content" id="code-19">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Explode array em linhas</span>
 from pyspark.sql.functions import explode
@@ -2701,10 +2677,9 @@ df.filter(array_contains("products", "laptop"))
             </div></div></div></div>
 
             <h4>STRUCT:</h4>
-            <div class="code-block"><div class="code-content" id="code-20"><div class="code-content" id="code-20"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-20"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(20)">📋 Copiar</button>
-                </div><div class="code-content" id="code-20">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Criar struct</span>
 SELECT struct(
@@ -2733,10 +2708,9 @@ df.withColumn("address", struct(
             </div></div></div></div>
 
             <h4>MAP:</h4>
-            <div class="code-block"><div class="code-content" id="code-21"><div class="code-content" id="code-21"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-21"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(21)">📋 Copiar</button>
-                </div><div class="code-content" id="code-21">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Criar map</span>
 SELECT map('key1', 'value1', 'key2', 'value2') as my_map;
@@ -2769,10 +2743,9 @@ SELECT explode(map('a', 1, 'b', 2)) as (key, value);
             <h3>3.5 PySpark DataFrames (⭐ MUITAS QUESTÕES)</h3>
             
             <h4>Agregações complexas:</h4>
-            <div class="code-block"><div class="code-content" id="code-22"><div class="code-content" id="code-22"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-22"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(22)">📋 Copiar</button>
-                </div><div class="code-content" id="code-22">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Import necessário</span>
 from pyspark.sql.functions import *
@@ -2811,8 +2784,7 @@ df.groupBy("date").agg(
             <h4>Window Functions:</h4>
             <div class="code-block"><div class="code-content" id="code-23"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(23)">📋 Copiar</button>
-                </div><div class="code-content" id="code-23"><div class="code-content" id="code-24">
+                </div><div class="code-content" id="code-24">
 from pyspark.sql.window import Window
 
 # Definir window
@@ -2833,10 +2805,9 @@ df.withColumn("dept_avg", avg("salary").over(window_dept))
             </div></div></div></div>
 
             <h4>Joins:</h4>
-            <div class="code-block"><div class="code-content" id="code-24"><div class="code-content" id="code-24"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-24"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(25)">📋 Copiar</button>
-                </div><div class="code-content" id="code-25">
+                </div>
 # Inner join (padrão)
 df1.join(df2, "id")
 df1.join(df2, df1.id == df2.user_id, "inner")
@@ -2923,10 +2894,9 @@ df1.join(df2, "id", "anti")
             </table>
 
             <h4>Estrutura de um Asset Bundle:</h4>
-            <div class="code-block"><div class="code-content" id="code-25"><div class="code-content" id="code-25"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-25"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(26)">📋 Copiar</button>
-                </div><div class="code-content" id="code-26">
+                </div>
 project/
 ├── databricks.yml          # Configuração principal
 ├── resources/
@@ -2941,10 +2911,9 @@ project/
         └── helpers.py
             </div></div></div></div>
 
-            <div class="code-block"><div class="code-content" id="code-26"><div class="code-content" id="code-26"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-26"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(27)">📋 Copiar</button>
-                </div><div class="code-content" id="code-27">
+                </div>
 # databricks.yml
 bundle:
   name: my-data-pipeline
@@ -2994,10 +2963,9 @@ targets:
 
             <h4>Job Parameters (⭐ IMPORTANTE):</h4>
 
-            <div class="code-block"><div class="code-content" id="code-27"><div class="code-content" id="code-27"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-27"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(28)">📋 Copiar</button>
-                </div><div class="code-content" id="code-28">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Notebook - Receber parâmetros do job</span>
 dbutils.widgets.text("environment", "prod")
@@ -3035,10 +3003,9 @@ if __name__ == "__main__":
 
             <p><strong>O que é:</strong> Passar dados entre tasks no mesmo job</p>
 
-            <div class="code-block"><div class="code-content" id="code-28"><div class="code-content" id="code-28"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-28"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(29)">📋 Copiar</button>
-                </div><div class="code-content" id="code-29">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Task 1 - Definir task value</span>
 dbutils.jobs.taskValues.set(
@@ -3116,10 +3083,9 @@ print(f"Count: {metrics['count']}, Errors: {metrics['errors']}")
 
             <h4>Retry Policies e Timeout (⭐ IMPORTANTE):</h4>
 
-            <div class="code-block"><div class="code-content" id="code-29"><div class="code-content" id="code-29"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-29"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(30)">📋 Copiar</button>
-                </div><div class="code-content" id="code-30">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Job configuration - Retry settings</span>
 tasks:
@@ -3191,10 +3157,9 @@ tasks:
 
             <h4>Notifications:</h4>
 
-            <div class="code-block"><div class="code-content" id="code-30"><div class="code-content" id="code-30"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-30"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(31)">📋 Copiar</button>
-                </div><div class="code-content" id="code-31">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Job notifications - Email</span>
 email_notifications:
@@ -3219,10 +3184,9 @@ webhook_notifications:
 
             <h4>Concurrency:</h4>
 
-            <div class="code-block"><div class="code-content" id="code-31"><div class="code-content" id="code-31"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-31"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(32)">📋 Copiar</button>
-                </div><div class="code-content" id="code-32">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Job concurrency settings</span>
 max_concurrent_runs: 1  # Apenas 1 run por vez
@@ -3320,10 +3284,9 @@ queue:
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-32"><div class="code-content" id="code-32"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-32"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(33)">📋 Copiar</button>
-                </div><div class="code-content" id="code-33">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Habilitar AQE (habilitado por padrão no DBR 7.3+)</span>
 spark.conf.set("spark.sql.adaptive.enabled", "true")
@@ -3346,10 +3309,9 @@ spark.conf.get("spark.sql.adaptive.enabled")
 
             <p><strong>O que é:</strong> Elimina partições desnecessárias em runtime durante joins</p>
 
-            <div class="code-block"><div class="code-content" id="code-33"><div class="code-content" id="code-33"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-33"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(34)">📋 Copiar</button>
-                </div><div class="code-content" id="code-34">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Exemplo: JOIN com filtro</span>
 SELECT sales.*
@@ -3370,10 +3332,9 @@ spark.conf.set("spark.sql.optimizer.dynamicPartitionPruning.enabled", "true")
 
             <h4>Spark Configuration - Otimizações Comuns:</h4>
 
-            <div class="code-block"><div class="code-content" id="code-34"><div class="code-content" id="code-34"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-34"><div class="code-header">
                     <span class="code-language">Python</span>
-                    <button class="code-copy-btn" onclick="copyCode(35)">📋 Copiar</button>
-                </div><div class="code-content" id="code-35">
+                </div>
 <div class="code-section">
 <span class="code-comment"># Shuffle partitions (padrão: 200)</span>
 spark.conf.set("spark.sql.shuffle.partitions", "100")
@@ -3484,10 +3445,9 @@ spark.conf.set("spark.sql.sources.parallelPartitionDiscovery.threshold", "32")
                 </tbody>
             </table>
 
-            <div class="code-block"><div class="code-content" id="code-35"><div class="code-content" id="code-35"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-35"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(36)">📋 Copiar</button>
-                </div><div class="code-content" id="code-36">
+                </div>
 -- Managed Table (sem LOCATION)
 CREATE TABLE users (id INT, name STRING) USING DELTA;
 
@@ -3503,10 +3463,9 @@ LOCATION 's3://my-bucket/data';
 
             <p><strong>Estrutura:</strong> catalog.schema.table</p>
 
-            <div class="code-block"><div class="code-content" id="code-36"><div class="code-content" id="code-36"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-36"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(37)">📋 Copiar</button>
-                </div><div class="code-content" id="code-37">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Ver catalog atual</span>
 SELECT current_catalog();
@@ -3555,10 +3514,9 @@ SELECT * FROM customers;
 
             <h4>CREATE SCHEMA - Managed vs External:</h4>
 
-            <div class="code-block"><div class="code-content" id="code-37"><div class="code-content" id="code-37"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-37"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(38)">📋 Copiar</button>
-                </div><div class="code-content" id="code-38">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Managed Schema (UC gerencia)</span>
 CREATE SCHEMA prod.sales;
@@ -3577,10 +3535,9 @@ DESCRIBE SCHEMA EXTENDED prod.sales;
             </div></div></div></div>
 
             <h4>Hierarquia:</h4>
-            <div class="code-block"><div class="code-content" id="code-38"><div class="code-content" id="code-38"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-38"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(39)">📋 Copiar</button>
-                </div><div class="code-content" id="code-39">
+                </div>
 METASTORE (top-level, cross-workspace)
   └── CATALOG
       └── SCHEMA (database)
@@ -3619,10 +3576,9 @@ METASTORE (top-level, cross-workspace)
                 </tbody>
             </table>
 
-            <div class="code-block"><div class="code-content" id="code-39"><div class="code-content" id="code-39"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-39"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(40)">📋 Copiar</button>
-                </div><div class="code-content" id="code-40">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- USAGE é sempre necessário primeiro!</span>
 GRANT USAGE ON CATALOG prod TO analysts;
@@ -3694,10 +3650,9 @@ SHOW GRANTS ON TABLE prod.sales.customers;
                 • Cloud storage configurado (S3, ADLS, GCS)
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-40"><div class="code-content" id="code-40"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-40"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(41)">📋 Copiar</button>
-                </div><div class="code-content" id="code-41">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Consultar audit logs</span>
 SELECT 
@@ -3743,10 +3698,9 @@ ORDER BY event_time DESC;
                 </tbody>
             </table>
 
-            <div class="code-block"><div class="code-content" id="code-41"><div class="code-content" id="code-41"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-41"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(42)">📋 Copiar</button>
-                </div><div class="code-content" id="code-42">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Queries mais caras (billing)</span>
 SELECT 
@@ -3790,10 +3744,9 @@ LIMIT 10;
 
             <p><strong>O que é:</strong> Metadados sobre objetos do catalog (tabelas, colunas, etc)</p>
 
-            <div class="code-block"><div class="code-content" id="code-42"><div class="code-content" id="code-42"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-42"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(43)">📋 Copiar</button>
-                </div><div class="code-content" id="code-43">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Listar todas as tabelas em um schema</span>
 SELECT table_catalog, table_schema, table_name, table_type
@@ -3851,10 +3804,9 @@ WHERE column_name = 'email'
 
             <h4>Row-Level Security (filtrar linhas):</h4>
 
-            <div class="code-block"><div class="code-content" id="code-43"><div class="code-content" id="code-43"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-43"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(44)">📋 Copiar</button>
-                </div><div class="code-content" id="code-44">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Ver dados apenas da sua região</span>
 CREATE VIEW sales_filtered AS
@@ -3880,10 +3832,9 @@ WHERE
 
             <h4>Column-Level Security (mascarar colunas):</h4>
 
-            <div class="code-block"><div class="code-content" id="code-44"><div class="code-content" id="code-44"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-44"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(45)">📋 Copiar</button>
-                </div><div class="code-content" id="code-45">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Mascarar dados sensíveis baseado em grupo</span>
 CREATE VIEW customers_masked AS
@@ -3988,10 +3939,9 @@ FROM employees;
                 </tbody>
             </table>
 
-            <div class="code-block"><div class="code-content" id="code-45"><div class="code-content" id="code-45"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-45"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(46)">📋 Copiar</button>
-                </div><div class="code-content" id="code-46">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Dar permissões a Service Principal</span>
 GRANT SELECT ON SCHEMA prod.sales 
@@ -4084,10 +4034,9 @@ TO `service-principal-uuid`;
 
             
 
-            <div class="code-block"><div class="code-content" id="code-46"><div class="code-content" id="code-46"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-46"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(47)">📋 Copiar</button>
-                </div><div class="code-content" id="code-47">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Criar Share</span>
 CREATE SHARE IF NOT EXISTS customer_share;
@@ -4169,10 +4118,9 @@ SELECT * FROM shared_data.sales.customers;
                 </ul>
             </div>
 
-            <div class="code-block"><div class="code-content" id="code-47"><div class="code-content" id="code-47"><div class="code-header">
+            <div class="code-block"><div class="code-content" id="code-47"><div class="code-header">
                     <span class="code-language">SQL</span>
-                    <button class="code-copy-btn" onclick="copyCode(48)">📋 Copiar</button>
-                </div><div class="code-content" id="code-48">
+                </div>
 <div class="code-section">
 <span class="code-comment">-- Criar connection para MySQL</span>
 CREATE CONNECTION mysql_prod
@@ -4375,56 +4323,6 @@ JOIN mysql_catalog.public.customers c
     </div>
 
     <script>
-        // Adicionar botões de copiar em todos os blocos de código
-        document.addEventListener('DOMContentLoaded', function() {
-            const codeBlocks = document.querySelectorAll('.code-block');
-            
-            codeBlocks.forEach((block, index) => {
-                // Detectar linguagem
-                const content = block.innerHTML;
-                let language = 'SQL';
-                if (content.includes('# PySpark') || content.includes('df.') || content.includes('spark.')) {
-                    language = 'Python';
-                } else if (content.includes('--')) {
-                    language = 'SQL';
-                }
-                
-                // Criar header com botão de copiar
-                const header = document.createElement('div');
-                header.className = 'code-header';
-                header.innerHTML = `
-                    <span class="code-language">${language}</span>
-                    <button class="code-copy-btn" onclick="copyCode(${index})">📋 Copiar</button>
-                `;
-                
-                // Envolver conteúdo existente
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'code-content';
-                contentDiv.innerHTML = block.innerHTML;
-                contentDiv.id = 'code-' + index;
-                
-                block.innerHTML = '';
-                block.appendChild(header);
-                block.appendChild(contentDiv);
-            });
-        });
-        
-        function copyCode(index) {
-            const codeElement = document.getElementById('code-' + index);
-            const text = codeElement.innerText;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '✓ Copiado!';
-                btn.style.background = '#4caf50';
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '#0e639c';
-                }, 2000);
-            });
-        }
         
         // Scroll to top functionality
         window.addEventListener('scroll', function() {
