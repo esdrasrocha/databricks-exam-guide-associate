@@ -190,7 +190,7 @@ Ajudar a comunidade de dados brasileira (e mundial!) a conquistar a certificaç�
 ## 📞 Contato
 
 - **GitHub:** [@esdrasrocha](https://github.com/esdrasrocha)
-- **LinkedIn:** [Seu LinkedIn](https://linkedin.com/in/esdras-rocha)
+- **LinkedIn:** [Meu LinkedIn](https://linkedin.com/in/esdras-rocha)
 
 -----
 
