@@ -1,0 +1,4473 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databricks Data Engineer Associate - Exam Guide Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #0d1117;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 80px;
+        }
+
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 999;
+            padding: 15px 0;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #c9d1d9;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .nav-links a:hover {
+            background: #21262d;
+            color: #58a6ff;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #c9d1d9;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(22, 27, 34, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                display: none;
+                border-bottom: 1px solid #30363d;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+
+        header {
+            background: #161b22;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+
+        header h1 {
+            color: #58a6ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header h2 {
+            color: #8b949e;
+        }
+
+        .exam-info {
+            background: #0d1117;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #30363d;
+        }
+        
+        .exam-info h3 {
+            color: #58a6ff;
+        }
+
+        .exam-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .exam-info-item {
+            background: #161b22;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #58a6ff;
+        }
+        
+        .exam-info-item div:first-child {
+            color: #8b949e;
+        }
+        
+        .exam-info-item div:last-child {
+            color: #58a6ff;
+        }
+
+        .section-breakdown {
+            background: #161b22;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+        
+        .section-breakdown h2 {
+            color: #58a6ff;
+        }
+
+        .section-bar {
+            margin: 20px 0;
+        }
+
+        .section-bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #c9d1d9;
+        }
+
+        .progress-track {
+            background: #21262d;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+
+        .progress-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            color: white;
+            font-weight: bold;
+            transition: width 0.3s ease;
+        }
+
+        .content-section {
+            background: #161b22;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+
+        .content-section h2 {
+            color: #58a6ff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #58a6ff;
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #79c0ff;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section h4 {
+            color: #8b949e;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .content-section p {
+            color: #c9d1d9;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+        
+        .content-section strong {
+            color: #e6edf3;
+        }
+        
+        .content-section ul, .content-section ol {
+            color: #c9d1d9;
+        }
+
+        .partners-module {
+            background: linear-gradient(135deg, #1f6feb 0%, #8957e5 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .partners-module-icon {
+            font-size: 2em;
+        }
+
+        .objective-list {
+            background: #0d1117;
+            border-left: 4px solid #58a6ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .objective-list strong {
+            color: #58a6ff;
+        }
+
+        .objective-list li {
+            margin: 10px 0;
+            padding-left: 10px;
+            color: #c9d1d9;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid;
+        }
+
+        .alert-info {
+            background: #0d1926;
+            border-color: #1f6feb;
+            color: #79c0ff;
+        }
+
+        .alert-warning {
+            background: #221c12;
+            border-color: #f59709;
+            color: #ffb757;
+        }
+
+        .alert-success {
+            background: #0a2e0b;
+            border-color: #2ea043;
+            color: #7ee787;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 25px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        
+        .code-block code {
+            display: block;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .code-comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+        
+        .code-keyword {
+            color: #ff79c6;
+            font-weight: bold;
+        }
+        
+        .code-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #44475a;
+        }
+        
+        .code-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Code Header e Copy Button */
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1c2128;
+            padding: 8px 15px;
+            border-radius: 6px 6px 0 0;
+            margin: -25px -25px 15px -25px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .code-language {
+            color: #8b949e;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .code-copy-btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .code-copy-btn:hover {
+            background: #1f6feb;
+            transform: scale(1.05);
+        }
+        
+        .code-content {
+            /* Conteúdo do código */
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1f6feb;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(31, 111, 235, 0.4);
+            transition: all 0.3s;
+            z-index: 998;
+        }
+        
+        .scroll-top:hover {
+            background: #58a6ff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(88, 166, 255, 0.5);
+        }
+        
+        /* Architecture Diagrams */
+        .diagram-container {
+            background: #0d1117;
+            border: 2px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .diagram-title {
+            color: #58a6ff;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .diagram-svg {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .diagram-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #c9d1d9;
+            font-size: 0.9em;
+        }
+        
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            border: 1px solid #30363d;
+        }
+
+        .comparison-table th {
+            background: #1f6feb;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #30363d;
+            color: #c9d1d9;
+            background: #0d1117;
+        }
+
+        .comparison-table tr:hover td {
+            background: #161b22;
+        }
+
+        .exam-question {
+            background: #fff8e1;
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .exam-question h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+
+        .exam-answer {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #1f6feb 0%, #8957e5 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid #30363d;
+        }
+
+        .summary-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .summary-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .summary-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #161b22;
+            text-align: center;
+            padding: 30px;
+            color: #8b949e;
+            margin-top: 50px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+        }
+        
+        footer strong {
+            color: #58a6ff;
+        }
+        
+        footer p {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <div class="nav-logo">📚 Databricks Exam Guide</div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#section1">Section 1</a>
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#section2">Section 2</a>
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#section3">Section 3</a>
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#section4">Section 4</a>
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#section5">Section 5</a>
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#checklist">Checklist</a>
+                <a href="file:///C:/Users/A521645/Downloads/databricks_exam_guide_FINAL.html#author">Autor</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🎓 Databricks Certified Data Engineer Associate</h1>
+            <h2>Exam Guide Completo</h2>
+            <p style="margin-top: 10px; color: #666;">Baseado no guia oficial | Mapeado com Databricks Academy Partners</p>
+            
+            <div class="exam-info">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📋 Informações Essenciais da Prova</h3>
+                <div class="exam-info-grid">
+                    <div class="exam-info-item">
+                        <div style="font-size: 0.9em; color: #666;">Questões</div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #667eea;">45</div>
+                    </div>
+                    <div class="exam-info-item">
+                        <div style="font-size: 0.9em; color: #666;">Duração</div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #667eea;">90 min</div>
+                    </div>
+                    <div class="exam-info-item">
+                        <div style="font-size: 0.9em; color: #666;">Custo</div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #667eea;">USD 200</div>
+                    </div>
+                    <div class="exam-info-item">
+                        <div style="font-size: 0.9em; color: #666;">Formato</div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #667eea;">Online</div>
+                    </div>
+                    <div class="exam-info-item">
+                        <div style="font-size: 0.9em; color: #666;">Validade</div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #667eea;">2 anos</div>
+                    </div>
+                    <div class="exam-info-item">
+                        <div style="font-size: 0.9em; color: #666;">Aprovação</div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #667eea;">~70%</div>
+                    </div>
+                </div>
+
+                <h4 style="color: #764ba2; margin-top: 25px; margin-bottom: 10px;">📚 Cursos Partners Recomendados:</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li><strong>Módulo 1:</strong> Data Ingestion with Lakeflow Connect (2h00m)</li>
+                    <li><strong>Módulo 2:</strong> Deploy Workloads with LakeFlow Jobs (2h00m)</li>
+                    <li><strong>Módulo 3:</strong> Build Data Pipelines with Lakeflow Declarative Pipeline (2h00m)</li>
+                    <li><strong>Módulo 4:</strong> Data Management and Governance with Unity Catalog (2h00m)</li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="section-breakdown">
+            <h2 style="color: #667eea; margin-bottom: 25px;">📊 Distribuição da Prova (45 questões)</h2>
+            
+            <div class="section-bar">
+                <div class="section-bar-header">
+                    <span><strong>Section 1:</strong> Databricks Intelligence Platform</span>
+                    <span><strong>~15% (7 questões)</strong></span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 15%; background: #2196f3;">15%</div>
+                </div>
+                <div style="margin-top: 8px; font-size: 0.9em; color: #666;">
+                    📍 <strong>Módulos Partners:</strong> Conceitos distribuídos em todos os módulos
+                </div>
+            </div>
+
+            <div class="section-bar">
+                <div class="section-bar-header">
+                    <span><strong>Section 2:</strong> Development and Ingestion</span>
+                    <span><strong>~20% (9 questões)</strong></span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 20%; background: #4caf50;">20%</div>
+                </div>
+                <div style="margin-top: 8px; font-size: 0.9em; color: #666;">
+                    📍 <strong>Módulo Partners 1:</strong> Data Ingestion with Lakeflow Connect
+                </div>
+            </div>
+
+            <div class="section-bar">
+                <div class="section-bar-header">
+                    <span><strong>Section 3:</strong> Data Processing &amp; Transformations</span>
+                    <span><strong>~30% (13-14 questões)</strong></span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 30%; background: #ff9800;">30%</div>
+                </div>
+                <div style="margin-top: 8px; font-size: 0.9em; color: #666;">
+                    📍 <strong>Módulo Partners 3:</strong> Build Data Pipelines with Lakeflow Declarative Pipeline
+                </div>
+            </div>
+
+            <div class="section-bar">
+                <div class="section-bar-header">
+                    <span><strong>Section 4:</strong> Productionizing Data Pipelines</span>
+                    <span><strong>~20% (9 questões)</strong></span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 20%; background: #9c27b0;">20%</div>
+                </div>
+                <div style="margin-top: 8px; font-size: 0.9em; color: #666;">
+                    📍 <strong>Módulo Partners 2:</strong> Deploy Workloads with LakeFlow Jobs
+                </div>
+            </div>
+
+            <div class="section-bar">
+                <div class="section-bar-header">
+                    <span><strong>Section 5:</strong> Data Governance &amp; Quality</span>
+                    <span><strong>~15% (7 questões)</strong></span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 15%; background: #f44336;">15%</div>
+                </div>
+                <div style="margin-top: 8px; font-size: 0.9em; color: #666;">
+                    📍 <strong>Módulo Partners 4:</strong> Data Management and Governance with Unity Catalog
+                </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 25px;">
+                <strong>💡 Estratégia de Estudo:</strong><br>
+                • Section 3 (30%) é a mais pesada - dedique 30% do tempo aqui<br>
+                • Sections 2 e 4 (20% cada) - dedique 20% do tempo em cada<br>
+                • Sections 1 e 5 (15% cada) - dedique 15% do tempo em cada<br></div>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="content-section" id="section1">
+            <h2>Section 1: Databricks Intelligence Platform (~15% - 7 questões)</h2>
+            
+            <div class="partners-module">
+                <div class="partners-module-icon">📚</div>
+                <div>
+                    <strong>Módulos Partners:</strong> Fundamentos distribuídos em todos os 4 módulos<br>
+                    <span style="opacity: 0.9;">Conceitos básicos presentes em: Módulos 1, 2, 3 e 4</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🎯 Objetivos desta seção:</strong><br>
+                • Enable features that simplify data layout decisions and optimize query performance<br>
+                • Explain the value of the Data Intelligence Platform<br>
+                • Identify the applicable compute to use for a specific use case
+            </div>
+
+            <!-- ARCHITECTURE DIAGRAM -->
+            <div class="diagram-container">
+                <div class="diagram-title">🏗️ Arquitetura Databricks Lakehouse Platform</div>
+                
+                <svg class="diagram-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="1000" height="700" fill="#0d1117"></rect>
+                    
+                    <!-- Control Plane -->
+                    <rect x="50" y="50" width="900" height="250" rx="10" fill="#1f2937" stroke="#3b82f6" stroke-width="3"></rect>
+                    <text x="500" y="85" text-anchor="middle" fill="#60a5fa" font-size="24" font-weight="bold">CONTROL PLANE (Databricks Managed)</text>
+                    
+                    <!-- Control Plane Components -->
+                    <g id="workspace">
+                        <rect x="80" y="110" width="180" height="160" rx="8" fill="#374151" stroke="#60a5fa" stroke-width="2"></rect>
+                        <text x="170" y="140" text-anchor="middle" fill="#60a5fa" font-size="16" font-weight="bold">Workspace</text>
+                        <text x="170" y="165" text-anchor="middle" fill="#d1d5db" font-size="12">• Notebooks</text>
+                        <text x="170" y="185" text-anchor="middle" fill="#d1d5db" font-size="12">• Repos (Git)</text>
+                        <text x="170" y="205" text-anchor="middle" fill="#d1d5db" font-size="12">• Web UI</text>
+                        <text x="170" y="225" text-anchor="middle" fill="#d1d5db" font-size="12">• DBSQL Editor</text>
+                        <text x="170" y="245" text-anchor="middle" fill="#d1d5db" font-size="12">• Workflows</text>
+                    </g>
+                    
+                    <g id="cluster-management">
+                        <rect x="290" y="110" width="180" height="160" rx="8" fill="#374151" stroke="#60a5fa" stroke-width="2"></rect>
+                        <text x="380" y="140" text-anchor="middle" fill="#60a5fa" font-size="16" font-weight="bold">Cluster Manager</text>
+                        <text x="380" y="165" text-anchor="middle" fill="#d1d5db" font-size="12">• All-Purpose</text>
+                        <text x="380" y="185" text-anchor="middle" fill="#d1d5db" font-size="12">• Job Clusters</text>
+                        <text x="380" y="205" text-anchor="middle" fill="#d1d5db" font-size="12">• SQL Warehouses</text>
+                        <text x="380" y="225" text-anchor="middle" fill="#d1d5db" font-size="12">• Serverless</text>
+                        <text x="380" y="245" text-anchor="middle" fill="#d1d5db" font-size="12">• Autoscaling</text>
+                    </g>
+                    
+                    <g id="security">
+                        <rect x="500" y="110" width="180" height="160" rx="8" fill="#374151" stroke="#60a5fa" stroke-width="2"></rect>
+                        <text x="590" y="140" text-anchor="middle" fill="#60a5fa" font-size="16" font-weight="bold">Security &amp; IAM</text>
+                        <text x="590" y="165" text-anchor="middle" fill="#d1d5db" font-size="12">• Unity Catalog</text>
+                        <text x="590" y="185" text-anchor="middle" fill="#d1d5db" font-size="12">• RBAC</text>
+                        <text x="590" y="205" text-anchor="middle" fill="#d1d5db" font-size="12">• Audit Logs</text>
+                        <text x="590" y="225" text-anchor="middle" fill="#d1d5db" font-size="12">• Encryption</text>
+                        <text x="590" y="245" text-anchor="middle" fill="#d1d5db" font-size="12">• SSO</text>
+                    </g>
+                    
+                    <g id="jobs">
+                        <rect x="710" y="110" width="180" height="160" rx="8" fill="#374151" stroke="#60a5fa" stroke-width="2"></rect>
+                        <text x="800" y="140" text-anchor="middle" fill="#60a5fa" font-size="16" font-weight="bold">Lakeflow Jobs</text>
+                        <text x="800" y="165" text-anchor="middle" fill="#d1d5db" font-size="12">• Orchestration</text>
+                        <text x="800" y="185" text-anchor="middle" fill="#d1d5db" font-size="12">• Scheduling</text>
+                        <text x="800" y="205" text-anchor="middle" fill="#d1d5db" font-size="12">• Monitoring</text>
+                        <text x="800" y="225" text-anchor="middle" fill="#d1d5db" font-size="12">• Alerting</text>
+                        <text x="800" y="245" text-anchor="middle" fill="#d1d5db" font-size="12">• DAG Control</text>
+                    </g>
+                    
+                    <!-- Arrow pointing down -->
+                    <line x1="500" y1="310" x2="500" y2="360" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    <text x="520" y="340" fill="#60a5fa" font-size="14">Secure Tunnel</text>
+                    
+                    <!-- Data Plane -->
+                    <rect x="50" y="370" width="900" height="280" rx="10" fill="#1f2937" stroke="#10b981" stroke-width="3"></rect>
+                    <text x="500" y="405" text-anchor="middle" fill="#34d399" font-size="24" font-weight="bold">DATA PLANE (Customer Cloud Account)</text>
+                    
+                    <!-- Compute -->
+                    <g id="compute">
+                        <rect x="80" y="430" width="400" height="200" rx="8" fill="#374151" stroke="#34d399" stroke-width="2"></rect>
+                        <text x="280" y="460" text-anchor="middle" fill="#34d399" font-size="18" font-weight="bold">⚡ Compute (Spark Clusters)</text>
+                        
+                        <rect x="100" y="480" width="160" height="130" rx="6" fill="#1f2937" stroke="#60a5fa" stroke-width="1.5"></rect>
+                        <text x="180" y="505" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="bold">Driver Node</text>
+                        <circle cx="180" cy="535" r="25" fill="#3b82f6"></circle>
+                        <text x="180" y="542" text-anchor="middle" fill="white" font-size="14" font-weight="bold">D</text>
+                        <text x="180" y="575" text-anchor="middle" fill="#d1d5db" font-size="11">SparkContext</text>
+                        <text x="180" y="590" text-anchor="middle" fill="#d1d5db" font-size="11">Cluster Manager</text>
+                        
+                        <rect x="280" y="480" width="180" height="130" rx="6" fill="#1f2937" stroke="#34d399" stroke-width="1.5"></rect>
+                        <text x="370" y="505" text-anchor="middle" fill="#34d399" font-size="14" font-weight="bold">Worker Nodes</text>
+                        <circle cx="320" cy="540" r="20" fill="#10b981"></circle>
+                        <text x="320" y="546" text-anchor="middle" fill="white" font-size="12" font-weight="bold">W1</text>
+                        <circle cx="370" cy="540" r="20" fill="#10b981"></circle>
+                        <text x="370" y="546" text-anchor="middle" fill="white" font-size="12" font-weight="bold">W2</text>
+                        <circle cx="420" cy="540" r="20" fill="#10b981"></circle>
+                        <text x="420" y="546" text-anchor="middle" fill="white" font-size="12" font-weight="bold">W3</text>
+                        <text x="370" y="580" text-anchor="middle" fill="#d1d5db" font-size="11">Executors</text>
+                        <text x="370" y="595" text-anchor="middle" fill="#d1d5db" font-size="11">Cache + Tasks</text>
+                    </g>
+                    
+                    <!-- Storage -->
+                    <g id="storage">
+                        <rect x="520" y="430" width="400" height="200" rx="8" fill="#374151" stroke="#f59e0b" stroke-width="2"></rect>
+                        <text x="720" y="460" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="bold">💾 Storage (Cloud Object Store)</text>
+                        
+                        <rect x="550" y="480" width="340" height="130" rx="6" fill="#1f2937" stroke="#f59e0b" stroke-width="1.5"></rect>
+                        <text x="720" y="505" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="bold">Delta Lake (Parquet + Transaction Log)</text>
+                        
+                        <g id="delta-files">
+                            <rect x="570" y="520" width="80" height="70" rx="4" fill="#78350f" stroke="#fbbf24" stroke-width="1"></rect>
+                            <text x="610" y="540" text-anchor="middle" fill="#fbbf24" font-size="11">Bronze</text>
+                            <text x="610" y="555" text-anchor="middle" fill="#d1d5db" font-size="9">Raw Data</text>
+                            <text x="610" y="570" text-anchor="middle" fill="#d1d5db" font-size="9">Parquet</text>
+                            <text x="610" y="582" text-anchor="middle" fill="#d1d5db" font-size="9">_delta_log/</text>
+                        </g>
+                        
+                        <g id="silver-files">
+                            <rect x="665" y="520" width="80" height="70" rx="4" fill="#78350f" stroke="#fbbf24" stroke-width="1"></rect>
+                            <text x="705" y="540" text-anchor="middle" fill="#fbbf24" font-size="11">Silver</text>
+                            <text x="705" y="555" text-anchor="middle" fill="#d1d5db" font-size="9">Cleaned</text>
+                            <text x="705" y="570" text-anchor="middle" fill="#d1d5db" font-size="9">Validated</text>
+                            <text x="705" y="582" text-anchor="middle" fill="#d1d5db" font-size="9">Optimized</text>
+                        </g>
+                        
+                        <g id="gold-files">
+                            <rect x="760" y="520" width="80" height="70" rx="4" fill="#78350f" stroke="#fbbf24" stroke-width="1"></rect>
+                            <text x="800" y="540" text-anchor="middle" fill="#fbbf24" font-size="11">Gold</text>
+                            <text x="800" y="555" text-anchor="middle" fill="#d1d5db" font-size="9">Aggregated</text>
+                            <text x="800" y="570" text-anchor="middle" fill="#d1d5db" font-size="9">Business</text>
+                            <text x="800" y="582" text-anchor="middle" fill="#d1d5db" font-size="9">Ready</text>
+                        </g>
+                    </g>
+                    
+                    <!-- Arrow markers -->
+                    <defs>
+                        <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#60a5fa"></path>
+                        </marker>
+                    </defs>
+                </svg>
+                
+                <div class="diagram-legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #3b82f6; border: 2px solid #60a5fa;"></div>
+                        <span>Control Plane (Databricks)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #10b981; border: 2px solid #34d399;"></div>
+                        <span>Data Plane (Your Cloud)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #f59e0b; border: 2px solid #fbbf24;"></div>
+                        <span>Storage Layer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Arquitetura:</strong><br>
+                • <strong>Control Plane:</strong> Gerenciado pela Databricks (Workspace, Notebooks, Jobs, Unity Catalog)<br>
+                • <strong>Data Plane:</strong> Roda na SUA conta cloud (Compute + Storage)<br>
+                • <strong>Secure Tunnel:</strong> Comunicação segura entre Control e Data Plane<br>
+                • <strong>Dados NUNCA saem do seu cloud:</strong> Databricks não tem acesso aos dados<br>
+                • <strong>Driver:</strong> Coordena workers e SparkContext<br>
+                • <strong>Workers:</strong> Executam tasks em paralelo
+            </div>
+
+            <h3>1.1 Features que Otimizam Performance</h3>
+            
+            <h4>Delta Lake Optimizations:</h4>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 35%;">Quando Usar</th>
+                        <th style="width: 40%;">Exemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>OPTIMIZE</strong></td>
+                        <td>Compactar arquivos pequenos em arquivos maiores</td>
+                        <td><code>OPTIMIZE events;</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Z-ORDERING</strong></td>
+                        <td>Organizar dados por colunas frequentemente filtradas</td>
+                        <td><code>OPTIMIZE events ZORDER BY (date, region);</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>AUTO OPTIMIZE</strong></td>
+                        <td>Otimizar automaticamente durante escrita</td>
+                        <td><code>TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true')</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>VACUUM</strong></td>
+                        <td>Remover arquivos antigos não referenciados</td>
+                        <td><code>VACUUM events RETAIN 168 HOURS;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Exemplos detalhados:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(0)">📋 Copiar</button>
+                </div><div class="code-content" id="code-0">
+<div class="code-section">
+<span class="code-comment">-- OPTIMIZE: Compactar arquivos pequenos</span>
+OPTIMIZE events;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Z-ORDERING: Para colunas em WHERE clauses</span>
+OPTIMIZE events 
+ZORDER BY (date, region, product_id);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- AUTO OPTIMIZE: Na criação da tabela</span>
+CREATE TABLE events (...) 
+TBLPROPERTIES (
+    'delta.autoOptimize.optimizeWrite' = 'true',
+    'delta.autoOptimize.autoCompact' = 'true'
+);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- VACUUM: Remover arquivos antigos (padrão: 7 dias)</span>
+VACUUM events RETAIN 168 HOURS;
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ IMPORTANTE PARA PROVA:</strong><br>
+                • <strong>OPTIMIZE</strong> não deleta automaticamente - use VACUUM depois<br>
+                • <strong>Z-ORDERING</strong> funciona bem com até 4 colunas<br>
+                • <strong>VACUUM</strong> impede Time Travel das versões removidas<br>
+                • <strong>AUTO OPTIMIZE</strong> adiciona pequeno overhead na escrita, ganho na leitura
+            </div>
+
+            <h3>1.2 Valor da Data Intelligence Platform</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Função</th>
+                        <th>Localização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Control Plane</strong></td>
+                        <td>Gerencia notebooks, jobs, UI, metadados</td>
+                        <td>Cloud Databricks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Plane</strong></td>
+                        <td>Executa processamento, armazena dados</td>
+                        <td>Sua conta cloud (AWS/Azure/GCP)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Unity Catalog</strong></td>
+                        <td>Governança centralizada</td>
+                        <td>Cross-workspace e cross-cloud</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Delta Lake</strong></td>
+                        <td>ACID transactions no Data Lake</td>
+                        <td>Storage layer</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>1.3 Tipos de Compute</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Quando Usar</th>
+                        <th>Custo</th>
+                        <th>⚠️ Prova</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>All-Purpose Cluster</strong></td>
+                        <td>Desenvolvimento interativo, notebooks</td>
+                        <td>💰💰💰</td>
+                        <td>NÃO use em produção</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Job Cluster</strong></td>
+                        <td>Jobs automatizados, produção</td>
+                        <td>💰💰</td>
+                        <td>✅ SEMPRE em produção</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SQL Warehouse</strong></td>
+                        <td>Queries SQL, BI tools, dashboards</td>
+                        <td>💰💰</td>
+                        <td>Otimizado para SQL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Serverless</strong></td>
+                        <td>Zero gerenciamento, autoscaling</td>
+                        <td>💰💰</td>
+                        <td>Hands-off compute</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Cluster Modes (⭐ IMPORTANTE):</h4>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Uso</th>
+                        <th>Características</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Standard</strong></td>
+                        <td>Single user, qualquer linguagem</td>
+                        <td>Scala, Python, R, SQL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High Concurrency</strong></td>
+                        <td>Múltiplos usuários simultâneos</td>
+                        <td>Apenas SQL e Python, table ACLs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Single Node</strong></td>
+                        <td>Desenvolvimento local, testes</td>
+                        <td>Sem workers, apenas driver</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA:</strong><br>
+                • <strong>High Concurrency</strong> → Multi-user, shared, table ACLs<br>
+                • <strong>Standard</strong> → Single user, qualquer linguagem<br>
+                • <strong>Single Node</strong> → Dev/test, sem distributed processing
+            </div>
+
+            <h4>Photon Engine:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ Engine nativo C++ para acelerar queries Spark SQL</li>
+                    <li>✅ Até 3x mais rápido que Spark tradicional</li>
+                    <li>✅ Automaticamente habilitado em SQL Warehouses</li>
+                    <li>✅ Opcional em clusters (Databricks Runtime with Photon)</li>
+                    <li>✅ Melhor para: SQL, Delta Lake, Parquet, agregações</li>
+                </ul>
+            </div>
+
+            <h4>Instance Pools:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ VMs pré-alocadas prontas para uso imediato</li>
+                    <li>✅ Reduz cluster startup time (de minutos para segundos)</li>
+                    <li>✅ Útil para jobs frequentes com SLA apertado</li>
+                    <li>✅ Custo: Paga pelas VMs idle no pool</li>
+                </ul>
+            </div>
+
+            <h4>Databricks Runtime (DBR):</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Runtime</th>
+                        <th>Inclui</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>DBR (Standard)</strong></td>
+                        <td>Spark + Delta Lake + otimizações</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DBR ML</strong></td>
+                        <td>DBR + MLflow + bibliotecas ML</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DBR with Photon</strong></td>
+                        <td>DBR + Photon Engine</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Caching e Performance:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(1)">📋 Copiar</button>
+                </div><div class="code-content" id="code-1">
+<div class="code-section">
+<span class="code-comment">-- Cache table em memória</span>
+CACHE TABLE events;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Remover cache</span>
+UNCACHE TABLE events;
+</div>
+
+<div class="code-section">
+<span class="code-comment"># PySpark - persist em memória</span>
+df.cache()  # ou df.persist()
+df.unpersist()
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Ver query plan</span>
+EXPLAIN SELECT * FROM events WHERE date = '2024-01-01';
+</div>
+            </div></div>
+
+            <div class="alert alert-success">
+                <strong>✅ DICA PARA PROVA:</strong><br>
+                • Job está rodando diariamente? → <strong>Job Cluster</strong> (mais barato)<br>
+                • Desenvolvimento/exploração? → <strong>All-Purpose Cluster</strong><br>
+                • Dashboard de BI? → <strong>SQL Warehouse</strong><br>
+                • Quer zero configuração? → <strong>Serverless</strong><br>
+                • Múltiplos usuários? → <strong>High Concurrency Mode</strong><br>
+                • Performance SQL crítica? → <strong>Photon Engine</strong>
+            </div>
+
+            <div class="summary-box">
+                <h3>📝 Resumo Section 1</h3>
+                <ul>
+                    <li><strong>Otimizações:</strong> OPTIMIZE, Z-ORDER, AUTO OPTIMIZE, VACUUM</li>
+                    <li><strong>Arquitetura:</strong> Control Plane (gerencia) + Data Plane (processa)</li>
+                    <li><strong>Compute:</strong> Job Cluster para produção, All-Purpose para dev</li>
+                    <li><strong>Foco:</strong> ~7 questões sobre otimizações e escolha de compute</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="content-section" id="section2">
+            <h2>Section 2: Development and Ingestion (~20% - 9 questões)</h2>
+            
+            <div class="partners-module">
+                <div class="partners-module-icon">📥</div>
+                <div>
+                    <strong>Módulo Partners 1:</strong> Data Ingestion with Lakeflow Connect (2h)<br>
+                    <span style="opacity: 0.9;">Cobre: Auto Loader, Notebooks, Databricks Connect, Debugging</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🎯 Objetivos desta seção:</strong><br>
+                • Use Databricks Connect in a data engineering workflow<br>
+                • Determine the capabilities of Notebooks functionality<br>
+                • Classify valid Auto Loader sources and use cases<br>
+                • Demonstrate knowledge of Auto Loader syntax<br>
+                • Use Databricks' built-in debugging tools
+            </div>
+
+            <h3>🌊 Lakeflow: A Nova Stack de Data Engineering da Databricks</h3>
+            
+            <div class="alert alert-success">
+                <strong>⭐ IMPORTANTE - Nomenclatura Atualizada:</strong><br>
+                A Databricks consolidou toda a stack de Data Engineering sob o guarda-chuva <strong>Lakeflow</strong>. Esta é a nomenclatura oficial atual e pode aparecer no exame. O antigo "Delta Live Tables (DLT)" agora é chamado de <strong>Lakeflow Declarative Pipelines</strong>.
+            </div>
+
+            <p><strong>Lakeflow</strong> é a solução end-to-end de Data Engineering da Databricks, composta por 3 pilares principais:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Descrição</th>
+                        <th>Anteriormente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🔌 Lakeflow Connect</strong></td>
+                        <td>Ingestão simplificada de dados com conectores gerenciados</td>
+                        <td>Parte do DLT</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⚙️ Lakeflow Declarative Pipelines</strong></td>
+                        <td>Framework declarativo para pipelines batch e streaming</td>
+                        <td>Delta Live Tables (DLT)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🔄 Lakeflow Jobs</strong></td>
+                        <td>Orquestração confiável e monitoramento de workloads</td>
+                        <td>Databricks Workflows</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- LAKEFLOW ARCHITECTURE DIAGRAM -->
+            <div class="diagram-container">
+                <div class="diagram-title">🌊 Arquitetura Completa do Lakeflow</div>
+                
+                <svg class="diagram-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="1200" height="800" fill="#0d1117"></rect>
+                    
+                    <!-- Title -->
+                    <text x="600" y="40" text-anchor="middle" fill="#60a5fa" font-size="28" font-weight="bold">Lakeflow: End-to-End Data Engineering</text>
+                    
+                    <!-- Sources -->
+                    <g id="sources">
+                        <text x="120" y="120" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="bold">📥 Data Sources</text>
+                        
+                        <rect x="30" y="140" width="180" height="100" rx="8" fill="#374151" stroke="#fbbf24" stroke-width="2"></rect>
+                        <text x="120" y="165" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="bold">SaaS Apps</text>
+                        <text x="120" y="185" text-anchor="middle" fill="#d1d5db" font-size="11">Salesforce</text>
+                        <text x="120" y="200" text-anchor="middle" fill="#d1d5db" font-size="11">Workday</text>
+                        <text x="120" y="215" text-anchor="middle" fill="#d1d5db" font-size="11">ServiceNow</text>
+                        <text x="120" y="230" text-anchor="middle" fill="#d1d5db" font-size="11">Google Analytics</text>
+                        
+                        <rect x="30" y="260" width="180" height="100" rx="8" fill="#374151" stroke="#fbbf24" stroke-width="2"></rect>
+                        <text x="120" y="285" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="bold">Databases</text>
+                        <text x="120" y="305" text-anchor="middle" fill="#d1d5db" font-size="11">SQL Server</text>
+                        <text x="120" y="320" text-anchor="middle" fill="#d1d5db" font-size="11">PostgreSQL</text>
+                        <text x="120" y="335" text-anchor="middle" fill="#d1d5db" font-size="11">MySQL</text>
+                        <text x="120" y="350" text-anchor="middle" fill="#d1d5db" font-size="11">Oracle</text>
+                        
+                        <rect x="30" y="380" width="180" height="100" rx="8" fill="#374151" stroke="#fbbf24" stroke-width="2"></rect>
+                        <text x="120" y="405" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="bold">Cloud Storage</text>
+                        <text x="120" y="425" text-anchor="middle" fill="#d1d5db" font-size="11">AWS S3</text>
+                        <text x="120" y="440" text-anchor="middle" fill="#d1d5db" font-size="11">Azure ADLS</text>
+                        <text x="120" y="455" text-anchor="middle" fill="#d1d5db" font-size="11">GCS</text>
+                        <text x="120" y="470" text-anchor="middle" fill="#d1d5db" font-size="11">Files</text>
+                        
+                        <rect x="30" y="500" width="180" height="80" rx="8" fill="#374151" stroke="#fbbf24" stroke-width="2"></rect>
+                        <text x="120" y="525" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="bold">Streaming</text>
+                        <text x="120" y="545" text-anchor="middle" fill="#d1d5db" font-size="11">Kafka</text>
+                        <text x="120" y="560" text-anchor="middle" fill="#d1d5db" font-size="11">Kinesis</text>
+                        <text x="120" y="575" text-anchor="middle" fill="#d1d5db" font-size="11">EventHub</text>
+                    </g>
+                    
+                    <!-- Arrows to Lakeflow Connect -->
+                    <line x1="210" y1="190" x2="300" y2="250" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    <line x1="210" y1="310" x2="300" y2="280" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    <line x1="210" y1="430" x2="300" y2="310" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    <line x1="210" y1="540" x2="300" y2="340" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    
+                    <!-- Lakeflow Connect -->
+                    <g id="lakeflow-connect">
+                        <rect x="300" y="220" width="220" height="160" rx="10" fill="#1f2937" stroke="#60a5fa" stroke-width="3"></rect>
+                        <text x="410" y="250" text-anchor="middle" fill="#60a5fa" font-size="20" font-weight="bold">🔌 Lakeflow Connect</text>
+                        
+                        <rect x="320" y="270" width="170" height="30" rx="5" fill="#374151" stroke="#34d399" stroke-width="1.5"></rect>
+                        <text x="405" y="292" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">Managed Connectors</text>
+                        
+                        <rect x="320" y="310" width="170" height="30" rx="5" fill="#374151" stroke="#fbbf24" stroke-width="1.5"></rect>
+                        <text x="405" y="332" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold">Partner Connectors</text>
+                        
+                        <rect x="320" y="350" width="170" height="30" rx="5" fill="#374151" stroke="#f87171" stroke-width="1.5"></rect>
+                        <text x="405" y="372" text-anchor="middle" fill="#f87171" font-size="13" font-weight="bold">Standard Connectors</text>
+                    </g>
+                    
+                    <!-- Arrow to Lakeflow Declarative Pipelines -->
+                    <line x1="520" y1="300" x2="600" y2="300" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    
+                    <!-- Lakeflow Declarative Pipelines -->
+                    <g id="lakeflow-pipelines">
+                        <rect x="600" y="140" width="280" height="320" rx="10" fill="#1f2937" stroke="#34d399" stroke-width="3"></rect>
+                        <text x="740" y="170" text-anchor="middle" fill="#34d399" font-size="20" font-weight="bold">⚙️ Lakeflow Declarative Pipelines</text>
+                        <text x="740" y="190" text-anchor="middle" fill="#8b949e" font-size="11" font-style="italic">(ex-Delta Live Tables)</text>
+                        
+                        <!-- Bronze -->
+                        <g id="bronze">
+                            <rect x="620" y="210" width="240" height="60" rx="8" fill="#78350f" stroke="#fbbf24" stroke-width="2"></rect>
+                            <text x="740" y="235" text-anchor="middle" fill="#fbbf24" font-size="16" font-weight="bold">🥉 Bronze (Raw)</text>
+                            <text x="740" y="255" text-anchor="middle" fill="#d1d5db" font-size="11">Streaming Tables • Append Flows</text>
+                        </g>
+                        
+                        <!-- Arrow -->
+                        <line x1="740" y1="270" x2="740" y2="290" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrowblue)"></line>
+                        
+                        <!-- Silver -->
+                        <g id="silver">
+                            <rect x="620" y="290" width="240" height="60" rx="8" fill="#475569" stroke="#94a3b8" stroke-width="2"></rect>
+                            <text x="740" y="315" text-anchor="middle" fill="#cbd5e1" font-size="16" font-weight="bold">🥈 Silver (Cleaned)</text>
+                            <text x="740" y="335" text-anchor="middle" fill="#d1d5db" font-size="11">AUTO CDC • Expectations • Views</text>
+                        </g>
+                        
+                        <!-- Arrow -->
+                        <line x1="740" y1="350" x2="740" y2="370" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrowblue)"></line>
+                        
+                        <!-- Gold -->
+                        <g id="gold">
+                            <rect x="620" y="370" width="240" height="60" rx="8" fill="#854d0e" stroke="#fbbf24" stroke-width="2"></rect>
+                            <text x="740" y="395" text-anchor="middle" fill="#fde047" font-size="16" font-weight="bold">🥇 Gold (Business)</text>
+                            <text x="740" y="415" text-anchor="middle" fill="#d1d5db" font-size="11">Materialized Views • Aggregations</text>
+                        </g>
+                    </g>
+                    
+                    <!-- Arrow to Lakeflow Jobs -->
+                    <line x1="880" y1="300" x2="960" y2="300" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrowblue)"></line>
+                    
+                    <!-- Lakeflow Jobs -->
+                    <g id="lakeflow-jobs">
+                        <rect x="960" y="220" width="200" height="160" rx="10" fill="#1f2937" stroke="#8b5cf6" stroke-width="3"></rect>
+                        <text x="1060" y="250" text-anchor="middle" fill="#a78bfa" font-size="18" font-weight="bold">🔄 Lakeflow Jobs</text>
+                        <text x="1060" y="268" text-anchor="middle" fill="#8b949e" font-size="10" font-style="italic">(ex-Workflows)</text>
+                        
+                        <text x="1060" y="295" text-anchor="middle" fill="#d1d5db" font-size="12">• Orchestration</text>
+                        <text x="1060" y="315" text-anchor="middle" fill="#d1d5db" font-size="12">• Scheduling</text>
+                        <text x="1060" y="335" text-anchor="middle" fill="#d1d5db" font-size="12">• Control Flow</text>
+                        <text x="1060" y="355" text-anchor="middle" fill="#d1d5db" font-size="12">• Monitoring</text>
+                        <text x="1060" y="375" text-anchor="middle" fill="#d1d5db" font-size="12">• Serverless</text>
+                    </g>
+                    
+                    <!-- Unity Catalog (bottom layer) -->
+                    <g id="unity-catalog">
+                        <rect x="300" y="500" width="860" height="120" rx="10" fill="#1f2937" stroke="#ec4899" stroke-width="3"></rect>
+                        <text x="730" y="530" text-anchor="middle" fill="#f9a8d4" font-size="20" font-weight="bold">🛡️ Unity Catalog (Governance Layer)</text>
+                        
+                        <g id="unity-features">
+                            <rect x="330" y="550" width="160" height="50" rx="6" fill="#374151" stroke="#f9a8d4" stroke-width="1.5"></rect>
+                            <text x="410" y="570" text-anchor="middle" fill="#f9a8d4" font-size="12">Catalog.Schema.Table</text>
+                            <text x="410" y="588" text-anchor="middle" fill="#d1d5db" font-size="10">3-Level Namespace</text>
+                            
+                            <rect x="510" y="550" width="160" height="50" rx="6" fill="#374151" stroke="#f9a8d4" stroke-width="1.5"></rect>
+                            <text x="590" y="570" text-anchor="middle" fill="#f9a8d4" font-size="12">GRANT/REVOKE</text>
+                            <text x="590" y="588" text-anchor="middle" fill="#d1d5db" font-size="10">Fine-grained RBAC</text>
+                            
+                            <rect x="690" y="550" width="160" height="50" rx="6" fill="#374151" stroke="#f9a8d4" stroke-width="1.5"></rect>
+                            <text x="770" y="570" text-anchor="middle" fill="#f9a8d4" font-size="12">Audit Logs</text>
+                            <text x="770" y="588" text-anchor="middle" fill="#d1d5db" font-size="10">Compliance &amp; Security</text>
+                            
+                            <rect x="870" y="550" width="160" height="50" rx="6" fill="#374151" stroke="#f9a8d4" stroke-width="1.5"></rect>
+                            <text x="950" y="570" text-anchor="middle" fill="#f9a8d4" font-size="12">Data Lineage</text>
+                            <text x="950" y="588" text-anchor="middle" fill="#d1d5db" font-size="10">End-to-end Tracking</text>
+                        </g>
+                    </g>
+                    
+                    <!-- Storage Layer (bottom) -->
+                    <g id="storage-layer">
+                        <rect x="300" y="650" width="860" height="90" rx="10" fill="#1f2937" stroke="#f59e0b" stroke-width="3"></rect>
+                        <text x="730" y="680" text-anchor="middle" fill="#fbbf24" font-size="20" font-weight="bold">💾 Delta Lake on Cloud Object Storage</text>
+                        
+                        <text x="730" y="705" text-anchor="middle" fill="#d1d5db" font-size="13">S3 / ADLS Gen2 / GCS</text>
+                        <text x="730" y="725" text-anchor="middle" fill="#d1d5db" font-size="11">Parquet + Transaction Log (_delta_log) • ACID • Time Travel • Schema Evolution</text>
+                    </g>
+                    
+                    <!-- Arrow markers -->
+                    <defs>
+                        <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#60a5fa"></path>
+                        </marker>
+                    </defs>
+                </svg>
+                
+                <div class="diagram-legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #60a5fa;"></div>
+                        <span>Lakeflow Connect (Ingestão)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #34d399;"></div>
+                        <span>Lakeflow Declarative Pipelines (Transformação)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #a78bfa;"></div>
+                        <span>Lakeflow Jobs (Orquestração)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #f9a8d4;"></div>
+                        <span>Unity Catalog (Governança)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>💡 Fluxo de Dados no Lakeflow:</strong><br>
+                1️⃣ <strong>Connect:</strong> Ingestão via Managed/Partner/Standard connectors<br>
+                2️⃣ <strong>Declarative Pipelines:</strong> Transformação Bronze → Silver → Gold (Medallion)<br>
+                3️⃣ <strong>Jobs:</strong> Orquestração e agendamento de todo o pipeline<br>
+                4️⃣ <strong>Unity Catalog:</strong> Governança e segurança em todas as camadas<br>
+                5️⃣ <strong>Delta Lake:</strong> Storage ACID no cloud object store (S3/ADLS/GCS)
+            </div>
+
+            <h4>🔌 Lakeflow Connect - Tipos de Conectores</h4>
+
+            <p>Lakeflow Connect oferece 3 tipos de conectores com níveis diferentes de gerenciamento:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Gerenciamento</th>
+                        <th>Exemplos</th>
+                        <th>Quando Usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Managed Connectors</strong></td>
+                        <td>Totalmente gerenciado com UI simples</td>
+                        <td>Salesforce, Workday, SQL Server, ServiceNow, Google Analytics</td>
+                        <td>Ingestão de SaaS apps e databases com mínimo overhead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Partner Connectors</strong></td>
+                        <td>Validado por Databricks</td>
+                        <td>Fivetran, Airbyte, Striim</td>
+                        <td>Ferramentas terceiras validadas via Partner Connect</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Standard Connectors</strong></td>
+                        <td>Customizável (mais controle)</td>
+                        <td>Cloud Storage (S3, ADLS, GCS), Kafka, Kinesis, EventHub</td>
+                        <td>Quando precisa de mais customização</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-info">
+                <strong>💡 Managed vs Standard Connectors:</strong><br>
+                • <strong>Managed:</strong> UI simples, sem código, powered by Lakeflow Declarative Pipelines internamente<br>
+                • <strong>Standard:</strong> Mais flexível, usa Structured Streaming ou Lakeflow Declarative Pipelines diretamente<br>
+                • <strong>Recomendação:</strong> Comece com Managed, depois parta para Standard se precisar de mais controle
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(2)">📋 Copiar</button>
+                </div><div class="code-content" id="code-2">
+<div class="code-section">
+<span class="code-comment">-- Exemplo: Managed Connector (Salesforce) via UI
+-- 1. No workspace: Data Engineering &gt; Lakeflow Connect &gt; Add Source
+-- 2. Selecione Salesforce
+-- 3. Configure OAuth e selecione objetos (Account, Contact)
+-- 4. Define target catalog/schema
+-- 5. Schedule automático via serverless compute</span>
+
+<span class="code-comment">-- Resultado: Pipeline gerenciado automaticamente com:</span>
+<span class="code-comment">-- - Incremental reads (CDC quando disponível)</span>
+<span class="code-comment">-- - Retry automático com exponential backoff</span>
+<span class="code-comment">-- - Unity Catalog governance</span>
+<span class="code-comment">-- - Monitoring e alerting built-in</span>
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Standard Connector: Auto Loader (Cloud Storage)
+-- Exemplo será visto em 2.2 Auto Loader</span>
+</div>
+            </div></div>
+
+            <h4>⚙️ Lakeflow Declarative Pipelines (anteriormente DLT)</h4>
+
+            <p><strong>Framework declarativo</strong> para construir pipelines batch e streaming com menor complexidade e maior performance.</p>
+
+            <div class="objective-list">
+                <strong>Conceitos Fundamentais:</strong>
+                <ul>
+                    <li><strong>Flows:</strong> Processam dados (queries incrementais)</li>
+                    <li><strong>Streaming Tables:</strong> Target para dados streaming/incremental</li>
+                    <li><strong>Materialized Views:</strong> Target para processamento batch com cache</li>
+                    <li><strong>Sinks:</strong> Targets externos (Kafka, EventHub, Delta Tables)</li>
+                </ul>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Conceito</th>
+                        <th>Tipo</th>
+                        <th>Quando Usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Streaming Table</strong></td>
+                        <td>Streaming/Incremental</td>
+                        <td>Dados crescendo continuamente, low latency, high throughput</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Materialized View</strong></td>
+                        <td>Batch com cache</td>
+                        <td>Agregações complexas, dados históricos, snapshot diário</td>
+                    </tr>
+                    <tr>
+                        <td><strong>View</strong></td>
+                        <td>Virtual (não persiste)</td>
+                        <td>Validação intermediária, desenvolvimento, não precisa persistir</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>📝 Exemplos Práticos com Lakeflow Declarative Pipelines</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(3)">📋 Copiar</button>
+                </div><div class="code-content" id="code-3">
+<div class="code-section">
+<span class="code-comment">-- EXEMPLO 1: Streaming Table (SQL)</span>
+CREATE OR REFRESH STREAMING TABLE customers_bronze
+AS SELECT * 
+FROM cloud_files(
+    '/mnt/data/customers/',
+    'json',
+    map('cloudFiles.inferColumnTypes', 'true')
+);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- EXEMPLO 2: Materialized View (SQL)</span>
+CREATE OR REFRESH MATERIALIZED VIEW daily_sales_summary
+AS SELECT 
+    DATE(order_date) as sale_date,
+    COUNT(*) as total_orders,
+    SUM(amount) as total_revenue
+FROM LIVE.orders_silver
+GROUP BY DATE(order_date);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- EXEMPLO 3: AUTO CDC para Change Data Capture (SQL)</span>
+CREATE OR REFRESH STREAMING TABLE customers_silver;
+
+APPLY CHANGES INTO LIVE.customers_silver
+FROM STREAM(LIVE.customers_cdc)
+KEYS (customer_id)
+APPLY AS DELETE WHEN operation = 'DELETE'
+SEQUENCE BY timestamp
+COLUMNS * EXCEPT (operation, timestamp);
+
+<span class="code-comment">-- Suporta SCD Type 1 (default) e Type 2</span>
+<span class="code-comment">-- Handles out-of-order events automaticamente</span>
+</div>
+            </div></div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(4)">📋 Copiar</button>
+                </div><div class="code-content" id="code-4">
+<div class="code-section">
+<span class="code-comment"># EXEMPLO 4: Streaming Table (Python)</span>
+from pyspark import pipelines as dp
+
+@dp.table(
+    comment="Bronze layer - raw customer data"
+)
+def customers_bronze():
+    return (
+        spark.readStream
+            .format("cloudFiles")
+            .option("cloudFiles.format", "json")
+            .option("cloudFiles.inferColumnTypes", "true")
+            .load("/mnt/data/customers/")
+    )
+</div>
+
+<div class="code-section">
+<span class="code-comment"># EXEMPLO 5: Materialized View (Python)</span>
+@dp.materialized_view(
+    comment="Daily sales aggregation",
+    table_properties={"quality": "gold"}
+)
+def daily_sales_summary():
+    return (
+        dp.read("orders_silver")
+            .groupBy(F.date_trunc("day", "order_date").alias("sale_date"))
+            .agg(
+                F.count("*").alias("total_orders"),
+                F.sum("amount").alias("total_revenue")
+            )
+    )
+</div>
+
+<div class="code-section">
+<span class="code-comment"># EXEMPLO 6: Append Flow (múltiplas sources)</span>
+@dp.streaming_table
+def orders_bronze():
+    pass  # Define empty table
+
+@dp.append_flow(
+    target="orders_bronze",
+    name="kafka_orders"
+)
+def kafka_source():
+    return (
+        spark.readStream
+            .format("kafka")
+            .option("kafka.bootstrap.servers", "broker:9092")
+            .option("subscribe", "orders")
+            .load()
+    )
+
+@dp.append_flow(
+    target="orders_bronze",
+    name="historical_backfill"
+)
+def historical_data():
+    return spark.read.table("legacy.orders_historical")
+</div>
+            </div></div>
+
+            <h4>🔄 Lakeflow Jobs (anteriormente Workflows)</h4>
+
+            <p>Orquestração confiável para qualquer workload de dados e AI com controle de fluxo avançado.</p>
+
+            <div class="objective-list">
+                <strong>Recursos principais:</strong>
+                <ul>
+                    <li><strong>Tasks:</strong> Notebooks, SQL, Pipelines, Python wheels, JARs, managed connectors</li>
+                    <li><strong>Control Flow:</strong> If/else, for-each loops, switch statements</li>
+                    <li><strong>Repair vs Rerun:</strong> Repair = falhas | Rerun = tudo</li>
+                    <li><strong>Serverless:</strong> Infraestrutura gerenciada automaticamente</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Lakeflow:</strong><br>
+                • <strong>Nomenclatura:</strong> DLT agora é "Lakeflow Declarative Pipelines"<br>
+                • <strong>Workflows:</strong> Agora são "Lakeflow Jobs"<br>
+                • <strong>Managed Connectors:</strong> SaaS apps (Salesforce, Workday) com UI sem código<br>
+                • <strong>Standard Connectors:</strong> Cloud storage, Kafka (mais customizável)<br>
+                • <strong>Streaming Table:</strong> Para dados continuamente crescendo<br>
+                • <strong>Materialized View:</strong> Para batch com processamento incremental<br>
+                • <strong>AUTO CDC:</strong> Handles SCD Type 1/2 automaticamente<br>
+                • <strong>Flows:</strong> Query incremental que carrega/processa dados
+            </div>
+
+            <div class="summary-box">
+                <h3>📝 Resumo Lakeflow</h3>
+                <ul>
+                    <li><strong>3 Pilares:</strong> Connect (ingestão) + Declarative Pipelines (transformação) + Jobs (orquestração)</li>
+                    <li><strong>Managed Connectors:</strong> UI simples, serverless, Salesforce/Workday/SQL Server</li>
+                    <li><strong>Standard Connectors:</strong> S3/ADLS/Kafka, mais controle, Structured Streaming ou LDP</li>
+                    <li><strong>Streaming Table:</strong> Dados continuamente crescendo, baixa latência</li>
+                    <li><strong>Materialized View:</strong> Batch incremental, agregações complexas</li>
+                    <li><strong>AUTO CDC:</strong> SCD Type 1/2, out-of-order events automaticamente</li>
+                    <li><strong>Flows:</strong> Append (padrão), AUTO CDC (streaming only), Materialized View</li>
+                    <li><strong>Antiga nomenclatura:</strong> DLT = Lakeflow Declarative Pipelines | Workflows = Lakeflow Jobs</li>
+                </ul>
+            </div>
+
+            <h3>2.1 Databricks Connect</h3>
+            
+            <p><strong>O que é:</strong> Biblioteca que permite rodar código Spark localmente (IDE) conectando a clusters Databricks</p>
+            
+            <div class="objective-list">
+                <strong>Casos de uso:</strong>
+                <ul>
+                    <li>Desenvolvimento local em VS Code, PyCharm, IntelliJ</li>
+                    <li>Testes unitários de código PySpark</li>
+                    <li>CI/CD pipelines</li>
+                    <li>Debugging com breakpoints locais</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(5)">📋 Copiar</button>
+                </div><div class="code-content" id="code-5">
+<div class="code-section">
+<span class="code-comment"># Instalar Databricks Connect</span>
+pip install databricks-connect
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Configurar conexão</span>
+databricks-connect configure --host &lt;workspace-url&gt; --token &lt;token&gt;
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Usar em código Python local</span>
+from databricks.connect import DatabricksSession
+
+spark = DatabricksSession.builder.getOrCreate()
+df = spark.table("catalog.schema.table")
+</div>
+            </div></div>
+
+            <h3>2.2 Notebooks Functionality</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Recurso</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Magic Commands</strong></td>
+                        <td>Comandos especiais iniciando com %</td>
+                        <td>%sql, %python, %run, %md, %pip</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Widgets</strong></td>
+                        <td>Parâmetros de entrada interativos</td>
+                        <td>dbutils.widgets.text("date", "2024-01-01")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>dbutils</strong></td>
+                        <td>Utilitários (fs, secrets, notebook)</td>
+                        <td>dbutils.fs.ls("/mnt/data")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Display</strong></td>
+                        <td>Visualizações de DataFrames</td>
+                        <td>display(df)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(6)">📋 Copiar</button>
+                </div><div class="code-content" id="code-6">
+<div class="code-section">
+<span class="code-comment"># Magic Commands - SQL</span>
+%sql
+SELECT * FROM events LIMIT 10
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Magic Commands - Python</span>
+%python  
+df = spark.table("events")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Executar outro notebook</span>
+%run /Shared/utils/common_functions
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Instalar pacotes</span>
+%pip install pandas numpy
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Widgets - Criar parâmetros</span>
+dbutils.widgets.text("environment", "prod", "Environment")
+env = dbutils.widgets.get("environment")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># dbutils.fs - Operações com arquivos</span>
+dbutils.fs.ls("/mnt/data")
+dbutils.fs.rm("/tmp/file.csv")
+dbutils.fs.cp("/source", "/dest")
+</div>
+            </div></div>
+
+            <h3>2.3 Auto Loader (⭐ ESSENCIAL)</h3>
+            
+            <p><strong>O que é:</strong> Ingestão incremental e escalável de arquivos de cloud storage</p>
+
+            <h4>Fontes válidas:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ S3 (AWS)</li>
+                    <li>✅ Azure Blob Storage / ADLS Gen2</li>
+                    <li>✅ Google Cloud Storage (GCS)</li>
+                    <li>✅ DBFS</li>
+                    <li>✅ Unity Catalog Volumes</li>
+                </ul>
+            </div>
+
+            <h4>Formatos suportados:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li>JSON, CSV, Parquet, Avro, ORC, Binary, Text</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(7)">📋 Copiar</button>
+                </div><div class="code-content" id="code-7">
+<div class="code-section">
+<span class="code-comment"># Sintaxe Auto Loader - Python</span>
+df = (spark.readStream
+    .format("cloudFiles")
+    .option("cloudFiles.format", "json")
+    .option("cloudFiles.schemaLocation", "/mnt/schema/events")
+    .option("cloudFiles.inferColumnTypes", "true")
+    .load("/mnt/source/events/")
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Escrever para Delta Table</span>
+(df.writeStream
+    .option("checkpointLocation", "/mnt/checkpoint/events")
+    .table("bronze.events")
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- SQL - Delta Live Tables</span>
+CREATE OR REFRESH STREAMING TABLE bronze_events
+AS SELECT * FROM cloud_files(
+    "/mnt/source/events/*.json",
+    "json",
+    map("cloudFiles.schemaLocation", "/mnt/schema")
+)
+</div>
+            </div></div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Auto Loader</th>
+                        <th>COPY INTO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>✅ Milhões de arquivos</td>
+                        <td>⚠️ Milhares de arquivos</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Schema inference automático</td>
+                        <td>❌ Schema manual</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Schema evolution</td>
+                        <td>❌ Sem evolution</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Streaming</td>
+                        <td>❌ Batch</td>
+                    </tr>
+                    <tr>
+                        <td>✅ Produção</td>
+                        <td>⚠️ Ad-hoc/dev</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.4 COPY INTO (⭐ IMPORTANTE)</h3>
+
+            <p><strong>O que é:</strong> Carregamento batch incremental de arquivos</p>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(8)">📋 Copiar</button>
+                </div><div class="code-content" id="code-8">
+<div class="code-section">
+<span class="code-comment">-- COPY INTO - Sintaxe básica</span>
+COPY INTO target_table
+FROM '/mnt/source/data'
+FILEFORMAT = PARQUET
+FORMAT_OPTIONS ('mergeSchema' = 'true')
+COPY_OPTIONS ('mergeSchema' = 'true');
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- COPY INTO - Com pattern matching</span>
+COPY INTO events
+FROM '/mnt/source/events'
+FILEFORMAT = JSON
+FILES = ('file1.json', 'file2.json')
+PATTERN = '*.json'
+FORMAT_OPTIONS ('inferSchema' = 'true');
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- COPY INTO - Idempotente (não duplica)</span>
+COPY INTO sales
+FROM '/mnt/raw/sales'
+FILEFORMAT = CSV
+FORMAT_OPTIONS ('header' = 'true', 'inferSchema' = 'true');
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Auto Loader vs COPY INTO:</strong><br>
+                • Format: <code>cloudFiles</code> (não "autoloader")<br>
+                • <strong>Milhões de arquivos</strong> → Auto Loader<br>
+                • <strong>Schema muda</strong> → Auto Loader<br>
+                • <strong>Produção streaming</strong> → Auto Loader<br>
+                • <strong>Quick one-time / Milhares de arquivos</strong> → COPY INTO<br>
+                • <strong>COPY INTO é idempotente</strong> - não carrega mesmo arquivo 2x
+            </div>
+
+            <h3>2.5 Schema Evolution (⭐ MUITO COBRADO!)</h3>
+
+            <p><strong>Problema:</strong> Novos campos aparecem nos dados de origem</p>
+
+            <h4>Opções para lidar com Schema Evolution:</h4>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Opção</th>
+                        <th>O que faz</th>
+                        <th>Quando usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>mergeSchema</strong></td>
+                        <td>Adiciona novas colunas automaticamente</td>
+                        <td>Schema pode crescer (additive)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>overwriteSchema</strong></td>
+                        <td>Substitui schema completamente</td>
+                        <td>Schema mudou drasticamente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto Loader</strong></td>
+                        <td>Schema evolution automático</td>
+                        <td>Produção, streaming</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(9)">📋 Copiar</button>
+                </div><div class="code-content" id="code-9">
+<div class="code-section">
+<span class="code-comment"># mergeSchema - Adicionar novas colunas</span>
+df.write \
+    .format("delta") \
+    .mode("append") \
+    .option("mergeSchema", "true") \
+    .save("/path/to/table")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># overwriteSchema - Substituir schema</span>
+df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option("overwriteSchema", "true") \
+    .save("/path/to/table")
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- SQL - Habilitar merge schema na tabela</span>
+ALTER TABLE events 
+SET TBLPROPERTIES ('delta.autoMerge.mergeSchema' = 'true');
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Auto Loader - Schema evolution automático</span>
+df = spark.readStream \
+    .format("cloudFiles") \
+    .option("cloudFiles.format", "json") \
+    .option("cloudFiles.schemaLocation", "/schema") \
+    .option("cloudFiles.schemaEvolutionMode", "addNewColumns") \
+    .load("/source")
+</div>
+            </div></div>
+
+            <h3>2.6 Checkpoints e Streaming (⭐ IMPORTANTE)</h3>
+
+            <p><strong>Checkpoint:</strong> Armazena estado do streaming para recovery e exactly-once processing</p>
+
+            <div class="objective-list">
+                <strong>Características:</strong>
+                <ul>
+                    <li>✅ Localização OBRIGATÓRIA para streaming</li>
+                    <li>✅ Armazena: offsets processados, schema, configurações</li>
+                    <li>✅ Permite retomar de onde parou após falha</li>
+                    <li>✅ Garantia de exactly-once processing</li>
+                    <li>⚠️ Deletar checkpoint = reprocessa tudo do início</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(10)">📋 Copiar</button>
+                </div><div class="code-content" id="code-10">
+<div class="code-section">
+<span class="code-comment"># Streaming com checkpoint</span>
+(spark.readStream
+    .format("cloudFiles")
+    .option("cloudFiles.format", "json")
+    .load("/source")
+    .writeStream
+    .option("checkpointLocation", "/checkpoint/events")
+    .table("bronze.events")
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Trigger options - Quando processar</span>
+.trigger(availableNow=True)  # Processa tudo disponível e para
+.trigger(once=True)           # Processa 1 micro-batch e para
+.trigger(processingTime="5 seconds")  # A cada 5 segundos
+.trigger(continuous="1 second")       # Continuous mode (low latency)
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Checkpoints:</strong><br>
+                • <strong>Obrigatório</strong> para streaming<br>
+                • <strong>Não deletar</strong> em produção (perde estado)<br>
+                • <strong>Trigger options</strong>: availableNow, once, processingTime<br>
+                • <strong>availableNow</strong> = processa tudo e para (batch-like)
+            </div>
+
+            <h3>2.7 Notebooks - Comandos Avançados</h3>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(11)">📋 Copiar</button>
+                </div><div class="code-content" id="code-11">
+<div class="code-section">
+<span class="code-comment"># %run - Executar outro notebook</span>
+%run /Shared/utils/common_functions
+
+<span class="code-comment"># Variáveis do notebook executado ficam disponíveis</span>
+print(variavel_do_outro_notebook)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># dbutils.notebook.exit - Retornar valor</span>
+dbutils.notebook.exit("Success: 1000 records processed")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># dbutils.notebook.run - Chamar notebook e capturar retorno</span>
+result = dbutils.notebook.run(
+    "/Shared/process_data",
+    timeout_seconds=300,
+    arguments={"date": "2024-01-01", "env": "prod"}
+)
+print(f"Result: {result}")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># dbutils.secrets - Acessar secrets (NÃO aparecem em logs)</span>
+api_key = dbutils.secrets.get(scope="my-scope", key="api-key")
+password = dbutils.secrets.get(scope="my-scope", key="db-password")
+</div>
+            </div></div>
+
+            <h3>2.4 Debugging Tools</h3>
+            
+            <div class="objective-list">
+                <strong>Ferramentas nativas do Databricks:</strong>
+                <ul>
+                    <li><strong>Spark UI:</strong> Analisar jobs, stages, tasks, execution plan</li>
+                    <li><strong>Driver Logs:</strong> Ver stdout, stderr, log4j</li>
+                    <li><strong>display():</strong> Inspecionar DataFrames interativamente</li>
+                    <li><strong>explain():</strong> Ver plano de execução</li>
+                    <li><strong>Notebook error messages:</strong> Stack traces inline</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(12)">📋 Copiar</button>
+                </div><div class="code-content" id="code-12">
+# Ver plano de execução
+df.explain(extended=True)
+
+# Display para debug
+display(df.limit(100))
+
+# Contar registros em cada etapa
+print(f"Após filtro: {df.count()}")
+
+# Verificar schema
+df.printSchema()
+            </div></div>
+
+            
+
+            <div class="summary-box">
+                <h3>📝 Resumo Section 2</h3>
+                <ul>
+                    <li><strong>Databricks Connect:</strong> Desenvolvimento local conectando a clusters</li>
+                    <li><strong>Notebooks:</strong> Magic commands (%sql, %run), widgets, dbutils</li>
+                    <li><strong>Auto Loader:</strong> format("cloudFiles") - milhões de arquivos</li>
+                    <li><strong>COPY INTO:</strong> Batch incremental, idempotente, até milhares de arquivos</li>
+                    <li><strong>Schema Evolution:</strong> mergeSchema, overwriteSchema, Auto Loader automático</li>
+                    <li><strong>Checkpoints:</strong> Obrigatório para streaming, recovery state</li>
+                    <li><strong>Triggers:</strong> availableNow (batch-like), once, processingTime</li>
+                    <li><strong>dbutils.notebook:</strong> run(), exit(), task orchestration</li>
+                    <li><strong>Debugging:</strong> Spark UI, explain(), display(), logs</li>
+                    <li><strong>Foco:</strong> ~9 questões, com ênfase em Auto Loader e Schema Evolution</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="content-section" id="section3">
+            <h2>Section 3: Data Processing &amp; Transformations (~30% - 13-14 questões)</h2>
+            
+            <div class="partners-module">
+                <div class="partners-module-icon">⚙️</div>
+                <div>
+                    <strong>Módulo Partners 3:</strong> Build Data Pipelines with Lakeflow Declarative Pipeline (2h)<br>
+                    <span style="opacity: 0.9;">Cobre: Medallion, Delta Live Tables, SQL DDL/DML, PySpark</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🎯 Objetivos desta seção (A MAIS PESADA!):</strong><br>
+                • Describe Medallion Architecture (Bronze, Silver, Gold)<br>
+                • Classify cluster type and configuration for optimal performance<br>
+                • Emphasize advantages of LDP (Lakeflow Declarative Pipelines / DLT)<br>
+                • Implement data pipelines using LDP<br>
+                • Identify DDL/DML features<br>
+                • Compute complex aggregations with PySpark DataFrames
+            </div>
+
+            <h3>3.1 Medallion Architecture (⭐ FUNDAMENTAL)</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Propósito</th>
+                        <th>O que fazer</th>
+                        <th>O que NÃO fazer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🥉 Bronze</strong></td>
+                        <td>Raw data, source of truth</td>
+                        <td>Ingestão pura, metadados</td>
+                        <td>❌ Sem transformações, filtros, limpeza</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🥈 Silver</strong></td>
+                        <td>Cleaned, validated</td>
+                        <td>Limpar, validar, dedupe, joins</td>
+                        <td>❌ Sem agregações de negócio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🥇 Gold</strong></td>
+                        <td>Business-level, curated</td>
+                        <td>Agregar, KPIs, métricas</td>
+                        <td>Pronto para BI/ML</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- MEDALLION ARCHITECTURE DIAGRAM -->
+            <div class="diagram-container">
+                <div class="diagram-title">🏅 Medallion Architecture - Data Flow</div>
+                
+                <svg class="diagram-svg" viewBox="0 0 1200 650" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="1200" height="650" fill="#0d1117"></rect>
+                    
+                    <!-- Raw Sources -->
+                    <g id="sources">
+                        <text x="100" y="100" text-anchor="middle" fill="#8b949e" font-size="16" font-weight="bold">Raw Sources</text>
+                        
+                        <circle cx="100" cy="180" r="35" fill="#374151" stroke="#60a5fa" stroke-width="2"></circle>
+                        <text x="100" y="188" text-anchor="middle" fill="#60a5fa" font-size="12">API</text>
+                        
+                        <circle cx="100" cy="270" r="35" fill="#374151" stroke="#60a5fa" stroke-width="2"></circle>
+                        <text x="100" y="278" text-anchor="middle" fill="#60a5fa" font-size="12">Files</text>
+                        
+                        <circle cx="100" cy="360" r="35" fill="#374151" stroke="#60a5fa" stroke-width="2"></circle>
+                        <text x="100" y="368" text-anchor="middle" fill="#60a5fa" font-size="12">DB</text>
+                        
+                        <circle cx="100" cy="450" r="35" fill="#374151" stroke="#60a5fa" stroke-width="2"></circle>
+                        <text x="100" y="458" text-anchor="middle" fill="#60a5fa" font-size="12">Stream</text>
+                    </g>
+                    
+                    <!-- Arrows to Bronze -->
+                    <line x1="135" y1="180" x2="240" y2="280" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrowblue)" stroke-dasharray="5,5"></line>
+                    <line x1="135" y1="270" x2="240" y2="290" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrowblue)" stroke-dasharray="5,5"></line>
+                    <line x1="135" y1="360" x2="240" y2="310" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrowblue)" stroke-dasharray="5,5"></line>
+                    <line x1="135" y1="450" x2="240" y2="320" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrowblue)" stroke-dasharray="5,5"></line>
+                    
+                    <!-- Bronze Layer -->
+                    <g id="bronze-layer">
+                        <rect x="240" y="200" width="280" height="220" rx="15" fill="#78350f" stroke="#fbbf24" stroke-width="4"></rect>
+                        
+                        <text x="380" y="240" text-anchor="middle" fill="#fde047" font-size="28" font-weight="bold">🥉 BRONZE</text>
+                        <text x="380" y="265" text-anchor="middle" fill="#fbbf24" font-size="14" font-style="italic">Raw / Landing Zone</text>
+                        
+                        <rect x="270" y="285" width="220" height="115" rx="8" fill="#1f2937" stroke="#fbbf24" stroke-width="1.5"></rect>
+                        
+                        <text x="380" y="310" text-anchor="middle" fill="#fde047" font-size="14" font-weight="bold">✅ O QUE FAZER:</text>
+                        <text x="380" y="332" text-anchor="middle" fill="#d1d5db" font-size="12">• Ingestão pura (1:1 da fonte)</text>
+                        <text x="380" y="352" text-anchor="middle" fill="#d1d5db" font-size="12">• Adicionar metadados</text>
+                        <text x="380" y="372" text-anchor="middle" fill="#d1d5db" font-size="12">• Append-only</text>
+                        <text x="380" y="392" text-anchor="middle" fill="#d1d5db" font-size="12">• Streaming tables</text>
+                    </g>
+                    
+                    <!-- Arrow Bronze to Silver -->
+                    <line x1="520" y1="310" x2="600" y2="310" stroke="#60a5fa" stroke-width="4" marker-end="url(#arrowblue)"></line>
+                    <text x="560" y="300" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="bold">Clean &amp; Validate</text>
+                    
+                    <!-- Silver Layer -->
+                    <g id="silver-layer">
+                        <rect x="600" y="200" width="280" height="220" rx="15" fill="#475569" stroke="#cbd5e1" stroke-width="4"></rect>
+                        
+                        <text x="740" y="240" text-anchor="middle" fill="#f1f5f9" font-size="28" font-weight="bold">🥈 SILVER</text>
+                        <text x="740" y="265" text-anchor="middle" fill="#cbd5e1" font-size="14" font-style="italic">Cleaned / Validated</text>
+                        
+                        <rect x="630" y="285" width="220" height="115" rx="8" fill="#1f2937" stroke="#cbd5e1" stroke-width="1.5"></rect>
+                        
+                        <text x="740" y="310" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">✅ O QUE FAZER:</text>
+                        <text x="740" y="332" text-anchor="middle" fill="#d1d5db" font-size="12">• Limpar dados (nulls, tipos)</text>
+                        <text x="740" y="352" text-anchor="middle" fill="#d1d5db" font-size="12">• Deduplicar registros</text>
+                        <text x="740" y="372" text-anchor="middle" fill="#d1d5db" font-size="12">• Validação (expectations)</text>
+                        <text x="740" y="392" text-anchor="middle" fill="#d1d5db" font-size="12">• JOINs entre fontes</text>
+                    </g>
+                    
+                    <!-- Arrow Silver to Gold -->
+                    <line x1="880" y1="310" x2="960" y2="310" stroke="#60a5fa" stroke-width="4" marker-end="url(#arrowblue)"></line>
+                    <text x="920" y="300" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="bold">Aggregate</text>
+                    
+                    <!-- Gold Layer -->
+                    <g id="gold-layer">
+                        <rect x="960" y="200" width="220" height="220" rx="15" fill="#854d0e" stroke="#fde047" stroke-width="4"></rect>
+                        
+                        <text x="1070" y="240" text-anchor="middle" fill="#fef08a" font-size="28" font-weight="bold">🥇 GOLD</text>
+                        <text x="1070" y="265" text-anchor="middle" fill="#fde047" font-size="14" font-style="italic">Business / Curated</text>
+                        
+                        <rect x="985" y="285" width="170" height="115" rx="8" fill="#1f2937" stroke="#fde047" stroke-width="1.5"></rect>
+                        
+                        <text x="1070" y="310" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold">✅ O QUE FAZER:</text>
+                        <text x="1070" y="332" text-anchor="middle" fill="#d1d5db" font-size="12">• Agregações</text>
+                        <text x="1070" y="352" text-anchor="middle" fill="#d1d5db" font-size="12">• KPIs e métricas</text>
+                        <text x="1070" y="372" text-anchor="middle" fill="#d1d5db" font-size="12">• Business rules</text>
+                        <text x="1070" y="392" text-anchor="middle" fill="#d1d5db" font-size="12">• Materialized views</text>
+                    </g>
+                    
+                    <!-- Consumers -->
+                    <g id="consumers">
+                        <text x="1070" y="470" text-anchor="middle" fill="#8b949e" font-size="16" font-weight="bold">Consumers</text>
+                        
+                        <rect x="970" y="490" width="90" height="60" rx="8" fill="#374151" stroke="#34d399" stroke-width="2"></rect>
+                        <text x="1015" y="515" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">📊 BI Tools</text>
+                        <text x="1015" y="535" text-anchor="middle" fill="#d1d5db" font-size="10">Power BI</text>
+                        <text x="1015" y="548" text-anchor="middle" fill="#d1d5db" font-size="10">Tableau</text>
+                        
+                        <rect x="1075" y="490" width="90" height="60" rx="8" fill="#374151" stroke="#f59e0b" stroke-width="2"></rect>
+                        <text x="1120" y="515" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold">🤖 ML/AI</text>
+                        <text x="1120" y="535" text-anchor="middle" fill="#d1d5db" font-size="10">Models</text>
+                        <text x="1120" y="548" text-anchor="middle" fill="#d1d5db" font-size="10">Training</text>
+                    </g>
+                    
+                    <!-- Arrows Gold to Consumers -->
+                    <line x1="1015" y1="420" x2="1015" y2="490" stroke="#34d399" stroke-width="2" marker-end="url(#arrowgreen)"></line>
+                    <line x1="1120" y1="420" x2="1120" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrowyellow)"></line>
+                    
+                    <!-- Data Quality Labels -->
+                    <g id="quality-indicators">
+                        <text x="380" y="460" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="bold">❌ Sem limpeza</text>
+                        <text x="380" y="480" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="bold">❌ Sem transformação</text>
+                        
+                        <text x="740" y="460" text-anchor="middle" fill="#ef4444" font-size="13" font-weight="bold">❌ Sem agregações</text>
+                        <text x="740" y="480" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">✅ Schema enforced</text>
+                        
+                        <text x="1070" y="460" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">✅ Ready for analytics</text>
+                    </g>
+                    
+                    <!-- Bottom Unity Catalog Layer -->
+                    <rect x="240" y="570" width="940" height="50" rx="8" fill="#1f2937" stroke="#ec4899" stroke-width="3"></rect>
+                    <text x="710" y="600" text-anchor="middle" fill="#f9a8d4" font-size="16" font-weight="bold">🛡️ Unity Catalog: catalog.bronze | catalog.silver | catalog.gold</text>
+                    
+                    <!-- Arrow markers -->
+                    <defs>
+                        <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#60a5fa"></path>
+                        </marker>
+                        <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#34d399"></path>
+                        </marker>
+                        <marker id="arrowyellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#fbbf24"></path>
+                        </marker>
+                    </defs>
+                </svg>
+                
+                <div class="diagram-legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #78350f; border: 2px solid #fbbf24;"></div>
+                        <span>Bronze: Raw data (ingestão pura)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #475569; border: 2px solid #cbd5e1;"></div>
+                        <span>Silver: Cleaned &amp; validated</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #854d0e; border: 2px solid #fde047;"></div>
+                        <span>Gold: Business-ready aggregations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PERGUNTAS COMUNS NA PROVA:</strong><br>
+                • Onde remover duplicatas? → <strong>Silver</strong><br>
+                • Onde está o dado exatamente como veio da fonte? → <strong>Bronze</strong><br>
+                • Onde criar tabela agregada para dashboard? → <strong>Gold</strong><br>
+                • Onde aplicar business rules? → <strong>Silver → Gold</strong>
+            </div>
+
+            <h3>3.2 Cluster Configuration (Performance)</h3>
+            
+            <div class="objective-list">
+                <strong>Decisões de configuração:</strong>
+                <ul>
+                    <li><strong>Autoscaling:</strong> Enable para workloads variáveis</li>
+                    <li><strong>Worker nodes:</strong> Mais workers = mais paralelismo</li>
+                    <li><strong>Node types:</strong> Memory-optimized vs Compute-optimized</li>
+                    <li><strong>Spot instances:</strong> Mais barato, mas pode ser interrompido</li>
+                    <li><strong>Cluster mode:</strong> Standard (geral) vs High Concurrency (multi-user)</li>
+                </ul>
+            </div>
+
+            <h3>3.3 Lakeflow Declarative Pipelines (DLT) (⭐ IMPORTANTE)</h3>
+            
+            <p><strong>Vantagens do DLT:</strong></p>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ Declarativo - foca no "o quê", não no "como"</li>
+                    <li>✅ Gerenciamento automático de dependências (DAG)</li>
+                    <li>✅ Quality checks integrados (expectations)</li>
+                    <li>✅ Monitoramento e observabilidade built-in</li>
+                    <li>✅ Gerenciamento automático de checkpoints e schemas</li>
+                    <li>✅ Recuperação automática de falhas</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(13)">📋 Copiar</button>
+                </div><div class="code-content" id="code-13">
+<div class="code-section">
+<span class="code-comment">-- Criar tabela Bronze (streaming)</span>
+CREATE OR REFRESH STREAMING TABLE bronze_events
+AS SELECT * FROM cloud_files(
+    "/mnt/source/events",
+    "json"
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Criar tabela Silver (com quality check)</span>
+CREATE OR REFRESH STREAMING TABLE silver_events (
+    CONSTRAINT valid_id EXPECT (id IS NOT NULL),
+    CONSTRAINT valid_timestamp EXPECT (timestamp &gt; '2020-01-01')
+)
+AS SELECT 
+    id,
+    user_id,
+    event_type,
+    CAST(timestamp AS TIMESTAMP) as event_timestamp
+FROM STREAM(bronze_events)
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Criar tabela Gold (agregação)</span>
+CREATE OR REFRESH LIVE TABLE gold_daily_metrics
+AS SELECT 
+    DATE(event_timestamp) as date,
+    event_type,
+    COUNT(*) as event_count
+FROM LIVE.silver_events
+GROUP BY DATE(event_timestamp), event_type
+</div>
+            </div></div>
+
+            <div class="alert alert-success">
+                <strong>✅ DLT vs Traditional ETL:</strong><br>
+                • <strong>DLT:</strong> Declarativo, menos código, mais confiável<br>
+                • <strong>Traditional:</strong> Imperativo, mais controle, mais complexo<br>
+                • <strong>Prova:</strong> Saber quando usar DLT (produção, qualidade, facilidade)
+            </div>
+
+            <h3>3.4 SQL DDL/DML (⭐ MUITAS QUESTÕES)</h3>
+            
+            <h4>DDL (Data Definition Language):</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(14)">📋 Copiar</button>
+                </div><div class="code-content" id="code-14">
+<div class="code-section">
+<span class="code-comment">-- CREATE OR REPLACE: Substitui se existe</span>
+CREATE OR REPLACE TABLE users (
+    id INT, 
+    name STRING
+) USING DELTA;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- CREATE IF NOT EXISTS: Cria só se não existe</span>
+CREATE TABLE IF NOT EXISTS users (
+    id INT, 
+    name STRING
+) USING DELTA;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- CTAS (Create Table As Select)</span>
+CREATE TABLE active_users AS 
+SELECT * FROM users 
+WHERE last_login &gt; current_date() - 30;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- ALTER TABLE - Adicionar coluna</span>
+ALTER TABLE users ADD COLUMN phone STRING;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- ALTER TABLE - Renomear coluna</span>
+ALTER TABLE users RENAME COLUMN name TO full_name;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- DROP TABLE</span>
+DROP TABLE IF EXISTS users;
+</div>
+            </div></div>
+
+            <h4>DML (Data Manipulation Language):</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(15)">📋 Copiar</button>
+                </div><div class="code-content" id="code-15">
+<div class="code-section">
+<span class="code-comment">-- INSERT INTO (adiciona)</span>
+INSERT INTO users 
+VALUES (1, 'João', 'joao@email.com');
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- UPDATE (atualiza)</span>
+UPDATE users 
+SET email = 'novo@email.com' 
+WHERE id = 1;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- DELETE (remove)</span>
+DELETE FROM users 
+WHERE id = 1;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- MERGE (upsert - MUITO IMPORTANTE!)</span>
+MERGE INTO users AS target
+USING updates AS source
+ON target.id = source.id
+WHEN MATCHED THEN
+    UPDATE SET target.email = source.email
+WHEN NOT MATCHED THEN
+    INSERT (id, name, email) 
+    VALUES (source.id, source.name, source.email);
+</div>
+            </div></div>
+
+            <h3>3.5 Change Data Capture (CDC) e SCD Type 2 (⭐⭐⭐ CRÍTICO!)</h3>
+
+            <p><strong>SCD (Slowly Changing Dimensions)</strong> = Como lidar com mudanças em dados dimensionais</p>
+
+            <h4>Tipos de SCD:</h4>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>O que faz</th>
+                        <th>Quando usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SCD Type 1</strong></td>
+                        <td>Sobrescreve valor antigo (sem histórico)</td>
+                        <td>Correções, dados não históricos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SCD Type 2</strong></td>
+                        <td>Mantém histórico completo com versões</td>
+                        <td>Auditoria, análise temporal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SCD Type 3</strong></td>
+                        <td>Mantém valor atual + 1 anterior</td>
+                        <td>Mudanças ocasionais</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>SCD Type 2 - Implementação com MERGE (⭐ MUITO COBRADO!):</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(16)">📋 Copiar</button>
+                </div><div class="code-content" id="code-16">
+<div class="code-section">
+<span class="code-comment">-- Estrutura SCD Type 2</span>
+CREATE TABLE customers_history (
+    customer_id INT,
+    name STRING,
+    email STRING,
+    address STRING,
+    effective_date DATE,
+    end_date DATE,
+    is_current BOOLEAN
+) USING DELTA;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- SCD Type 2 - Atualizar registros mudados</span>
+MERGE INTO customers_history AS target
+USING customer_updates AS source
+ON target.customer_id = source.customer_id 
+   AND target.is_current = true
+WHEN MATCHED AND (
+    target.email != source.email OR 
+    target.address != source.address
+) THEN
+    UPDATE SET 
+        end_date = current_date(),
+        is_current = false
+WHEN NOT MATCHED THEN
+    INSERT (
+        customer_id, name, email, address,
+        effective_date, end_date, is_current
+    ) VALUES (
+        source.customer_id, source.name, source.email, source.address,
+        current_date(), NULL, true
+    );
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Inserir novas versões (após MERGE acima)</span>
+INSERT INTO customers_history
+SELECT 
+    customer_id, name, email, address,
+    current_date() as effective_date,
+    NULL as end_date,
+    true as is_current
+FROM customer_updates
+WHERE EXISTS (
+    SELECT 1 FROM customers_history
+    WHERE customers_history.customer_id = customer_updates.customer_id
+    AND customers_history.end_date = current_date()
+);
+</div>
+            </div></div>
+
+            <h4>APPLY CHANGES INTO (DLT) - SCD Type 2 Simplificado (⭐⭐⭐ ESSENCIAL!):</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(17)">📋 Copiar</button>
+                </div><div class="code-content" id="code-17">
+<div class="code-section">
+<span class="code-comment">-- APPLY CHANGES INTO - SCD Type 2 automático no DLT</span>
+CREATE OR REFRESH STREAMING TABLE customers_silver;
+
+APPLY CHANGES INTO live.customers_silver
+FROM STREAM(live.customers_bronze)
+KEYS (customer_id)
+SEQUENCE BY timestamp
+STORED AS SCD TYPE 2
+COLUMNS * EXCEPT (operation, timestamp);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- APPLY CHANGES INTO - SCD Type 1</span>
+APPLY CHANGES INTO live.customers_silver
+FROM STREAM(live.customers_bronze)
+KEYS (customer_id)
+SEQUENCE BY timestamp
+STORED AS SCD TYPE 1;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- APPLY CHANGES INTO - Com delete</span>
+APPLY CHANGES INTO live.customers_silver
+FROM STREAM(live.customers_bronze)
+KEYS (customer_id)
+SEQUENCE BY timestamp
+WHERE operation != 'DELETE'
+APPLY AS DELETE WHEN operation = 'DELETE'
+STORED AS SCD TYPE 2;
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - SCD Type 2:</strong><br>
+                • <strong>MERGE</strong> = Abordagem manual tradicional<br>
+                • <strong>APPLY CHANGES INTO</strong> = DLT simplificado (recomendado)<br>
+                • <strong>KEYS</strong> = Chave primária (business key)<br>
+                • <strong>SEQUENCE BY</strong> = Coluna que define ordem (timestamp)<br>
+                • <strong>STORED AS SCD TYPE 2</strong> = Mantém histórico completo
+            </div>
+
+            <h3>3.6 Complex Data Types (⭐⭐ MUITO IMPORTANTE!)</h3>
+
+            <p><strong>Spark suporta tipos complexos:</strong> ARRAY, MAP, STRUCT</p>
+
+            <h4>ARRAY:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(18)">📋 Copiar</button>
+                </div><div class="code-content" id="code-18">
+<div class="code-section">
+<span class="code-comment">-- Criar array</span>
+SELECT array(1, 2, 3) as numbers;
+SELECT array('a', 'b', 'c') as letters;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Acessar elemento (base 0)</span>
+SELECT numbers[0] FROM table;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- EXPLODE - Transformar array em linhas</span>
+SELECT explode(array(1, 2, 3)) as number;
+
+<span class="code-comment">-- Resultado:</span>
+<span class="code-comment">-- number</span>
+<span class="code-comment">-- 1</span>
+<span class="code-comment">-- 2</span>
+<span class="code-comment">-- 3</span>
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- COLLECT_LIST - Agregar em array (com duplicatas)</span>
+SELECT user_id, collect_list(product_id) as products
+FROM purchases
+GROUP BY user_id;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- COLLECT_SET - Agregar em array (sem duplicatas)</span>
+SELECT user_id, collect_set(product_id) as unique_products
+FROM purchases
+GROUP BY user_id;
+</div>
+            </div></div>
+
+            <h4>PySpark - Arrays:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(19)">📋 Copiar</button>
+                </div><div class="code-content" id="code-19">
+<div class="code-section">
+<span class="code-comment"># Explode array em linhas</span>
+from pyspark.sql.functions import explode
+
+df.select("user_id", explode("products").alias("product")).show()
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Collect list/set</span>
+from pyspark.sql.functions import collect_list, collect_set
+
+df.groupBy("user_id").agg(
+    collect_list("product_id").alias("all_products"),
+    collect_set("product_id").alias("unique_products")
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Size - Tamanho do array</span>
+from pyspark.sql.functions import size
+
+df.withColumn("num_products", size("products"))
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Array contains</span>
+from pyspark.sql.functions import array_contains
+
+df.filter(array_contains("products", "laptop"))
+</div>
+            </div></div>
+
+            <h4>STRUCT:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(20)">📋 Copiar</button>
+                </div><div class="code-content" id="code-20">
+<div class="code-section">
+<span class="code-comment">-- Criar struct</span>
+SELECT struct(
+    'John' as name,
+    30 as age,
+    'john@email.com' as email
+) as user_info;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Acessar campos do struct</span>
+SELECT user_info.name, user_info.age
+FROM users;
+</div>
+
+<div class="code-section">
+<span class="code-comment"># PySpark - Criar struct</span>
+from pyspark.sql.functions import struct
+
+df.withColumn("address", struct(
+    col("street"),
+    col("city"),
+    col("state")
+))
+</div>
+            </div></div>
+
+            <h4>MAP:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(21)">📋 Copiar</button>
+                </div><div class="code-content" id="code-21">
+<div class="code-section">
+<span class="code-comment">-- Criar map</span>
+SELECT map('key1', 'value1', 'key2', 'value2') as my_map;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Acessar valor</span>
+SELECT my_map['key1'] FROM table;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- EXPLODE map em linhas</span>
+SELECT explode(map('a', 1, 'b', 2)) as (key, value);
+</div>
+            </div></div>
+
+            <div class="alert alert-success">
+                <strong>✅ PARA PROVA - Complex Types:</strong><br>
+                • <strong>EXPLODE</strong> = array/map → linhas<br>
+                • <strong>COLLECT_LIST</strong> = linhas → array (com duplicatas)<br>
+                • <strong>COLLECT_SET</strong> = linhas → array (sem duplicatas)<br>
+                • <strong>STRUCT</strong> = agrupar campos relacionados<br>
+                • <strong>MAP</strong> = pares chave-valor
+            </div>
+
+            
+
+            
+
+            <h3>3.5 PySpark DataFrames (⭐ MUITAS QUESTÕES)</h3>
+            
+            <h4>Agregações complexas:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(22)">📋 Copiar</button>
+                </div><div class="code-content" id="code-22">
+<div class="code-section">
+<span class="code-comment"># Import necessário</span>
+from pyspark.sql.functions import *
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Group by com múltiplas agregações</span>
+df.groupBy("department").agg(
+    count("*").alias("total_employees"),
+    avg("salary").alias("avg_salary"),
+    sum("salary").alias("total_salary"),
+    max("salary").alias("max_salary"),
+    min("salary").alias("min_salary")
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># count_distinct (MUITO COBRADO NA PROVA!)</span>
+df.groupBy("date").agg(
+    count_distinct("user_id").alias("unique_users"),
+    sum("amount").alias("total_revenue")
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Agregações condicionais com WHEN</span>
+df.groupBy("date").agg(
+    sum(when(col("status") == "success", 1).otherwise(0)).alias("successes"),
+    sum(when(col("status") == "failed", 1).otherwise(0)).alias("failures")
+)
+</div>
+            </div></div>
+
+            
+
+            <h4>Window Functions:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(24)">📋 Copiar</button>
+                </div><div class="code-content" id="code-24">
+from pyspark.sql.window import Window
+
+# Definir window
+window_spec = Window.partitionBy("department").orderBy(col("salary").desc())
+
+# Row number, rank, dense_rank
+df.withColumn("rank", row_number().over(window_spec))
+df.withColumn("rank", rank().over(window_spec))
+df.withColumn("dense_rank", dense_rank().over(window_spec))
+
+# Lag e Lead
+df.withColumn("prev_salary", lag("salary", 1).over(window_spec))
+df.withColumn("next_salary", lead("salary", 1).over(window_spec))
+
+# Agregações em window
+window_dept = Window.partitionBy("department")
+df.withColumn("dept_avg", avg("salary").over(window_dept))
+            </div></div>
+
+            <h4>Joins:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(25)">📋 Copiar</button>
+                </div><div class="code-content" id="code-25">
+# Inner join (padrão)
+df1.join(df2, "id")
+df1.join(df2, df1.id == df2.user_id, "inner")
+
+# Left, right, outer joins
+df1.join(df2, "id", "left")
+df1.join(df2, "id", "right")
+df1.join(df2, "id", "outer")
+
+# Semi join (apenas linhas com match)
+df1.join(df2, "id", "semi")
+
+# Anti join (apenas linhas SEM match)
+df1.join(df2, "id", "anti")
+            </div></div>
+
+            <div class="summary-box">
+                <h3>📝 Resumo Section 3 (A MAIS IMPORTANTE!)</h3>
+                <ul>
+                    <li><strong>Medallion:</strong> Bronze (raw) → Silver (clean) → Gold (curated)</li>
+                    <li><strong>DLT:</strong> Declarativo, quality checks, auto dependency management</li>
+                    <li><strong>SQL:</strong> CREATE OR REPLACE, MERGE (upsert), INSERT INTO</li>
+                    <li><strong>PySpark:</strong> groupBy + agg, count_distinct, window functions, joins</li>
+                    <li><strong>Foco:</strong> ~13-14 questões (30% da prova!) - ESTUDE BEM!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="content-section" id="section4">
+            <h2>Section 4: Productionizing Data Pipelines (~20% - 9 questões)</h2>
+            
+            <div class="partners-module">
+                <div class="partners-module-icon">🚀</div>
+                <div>
+                    <strong>Módulo Partners 2:</strong> Deploy Workloads with LakeFlow Jobs (2h)<br>
+                    <span style="opacity: 0.9;">Cobre: Workflows, DAB (Asset Bundles), Serverless, Spark UI</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🎯 Objetivos desta seção:</strong><br>
+                • Identify difference between DAB and traditional deployment<br>
+                • Identify structure of Asset Bundles<br>
+                • Deploy workflow, repair, and rerun tasks<br>
+                • Use serverless compute<br>
+                • Analyze Spark UI to optimize queries
+            </div>
+
+            <h3>4.1 Databricks Asset Bundles (DAB)</h3>
+            
+            <p><strong>O que é:</strong> Método moderno de deployment (CI/CD) para Databricks</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>DAB (Moderno)</th>
+                        <th>Traditional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Definição</strong></td>
+                        <td>Código YAML declarativo</td>
+                        <td>Scripts manuais, UI</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Versionamento</strong></td>
+                        <td>✅ Git-based, full versioning</td>
+                        <td>❌ Manual tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CI/CD</strong></td>
+                        <td>✅ Native integration</td>
+                        <td>⚠️ Custom scripts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ambientes</strong></td>
+                        <td>✅ dev, staging, prod</td>
+                        <td>⚠️ Manual por ambiente</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Estrutura de um Asset Bundle:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(26)">📋 Copiar</button>
+                </div><div class="code-content" id="code-26">
+project/
+├── databricks.yml          # Configuração principal
+├── resources/
+│   ├── jobs/
+│   │   └── etl_job.yml    # Definição de jobs
+│   ├── pipelines/
+│   │   └── dlt_pipeline.yml
+│   └── notebooks/
+│       └── process_data.py
+└── src/
+    └── utils/
+        └── helpers.py
+            </div></div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(27)">📋 Copiar</button>
+                </div><div class="code-content" id="code-27">
+# databricks.yml
+bundle:
+  name: my-data-pipeline
+  
+resources:
+  jobs:
+    daily_etl:
+      name: "Daily ETL Pipeline"
+      tasks:
+        - task_key: bronze_ingestion
+          notebook_task:
+            notebook_path: ./notebooks/bronze_ingestion
+          job_cluster_key: etl_cluster
+        - task_key: silver_processing
+          notebook_task:
+            notebook_path: ./notebooks/silver_processing
+          depends_on:
+            - task_key: bronze_ingestion
+
+targets:
+  dev:
+    mode: development
+    workspace:
+      host: https://dev-workspace.databricks.com
+  prod:
+    mode: production
+    workspace:
+      host: https://prod-workspace.databricks.com
+            </div></div>
+
+            <h3>4.2 Lakeflow Jobs (Workflows) - Deploy, Repair, Rerun</h3>
+            
+            <div class="alert alert-info">
+                <strong>📝 Nomenclatura Atualizada:</strong> Databricks Workflows agora são chamados de <strong>Lakeflow Jobs</strong> - parte da stack Lakeflow unificada para Data Engineering.
+            </div>
+            
+            <h4>Conceitos importantes:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li><strong>Task:</strong> Unidade de trabalho (notebook, Python, SQL, JAR, Lakeflow Declarative Pipelines)</li>
+                    <li><strong>DAG:</strong> Directed Acyclic Graph - ordem de execução</li>
+                    <li><strong>Dependencies:</strong> Task B depende de Task A</li>
+                    <li><strong>Job Cluster:</strong> Cluster criado para o job (recomendado)</li>
+                    <li><strong>Control Flow:</strong> If/else, for-each, switch (orquestração avançada)</li>
+                </ul>
+            </div>
+
+            <h4>Job Parameters (⭐ IMPORTANTE):</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(28)">📋 Copiar</button>
+                </div><div class="code-content" id="code-28">
+<div class="code-section">
+<span class="code-comment"># Notebook - Receber parâmetros do job</span>
+dbutils.widgets.text("environment", "prod")
+dbutils.widgets.text("date", "")
+
+env = dbutils.widgets.get("environment")
+date = dbutils.widgets.get("date")
+
+print(f"Running in {env} for date {date}")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Job definition (YAML) - Passar parâmetros</span>
+tasks:
+  - task_key: process_data
+    notebook_task:
+      notebook_path: /Shared/process
+      base_parameters:
+        environment: "prod"
+        date: "2024-01-01"
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Python script - Receber argumentos</span>
+import sys
+
+if __name__ == "__main__":
+    env = sys.argv[1]
+    date = sys.argv[2]
+    print(f"Environment: {env}, Date: {date}")
+</div>
+            </div></div>
+
+            <h4>Task Values (⭐⭐ MUITO IMPORTANTE!):</h4>
+
+            <p><strong>O que é:</strong> Passar dados entre tasks no mesmo job</p>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(29)">📋 Copiar</button>
+                </div><div class="code-content" id="code-29">
+<div class="code-section">
+<span class="code-comment"># Task 1 - Definir task value</span>
+dbutils.jobs.taskValues.set(
+    key="record_count", 
+    value=1000
+)
+dbutils.jobs.taskValues.set(
+    key="status", 
+    value="success"
+)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Task 2 - Ler task value da Task 1</span>
+record_count = dbutils.jobs.taskValues.get(
+    taskKey="task1",
+    key="record_count"
+)
+status = dbutils.jobs.taskValues.get(
+    taskKey="task1",
+    key="status"
+)
+
+print(f"Previous task processed {record_count} records with status {status}")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Task Values - Passando objetos complexos</span>
+import json
+
+<span class="code-comment"># Serializar</span>
+dbutils.jobs.taskValues.set(
+    key="metrics",
+    value=json.dumps({"count": 1000, "errors": 5})
+)
+
+<span class="code-comment"># Deserializar</span>
+metrics_json = dbutils.jobs.taskValues.get(taskKey="task1", key="metrics")
+metrics = json.loads(metrics_json)
+print(f"Count: {metrics['count']}, Errors: {metrics['errors']}")
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Task Values:</strong><br>
+                • <strong>taskValues.set()</strong> = Definir valor na task atual<br>
+                • <strong>taskValues.get(taskKey, key)</strong> = Ler valor de outra task<br>
+                • <strong>Limite:</strong> 1MB por valor<br>
+                • <strong>Tipo:</strong> Apenas strings (use JSON para objetos)<br>
+                • <strong>Escopo:</strong> Apenas dentro do mesmo job run
+            </div>
+
+            <h4>Repair vs Rerun:</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Operação</th>
+                        <th>O que faz</th>
+                        <th>Quando usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>REPAIR</strong></td>
+                        <td>Re-executa apenas tasks falhadas</td>
+                        <td>✅ Economizar tempo/custo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RERUN</strong></td>
+                        <td>Re-executa job completo do zero</td>
+                        <td>⚠️ Garantir consistência total</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Retry Policies e Timeout (⭐ IMPORTANTE):</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(30)">📋 Copiar</button>
+                </div><div class="code-content" id="code-30">
+<div class="code-section">
+<span class="code-comment"># Job configuration - Retry settings</span>
+tasks:
+  - task_key: extract_data
+    notebook_task:
+      notebook_path: /extract
+    max_retries: 3
+    min_retry_interval_millis: 60000  # 1 minuto
+    retry_on_timeout: true
+    timeout_seconds: 3600  # 1 hora
+</div>
+            </div></div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Configuração</th>
+                        <th>O que faz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>max_retries</strong></td>
+                        <td>Número máximo de tentativas (0-3)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>min_retry_interval_millis</strong></td>
+                        <td>Tempo mínimo entre retries</td>
+                    </tr>
+                    <tr>
+                        <td><strong>retry_on_timeout</strong></td>
+                        <td>Retry se task timeout</td>
+                    </tr>
+                    <tr>
+                        <td><strong>timeout_seconds</strong></td>
+                        <td>Timeout da task (0 = sem limite)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Job Triggers (⭐ IMPORTANTE):</h4>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Trigger</th>
+                        <th>Quando executa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Manual</strong></td>
+                        <td>Executado manualmente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scheduled (Cron)</strong></td>
+                        <td>Baseado em schedule (0 0 * * * = diariamente à meia-noite)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>File Arrival</strong></td>
+                        <td>Quando novos arquivos chegam no path especificado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Continuous</strong></td>
+                        <td>Executa continuamente (assim que termina, inicia de novo)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Notifications:</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(31)">📋 Copiar</button>
+                </div><div class="code-content" id="code-31">
+<div class="code-section">
+<span class="code-comment"># Job notifications - Email</span>
+email_notifications:
+  on_start:
+    - admin@company.com
+  on_success:
+    - team@company.com
+  on_failure:
+    - oncall@company.com
+  no_alert_for_skipped_runs: true
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Webhook notifications - Slack, PagerDuty</span>
+webhook_notifications:
+  on_failure:
+    - id: "slack-webhook-id"
+  on_success:
+    - id: "teams-webhook-id"
+</div>
+            </div></div>
+
+            <h4>Concurrency:</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(32)">📋 Copiar</button>
+                </div><div class="code-content" id="code-32">
+<div class="code-section">
+<span class="code-comment"># Job concurrency settings</span>
+max_concurrent_runs: 1  # Apenas 1 run por vez
+queue:
+  enabled: true  # Enfileirar se já está rodando
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA:</strong><br>
+                • Task falhou no meio do job? → <strong>REPAIR</strong> (mais eficiente)<br>
+                • Precisa garantir consistência total? → <strong>RERUN</strong><br>
+                • Job de produção? → Use <strong>Job Cluster</strong> (não All-Purpose)<br>
+                • <strong>max_concurrent_runs=1</strong> = Evita overlapping runs
+            </div>
+
+            <h3>4.3 Serverless Compute</h3>
+            
+            <p><strong>Vantagens:</strong></p>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ Zero gerenciamento de infraestrutura</li>
+                    <li>✅ Auto-scaling instantâneo</li>
+                    <li>✅ Pay-per-use (paga só o que usa)</li>
+                    <li>✅ Início rápido (sem cold start)</li>
+                    <li>✅ Otimizações automáticas</li>
+                </ul>
+            </div>
+
+            <p><strong>Disponível para:</strong></p>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ Notebooks</li>
+                    <li>✅ Jobs (Workflows)</li>
+                    <li>✅ Delta Live Tables</li>
+                    <li>✅ SQL Warehouses</li>
+                </ul>
+            </div>
+
+            <h3>4.4 Spark UI - Otimização de Queries</h3>
+            
+            <p><strong>Principais métricas para analisar:</strong></p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>O que indica</th>
+                        <th>Solução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Skew (data skew)</strong></td>
+                        <td>Tasks desequilibradas</td>
+                        <td>Repartition, salting keys</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shuffle</strong></td>
+                        <td>Movimento de dados entre nodes</td>
+                        <td>Broadcast join, coalesce</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spill</strong></td>
+                        <td>Memória insuficiente</td>
+                        <td>Mais memória, cache</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Task duration</strong></td>
+                        <td>Tasks muito lentas</td>
+                        <td>Otimizar código, OPTIMIZE table</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="objective-list">
+                <strong>Como acessar Spark UI:</strong>
+                <ul>
+                    <li>Cluster → Spark UI → Acessar jobs, stages, executors</li>
+                    <li>Analisar: DAG visualization, task metrics, shuffle read/write</li>
+                    <li>Identificar: bottlenecks, skew, excessive shuffles</li>
+                </ul>
+            </div>
+
+            <h3>4.5 Adaptive Query Execution (AQE) (⭐ IMPORTANTE)</h3>
+
+            <p><strong>O que é:</strong> Otimização automática de queries em runtime baseado em estatísticas reais</p>
+
+            <div class="objective-list">
+                <strong>3 otimizações principais do AQE:</strong>
+                <ul>
+                    <li><strong>Dynamically coalesce shuffle partitions:</strong> Reduz partições após shuffle</li>
+                    <li><strong>Dynamically switch join strategies:</strong> Muda de shuffle para broadcast join</li>
+                    <li><strong>Dynamically optimize skew joins:</strong> Split partitions com skew</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(33)">📋 Copiar</button>
+                </div><div class="code-content" id="code-33">
+<div class="code-section">
+<span class="code-comment"># Habilitar AQE (habilitado por padrão no DBR 7.3+)</span>
+spark.conf.set("spark.sql.adaptive.enabled", "true")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Configurações AQE importantes</span>
+spark.conf.set("spark.sql.adaptive.coalescePartitions.enabled", "true")
+spark.conf.set("spark.sql.adaptive.skewJoin.enabled", "true")
+spark.conf.set("spark.sql.adaptive.localShuffleReader.enabled", "true")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Ver se AQE está ativo</span>
+spark.conf.get("spark.sql.adaptive.enabled")
+</div>
+            </div></div>
+
+            <h4>Dynamic Partition Pruning (⭐ IMPORTANTE):</h4>
+
+            <p><strong>O que é:</strong> Elimina partições desnecessárias em runtime durante joins</p>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(34)">📋 Copiar</button>
+                </div><div class="code-content" id="code-34">
+<div class="code-section">
+<span class="code-comment">-- Exemplo: JOIN com filtro</span>
+SELECT sales.*
+FROM sales
+JOIN stores ON sales.store_id = stores.id
+WHERE stores.region = 'WEST';
+
+<span class="code-comment">-- Dynamic Partition Pruning:</span>
+<span class="code-comment">-- Só lê partições de sales onde store está em WEST</span>
+<span class="comment">-- Evita ler TODAS as partições de sales</span>
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Habilitado por padrão</span>
+spark.conf.set("spark.sql.optimizer.dynamicPartitionPruning.enabled", "true")
+</div>
+            </div></div>
+
+            <h4>Spark Configuration - Otimizações Comuns:</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">Python</span>
+                    <button class="code-copy-btn" onclick="copyCode(35)">📋 Copiar</button>
+                </div><div class="code-content" id="code-35">
+<div class="code-section">
+<span class="code-comment"># Shuffle partitions (padrão: 200)</span>
+spark.conf.set("spark.sql.shuffle.partitions", "100")
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Broadcast threshold (padrão: 10MB)</span>
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", "10485760")  # 10MB
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Cache storage level</span>
+from pyspark import StorageLevel
+df.persist(StorageLevel.MEMORY_AND_DISK)
+</div>
+
+<div class="code-section">
+<span class="code-comment"># Partition discovery parallelism</span>
+spark.conf.set("spark.sql.sources.parallelPartitionDiscovery.threshold", "32")
+</div>
+            </div></div>
+
+            <div class="alert alert-success">
+                <strong>✅ PARA PROVA - Performance:</strong><br>
+                • <strong>AQE</strong> = Otimização automática em runtime (já habilitado)<br>
+                • <strong>Dynamic Partition Pruning</strong> = Pula partições irrelevantes em JOINs<br>
+                • <strong>shuffle.partitions</strong> = Ajustar baseado em tamanho dos dados<br>
+                • <strong>Broadcast threshold</strong> = Auto-broadcast de tabelas &lt;10MB<br>
+                • <strong>Data skew no Spark UI</strong> = Procurar tasks muito mais lentas
+            </div>
+
+            <div class="summary-box">
+                <h3>📝 Resumo Section 4</h3>
+                <ul>
+                    <li><strong>DAB:</strong> Deployment moderno via YAML, CI/CD integrado</li>
+                    <li><strong>Job Parameters:</strong> base_parameters para passar configs</li>
+                    <li><strong>Task Values:</strong> taskValues.set/get para passar dados entre tasks</li>
+                    <li><strong>Repair vs Rerun:</strong> Repair re-executa só falhas, Rerun tudo</li>
+                    <li><strong>Retry:</strong> max_retries, min_retry_interval, timeout_seconds</li>
+                    <li><strong>Triggers:</strong> Manual, Scheduled (cron), File arrival, Continuous</li>
+                    <li><strong>Notifications:</strong> Email, webhooks (Slack, PagerDuty)</li>
+                    <li><strong>Serverless:</strong> Zero gerenciamento, auto-optimizado</li>
+                    <li><strong>Spark UI:</strong> Analisar jobs, identificar skew e shuffles</li>
+                    <li><strong>AQE:</strong> Adaptive Query Execution - otimização automática</li>
+                    <li><strong>Dynamic Partition Pruning:</strong> Pula partições irrelevantes em JOINs</li>
+                    <li><strong>Foco:</strong> ~9 questões sobre deployment, task values e otimização</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="content-section" id="section5">
+            <h2>Section 5: Data Governance &amp; Quality (~15% - 7 questões)</h2>
+            
+            <div class="partners-module">
+                <div class="partners-module-icon">🔒</div>
+                <div>
+                    <strong>Módulo Partners 4:</strong> Data Management and Governance with Unity Catalog (2h)<br>
+                    <span style="opacity: 0.9;">Cobre: Unity Catalog, Permissions, Delta Sharing, Lakehouse Federation</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>🎯 Objetivos desta seção:</strong><br>
+                • Explain difference between managed and external tables<br>
+                • Identify grant of permissions (UC)<br>
+                • Identify key roles in UC<br>
+                • Identify how audit logs are stored<br>
+                • Use lineage features<br>
+                • Use Delta Sharing<br>
+                • Identify advantages/limitations of Delta Sharing<br>
+                • Types of Delta Sharing (Databricks vs external)<br>
+                • Cost considerations (cross-cloud)<br>
+                • Lakehouse Federation use cases
+            </div>
+
+            <h3>5.1 Managed vs External Tables</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Managed Table</th>
+                        <th>External Table</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Gerenciamento</strong></td>
+                        <td>UC gerencia dados + metadados</td>
+                        <td>UC gerencia só metadados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Localização</strong></td>
+                        <td>Automática (UC define)</td>
+                        <td>Você especifica (LOCATION)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DROP TABLE</strong></td>
+                        <td>❌ Deleta dados + metadados</td>
+                        <td>✅ Deleta só metadados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quando usar</strong></td>
+                        <td>Dados internos do lakehouse</td>
+                        <td>Dados compartilhados/externos</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(36)">📋 Copiar</button>
+                </div><div class="code-content" id="code-36">
+-- Managed Table (sem LOCATION)
+CREATE TABLE users (id INT, name STRING) USING DELTA;
+
+-- External Table (com LOCATION)
+CREATE TABLE external_data (id INT, value STRING) 
+USING DELTA
+LOCATION 's3://my-bucket/data';
+            </div></div>
+
+            <h3>5.2 Unity Catalog - Permissões</h3>
+            
+            <h4>Three-Level Namespace (⭐⭐ MUITO IMPORTANTE!):</h4>
+
+            <p><strong>Estrutura:</strong> catalog.schema.table</p>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(37)">📋 Copiar</button>
+                </div><div class="code-content" id="code-37">
+<div class="code-section">
+<span class="code-comment">-- Ver catalog atual</span>
+SELECT current_catalog();
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Ver schema atual</span>
+SELECT current_schema();
+SELECT current_database();  -- Mesmo que schema
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Mudar catalog</span>
+USE CATALOG prod;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Mudar schema</span>
+USE SCHEMA sales;
+USE prod.sales;  -- Catalog + schema
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Referência completa (3-level)</span>
+SELECT * FROM prod.sales.customers;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Referência sem catalog (usa current)</span>
+SELECT * FROM sales.customers;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Referência sem catalog e schema (usa ambos current)</span>
+SELECT * FROM customers;
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Three-Level Namespace:</strong><br>
+                • <strong>Sempre usar 3-level</strong> em produção: catalog.schema.table<br>
+                • <strong>USE CATALOG</strong> muda contexto do catalog<br>
+                • <strong>USE SCHEMA</strong> muda contexto do schema<br>
+                • <strong>current_catalog()</strong> e <strong>current_schema()</strong> para verificar contexto
+            </div>
+
+            <h4>CREATE SCHEMA - Managed vs External:</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(38)">📋 Copiar</button>
+                </div><div class="code-content" id="code-38">
+<div class="code-section">
+<span class="code-comment">-- Managed Schema (UC gerencia)</span>
+CREATE SCHEMA prod.sales;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- External Schema (você gerencia storage)</span>
+CREATE SCHEMA prod.sales_external
+LOCATION 's3://my-bucket/sales';
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Ver onde schema está armazenado</span>
+DESCRIBE SCHEMA EXTENDED prod.sales;
+</div>
+            </div></div>
+
+            <h4>Hierarquia:</h4>
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(39)">📋 Copiar</button>
+                </div><div class="code-content" id="code-39">
+METASTORE (top-level, cross-workspace)
+  └── CATALOG
+      └── SCHEMA (database)
+          └── TABLE / VIEW / FUNCTION / VOLUME
+            </div></div>
+
+            <h4>Privilégios principais:</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Privilégio</th>
+                        <th>O que permite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>USAGE</strong></td>
+                        <td>Necessário antes de qualquer outro (catalog/schema)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SELECT</strong></td>
+                        <td>Ler dados (queries)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MODIFY</strong></td>
+                        <td>INSERT, UPDATE, DELETE, MERGE</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CREATE</strong></td>
+                        <td>Criar objetos (tables, schemas)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>READ_METADATA</strong></td>
+                        <td>Ver metadados (schema, colunas)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(40)">📋 Copiar</button>
+                </div><div class="code-content" id="code-40">
+<div class="code-section">
+<span class="code-comment">-- USAGE é sempre necessário primeiro!</span>
+GRANT USAGE ON CATALOG prod TO analysts;
+GRANT USAGE ON SCHEMA prod.sales TO analysts;
+GRANT SELECT ON TABLE prod.sales.customers TO analysts;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Dar SELECT em schema inteiro</span>
+GRANT SELECT ON SCHEMA prod.sales TO analysts;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Múltiplas permissões de uma vez</span>
+GRANT SELECT, MODIFY 
+ON TABLE prod.sales.orders 
+TO data_engineers;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Revogar permissão</span>
+REVOKE SELECT 
+ON TABLE prod.sales.customers 
+FROM analysts;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Ver permissões atuais</span>
+SHOW GRANTS ON TABLE prod.sales.customers;
+</div>
+            </div></div>
+
+            
+
+            <h3>5.3 Roles no Unity Catalog</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Responsabilidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Metastore Admin</strong></td>
+                        <td>Controle total, criar catalogs, gerenciar tudo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Catalog Owner</strong></td>
+                        <td>Controle do catalog específico</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Schema Owner</strong></td>
+                        <td>Controle do schema específico</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Table Owner</strong></td>
+                        <td>Controle da tabela específica</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.4 Audit Logs</h3>
+            
+            <div class="alert alert-success">
+                <strong>✅ Onde são armazenados:</strong><br>
+                • Tabela do sistema: <code>system.access.audit</code><br>
+                • Cloud storage configurado (S3, ADLS, GCS)
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(41)">📋 Copiar</button>
+                </div><div class="code-content" id="code-41">
+<div class="code-section">
+<span class="code-comment">-- Consultar audit logs</span>
+SELECT 
+    action_name,
+    user_identity,
+    request_params,
+    event_time
+FROM system.access.audit
+WHERE date &gt;= current_date() - 7
+  AND action_name = 'SELECT'
+ORDER BY event_time DESC;
+</div>
+            </div></div>
+
+            <h4>System Tables (⭐⭐ IMPORTANTE!)</h4>
+
+            <p><strong>O que são:</strong> Tabelas automáticas do Databricks com metadados e métricas</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>System Table</th>
+                        <th>O que contém</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>system.access.audit</strong></td>
+                        <td>Logs de auditoria (quem acessou o quê)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>system.billing.usage</strong></td>
+                        <td>Custos e uso de DBUs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>system.compute.clusters</strong></td>
+                        <td>Informações sobre clusters</td>
+                    </tr>
+                    <tr>
+                        <td><strong>system.query.history</strong></td>
+                        <td>Histórico de queries executadas</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(42)">📋 Copiar</button>
+                </div><div class="code-content" id="code-42">
+<div class="code-section">
+<span class="code-comment">-- Queries mais caras (billing)</span>
+SELECT 
+    workspace_id,
+    sku_name,
+    usage_date,
+    SUM(usage_quantity) as total_dbus
+FROM system.billing.usage
+WHERE usage_date &gt;= current_date() - 30
+GROUP BY workspace_id, sku_name, usage_date
+ORDER BY total_dbus DESC;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Clusters ativos</span>
+SELECT 
+    cluster_id,
+    cluster_name,
+    state,
+    cluster_source
+FROM system.compute.clusters
+WHERE state = 'RUNNING';
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Queries lentas (query history)</span>
+SELECT 
+    statement_id,
+    statement_text,
+    execution_duration_ms,
+    user_name,
+    start_time
+FROM system.query.history
+WHERE execution_duration_ms &gt; 60000  -- &gt; 1 minuto
+ORDER BY execution_duration_ms DESC
+LIMIT 10;
+</div>
+            </div></div>
+
+            <h4>Information Schema (⭐ IMPORTANTE):</h4>
+
+            <p><strong>O que é:</strong> Metadados sobre objetos do catalog (tabelas, colunas, etc)</p>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(43)">📋 Copiar</button>
+                </div><div class="code-content" id="code-43">
+<div class="code-section">
+<span class="code-comment">-- Listar todas as tabelas em um schema</span>
+SELECT table_catalog, table_schema, table_name, table_type
+FROM information_schema.tables
+WHERE table_schema = 'sales';
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Listar colunas de uma tabela</span>
+SELECT 
+    column_name,
+    data_type,
+    is_nullable
+FROM information_schema.columns
+WHERE table_name = 'customers'
+  AND table_schema = 'sales';
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Encontrar tabelas com coluna específica</span>
+SELECT DISTINCT table_name
+FROM information_schema.columns
+WHERE column_name = 'email'
+  AND table_schema = 'sales';
+</div>
+            </div></div>
+
+            <div class="alert alert-success">
+                <strong>✅ PARA PROVA:</strong><br>
+                • <strong>system.access.audit</strong> = Auditoria de quem acessou o quê<br>
+                • <strong>system.billing.usage</strong> = Custos em DBUs<br>
+                • <strong>information_schema.tables</strong> = Metadados das tabelas<br>
+                • <strong>information_schema.columns</strong> = Metadados das colunas
+            </div>
+
+            <h3>5.5 Data Lineage</h3>
+            
+            <p><strong>O que é:</strong> Rastreamento automático de origem e transformações dos dados</p>
+
+            <div class="objective-list">
+                <strong>Benefícios:</strong>
+                <ul>
+                    <li>✅ Visualizar fluxo end-to-end</li>
+                    <li>✅ Identificar origem de problemas</li>
+                    <li>✅ Análise de impacto (o que é afetado?)</li>
+                    <li>✅ Compliance e auditoria</li>
+                </ul>
+            </div>
+
+            <p><strong>Onde ver:</strong> Data Explorer → Selecionar tabela → Aba "Lineage"</p>
+
+            <h3>5.6 Dynamic Views e Column-Level Security (⭐ IMPORTANTE)</h3>
+
+            <p><strong>Dynamic Views:</strong> Views com regras de acesso baseadas no usuário</p>
+
+            <h4>Row-Level Security (filtrar linhas):</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(44)">📋 Copiar</button>
+                </div><div class="code-content" id="code-44">
+<div class="code-section">
+<span class="code-comment">-- Ver dados apenas da sua região</span>
+CREATE VIEW sales_filtered AS
+SELECT * FROM sales
+WHERE region = (
+    SELECT region FROM user_regions 
+    WHERE user = current_user()
+);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Filtrar por grupo do usuário</span>
+CREATE VIEW sensitive_data AS
+SELECT * FROM customers
+WHERE 
+    CASE
+        WHEN is_account_group_member('admins') THEN TRUE
+        WHEN is_account_group_member('analysts') AND region = 'US' THEN TRUE
+        ELSE FALSE
+    END;
+</div>
+            </div></div>
+
+            <h4>Column-Level Security (mascarar colunas):</h4>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(45)">📋 Copiar</button>
+                </div><div class="code-content" id="code-45">
+<div class="code-section">
+<span class="code-comment">-- Mascarar dados sensíveis baseado em grupo</span>
+CREATE VIEW customers_masked AS
+SELECT 
+    customer_id,
+    name,
+    CASE
+        WHEN is_account_group_member('pii_readers') THEN email
+        ELSE 'REDACTED'
+    END AS email,
+    CASE
+        WHEN is_account_group_member('admins') THEN ssn
+        ELSE '***-**-****'
+    END AS ssn,
+    address
+FROM customers;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Mostrar salários apenas para managers</span>
+CREATE VIEW employees_view AS
+SELECT 
+    employee_id,
+    name,
+    department,
+    CASE
+        WHEN is_account_group_member('managers') THEN salary
+        ELSE NULL
+    END AS salary
+FROM employees;
+</div>
+            </div></div>
+
+            <h4>Funções úteis para Dynamic Views:</h4>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Função</th>
+                        <th>O que retorna</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>current_user()</strong></td>
+                        <td>Email do usuário atual</td>
+                    </tr>
+                    <tr>
+                        <td><strong>is_account_group_member('group')</strong></td>
+                        <td>TRUE se usuário está no grupo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>is_member('workspace_group')</strong></td>
+                        <td>TRUE se usuário está no grupo do workspace</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Dynamic Views:</strong><br>
+                • <strong>Row-level security</strong> = Filtrar linhas com WHERE + current_user()<br>
+                • <strong>Column-level security</strong> = Mascarar colunas com CASE + is_account_group_member()<br>
+                • <strong>is_account_group_member()</strong> = Verificar se usuário está em grupo<br>
+                • <strong>current_user()</strong> = Email do usuário executando query
+            </div>
+
+            <h3>5.7 Service Principals (⭐ IMPORTANTE)</h3>
+
+            <p><strong>O que são:</strong> Identidades para automação (não são usuários reais)</p>
+
+            <div class="objective-list">
+                <strong>Quando usar Service Principals:</strong>
+                <ul>
+                    <li>✅ Jobs automatizados</li>
+                    <li>✅ Integrações com APIs externas</li>
+                    <li>✅ CI/CD pipelines</li>
+                    <li>✅ Aplicações que acessam Databricks</li>
+                    <li>❌ NÃO usar para usuários humanos</li>
+                </ul>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Service Principal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pessoa física</td>
+                        <td>Aplicação/automação</td>
+                    </tr>
+                    <tr>
+                        <td>Login interativo</td>
+                        <td>Token/OAuth</td>
+                    </tr>
+                    <tr>
+                        <td>Email como ID</td>
+                        <td>UUID como ID</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(46)">📋 Copiar</button>
+                </div><div class="code-content" id="code-46">
+<div class="code-section">
+<span class="code-comment">-- Dar permissões a Service Principal</span>
+GRANT SELECT ON SCHEMA prod.sales 
+TO `service-principal-uuid`;
+</div>
+            </div></div>
+
+            <h3>5.8 Delta Sharing (⭐ IMPORTANTE)</h3>
+            
+            <p><strong>O que é:</strong> Protocolo aberto para compartilhar dados entre organizações/plataformas</p>
+
+            <h4>Tipos de Delta Sharing:</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Databricks-to-Databricks</th>
+                        <th>Open (External)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Destinatário</strong></td>
+                        <td>Outro workspace Databricks</td>
+                        <td>Qualquer sistema (Pandas, Spark, BI)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>⚡⚡⚡ Excelente</td>
+                        <td>⚡⚡ Boa (HTTP)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Permissões</strong></td>
+                        <td>READ e WRITE possível</td>
+                        <td>READ-only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Autenticação</strong></td>
+                        <td>Unity Catalog integrado</td>
+                        <td>Bearer token</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Vantagens:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li>✅ Sem cópia de dados (economia de storage)</li>
+                    <li>✅ Sempre atualizado (live data)</li>
+                    <li>✅ Governança centralizada via UC</li>
+                    <li>✅ Audit logs automáticos</li>
+                    <li>✅ Revogação instantânea</li>
+                    <li>✅ Cross-cloud (AWS, Azure, GCP)</li>
+                </ul>
+            </div>
+
+            <h4>Limitações:</h4>
+            <div class="objective-list">
+                <ul>
+                    <li>❌ READ-only (exceto D2D)</li>
+                    <li>❌ Apenas Delta Tables</li>
+                    <li>❌ Sem streaming</li>
+                    <li>❌ Custos de egress (cross-cloud)</li>
+                </ul>
+            </div>
+
+            <h4>Custos Cross-Cloud:</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Cenário</th>
+                        <th>Custo de Egress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mesma cloud, mesma região</td>
+                        <td>💰 Grátis ou muito baixo</td>
+                    </tr>
+                    <tr>
+                        <td>Mesma cloud, regiões diferentes</td>
+                        <td>💰💰 Baixo a moderado</td>
+                    </tr>
+                    <tr>
+                        <td>Clouds diferentes (AWS→Azure)</td>
+                        <td>💰💰💰 ALTO</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(47)">📋 Copiar</button>
+                </div><div class="code-content" id="code-47">
+<div class="code-section">
+<span class="code-comment">-- Criar Share</span>
+CREATE SHARE IF NOT EXISTS customer_share;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Adicionar tabela ao share</span>
+ALTER SHARE customer_share 
+ADD TABLE prod.sales.customers;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Criar Recipient (quem vai receber os dados)</span>
+CREATE RECIPIENT external_partner 
+USING ID 'abc123';
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Dar acesso ao recipient</span>
+GRANT SELECT 
+ON SHARE customer_share 
+TO RECIPIENT external_partner;
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Consumir dados (Databricks-to-Databricks)</span>
+CREATE CATALOG shared_data 
+USING SHARE provider.customer_share;
+
+SELECT * FROM shared_data.sales.customers;
+</div>
+            </div></div>
+
+            <h3>5.9 Lakehouse Federation (⭐ IMPORTANTE)</h3>
+            
+            <p><strong>O que é:</strong> Conectar Unity Catalog a fontes externas (MySQL, PostgreSQL, Snowflake, etc)</p>
+
+            <h4>Databases Suportados:</h4>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Database</th>
+                        <th>Suportado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>MySQL</strong></td>
+                        <td>✅ Sim</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PostgreSQL</strong></td>
+                        <td>✅ Sim</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SQL Server</strong></td>
+                        <td>✅ Sim</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Snowflake</strong></td>
+                        <td>✅ Sim</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Oracle</strong></td>
+                        <td>⚠️ Via JDBC</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="objective-list">
+                <strong>Casos de uso:</strong>
+                <ul>
+                    <li>✅ Query dados externos sem copiar</li>
+                    <li>✅ Migração gradual para Databricks</li>
+                    <li>✅ Integração com sistemas legados</li>
+                    <li>✅ Unified analytics (dados internos + externos)</li>
+                    <li>✅ Join entre Delta Tables e tabelas externas</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><div class="code-header">
+                    <span class="code-language">SQL</span>
+                    <button class="code-copy-btn" onclick="copyCode(48)">📋 Copiar</button>
+                </div><div class="code-content" id="code-48">
+<div class="code-section">
+<span class="code-comment">-- Criar connection para MySQL</span>
+CREATE CONNECTION mysql_prod
+TYPE mysql
+OPTIONS (
+    host 'mysql.company.com',
+    port '3306',
+    user 'readonly_user',
+    password secret('my-scope', 'mysql-password')
+);
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Criar foreign catalog</span>
+CREATE FOREIGN CATALOG mysql_catalog
+USING CONNECTION mysql_prod
+OPTIONS (database 'production_db');
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- Query dados externos via Unity Catalog</span>
+SELECT * FROM mysql_catalog.public.customers
+WHERE country = 'Brazil';
+</div>
+
+<div class="code-section">
+<span class="code-comment">-- JOIN entre Delta e dados externos</span>
+SELECT 
+    o.order_id,
+    o.order_date,
+    c.customer_name,
+    c.email
+FROM prod.sales.orders o
+JOIN mysql_catalog.public.customers c
+    ON o.customer_id = c.id;
+</div>
+            </div></div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ PARA PROVA - Lakehouse Federation:</strong><br>
+                • <strong>CREATE CONNECTION</strong> = Conexão com database externo<br>
+                • <strong>CREATE FOREIGN CATALOG</strong> = Catalog apontando para fonte externa<br>
+                • <strong>Suportados:</strong> MySQL, PostgreSQL, SQL Server, Snowflake<br>
+                • <strong>Benefício:</strong> Query sem copiar dados (federated query)<br>
+                • <strong>Performance:</strong> Mais lento que Delta Lake (dados remotos)
+            </div>
+
+            <div class="summary-box">
+                <h3>📝 Resumo Section 5</h3>
+                <ul>
+                    <li><strong>Managed:</strong> DROP deleta dados | External: DROP mantém dados</li>
+                    <li><strong>Three-level:</strong> catalog.schema.table (sempre usar em produção)</li>
+                    <li><strong>Permissões:</strong> USAGE sempre primeiro, depois SELECT/MODIFY</li>
+                    <li><strong>System Tables:</strong> system.access.audit, system.billing.usage</li>
+                    <li><strong>Information Schema:</strong> Metadados (tables, columns)</li>
+                    <li><strong>Dynamic Views:</strong> Row/column security com current_user()</li>
+                    <li><strong>Service Principals:</strong> Para automação (jobs, APIs)</li>
+                    <li><strong>Delta Sharing:</strong> D2D (melhor) vs Open (external, READ-only)</li>
+                    <li><strong>Lakehouse Federation:</strong> Query MySQL, PostgreSQL, Snowflake</li>
+                    <li><strong>Foco:</strong> ~7 questões sobre governança e compartilhamento</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RESUMO FINAL -->
+        <div class="content-section" id="checklist">
+            <h2>🎯 Checklist Final de Preparação</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+                <div style="background: #e3f2f; padding: 20px; border-radius: 10px; border-left: 5px solid #2196f3;">
+                    <h4 style="color: #2196f3; margin-bottom: 10px;">Section 1 (15%)</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>✓ OPTIMIZE e Z-ORDERING</li>
+                        <li>✓ Tipos de compute</li>
+                        <li>✓ Control vs Data Plane</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #e8f5e; padding: 20px; border-radius: 10px; border-left: 5px solid #4caf50;">
+                    <h4 style="color: #4caf50; margin-bottom: 10px;">Section 2 (20%)</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>✓ Auto Loader (cloudFiles)</li>
+                        <li>✓ Notebooks (magic, widgets)</li>
+                        <li>✓ Databricks Connect</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #fff3e; padding: 20px; border-radius: 10px; border-left: 5px solid #ff9800;">
+                    <h4 style="color: #ff9800; margin-bottom: 10px;">Section 3 (30%) 🔥</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>✓ Medallion Architecture</li>
+                        <li>✓ DLT / Lakeflow Pipelines</li>
+                        <li>✓ SQL DDL/DML (MERGE)</li>
+                        <li>✓ PySpark (count_distinct!)</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f3e5f; padding: 20px; border-radius: 10px; border-left: 5px solid #9c27b0;">
+                    <h4 style="color: #9c27b0; margin-bottom: 10px;">Section 4 (20%)</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>✓ DAB (Asset Bundles)</li>
+                        <li>✓ Workflows (Repair vs Rerun)</li>
+                        <li>✓ Serverless</li>
+                        <li>✓ Spark UI</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #ffebe; padding: 20px; border-radius: 10px; border-left: 5px solid #f44336;">
+                    <h4 style="color: #f44336; margin-bottom: 10px;">Section 5 (15%)</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>✓ Managed vs External</li>
+                        <li>✓ GRANT permissions</li>
+                        <li>✓ Delta Sharing</li>
+                        <li>✓ Audit logs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: 30px;">
+                <h3 style="margin-bottom: 15px;">🚀 Próximos Passos</h3>
+                <ol style="margin: 0; padding-left: 25px;">
+                    <li><strong>Estude este guia:</strong> Seção por seção, começando pela Section 3 (30%)</li>
+                    <li><strong>Faça os módulos Partners:</strong> 8h no total, todos os 4 módulos</li>
+                    <li><strong>Hands-on no Databricks:</strong> Pratique Auto Loader, DLT, Unity Catalog</li>
+                    <li><strong>Revise questões:</strong> As 5 questões do Exam Guide PDF</li>
+                    <li><strong>Simulados:</strong> Se possível, faça practice tests</li>
+                    <li><strong>Agende a prova:</strong> Quando estiver confiante (70%+ de acerto esperado)</li>
+                </ol>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin-top: 30px; text-align: center;">
+                <h2 style="color: white; margin-bottom: 15px;">💪 Você consegue!</h2>
+                <p style="font-size: 1.1em; margin: 0;">
+                    45 questões | 90 minutos | 70% para passar (~32 questões corretas)<br>
+                    <strong>Estude focado, pratique bastante, e boa sorte! 🎯</strong>
+                </p>
+            </div>
+        </div>
+
+        
+        <!-- AUTHOR SECTION -->
+        <div class="content-section" id="author">
+            <h2>👨‍💻 Sobre o Autor</h2>
+            
+            <div style="display: flex; gap: 30px; align-items: start; flex-wrap: wrap; margin: 30px 0;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: #58a6ff; margin-top: 0;">Esdras Rocha</h3>
+                    <p style="font-size: 1.1em; color: #8b949e; margin-bottom: 20px;">
+                        <strong style="color: #c9d1d9;">Engenheiro de Dados Sênior</strong><br>
+                        Databricks | ADF | PySpark | Multi-Cloud (AWS &amp; Azure)<br>
+                        Arquitetura Lakehouse | ETL &amp; Governança de Dados
+                    </p>
+                    
+                    <p style="line-height: 1.8; color: #c9d1d9;">
+                        Mais de <strong>14 anos</strong> transformando dados em valor estratégico, com atuação em projetos 
+                        multinacionais (Brasil, LATAM e Europa) focados em arquitetura Lakehouse, pipelines escaláveis, 
+                        governança e automação de dados.
+                    </p>
+                    
+                    <div class="objective-list" style="margin: 20px 0;">
+                        <strong>Especialidades:</strong>
+                        <ul>
+                            <li>Databricks (Unity Catalog, Delta Lake, PySpark avançado)</li>
+                            <li>Experiência sólida em AWS e Azure</li>
+                            <li>Migração de legados (Oracle, SQL Server) para plataformas modernas</li>
+                            <li>Projetos em larga escala nos setores financeiro, automotivo, varejo e tecnologia</li>
+                        </ul>
+                    </div>
+                    
+                    
+                    
+                    <div style="margin-top: 25px;">
+                        <a href="https://www.linkedin.com/in/esdras-rocha" target="_blank" style="display: inline-block; background: #0077b5; color: white; padding: 12px 25px; 
+                                  text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px;
+                                  transition: background 0.3s;">
+                            🔗 LinkedIn
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-info" style="margin-top: 30px;">
+                <strong>💡 Sobre este guia:</strong><br>
+                Este material foi desenvolvido com base em anos de experiência prática com Databricks e no estudo 
+                aprofundado do guia oficial de certificação. O objetivo é facilitar a preparação de profissionais 
+                que buscam a certificação <strong>Databricks Certified Data Engineer Associate</strong>, oferecendo 
+                conteúdo técnico, exemplos práticos e dicas estratégicas para o exame.
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>📚 Databricks Certified Data Engineer Associate - Exam Guide Completo</strong></p>
+            <p>Baseado no Exam Guide Julho 2025 | Mapeado com Databricks Academy Partners</p>
+            <p style="margin-top: 15px; opacity: 0.9;">
+                Section 1 (15%) | Section 2 (20%) | Section 3 (30%) | Section 4 (20%) | Section 5 (15%)
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Adicionar botões de copiar em todos os blocos de código
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            
+            codeBlocks.forEach((block, index) => {
+                // Detectar linguagem
+                const content = block.innerHTML;
+                let language = 'SQL';
+                if (content.includes('# PySpark') || content.includes('df.') || content.includes('spark.')) {
+                    language = 'Python';
+                } else if (content.includes('--')) {
+                    language = 'SQL';
+                }
+                
+                // Criar header com botão de copiar
+                const header = document.createElement('div');
+                header.className = 'code-header';
+                header.innerHTML = `
+                    <span class="code-language">${language}</span>
+                    <button class="code-copy-btn" onclick="copyCode(${index})">📋 Copiar</button>
+                `;
+                
+                // Envolver conteúdo existente
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'code-content';
+                contentDiv.innerHTML = block.innerHTML;
+                contentDiv.id = 'code-' + index;
+                
+                block.innerHTML = '';
+                block.appendChild(header);
+                block.appendChild(contentDiv);
+            });
+        });
+        
+        function copyCode(index) {
+            const codeElement = document.getElementById('code-' + index);
+            const text = codeElement.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✓ Copiado!';
+                btn.style.background = '#4caf50';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#0e639c';
+                }, 2000);
+            });
+        }
+        
+        // Scroll to top functionality
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+    
+    <div class="scroll-top" onclick="scrollToTop()" style="display: none;">
+        ↑
+    </div>
+
+
+</body></html>
