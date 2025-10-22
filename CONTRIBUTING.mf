@@ -1,0 +1,189 @@
+# 🤝 Contribuindo para o Databricks Exam Guide
+
+Obrigado por considerar contribuir! Este guia é feito pela comunidade, para a comunidade. 🎉
+
+## 📋 Como Contribuir
+
+### 1. 🐛 Reportar Erros
+
+Encontrou algo errado? Abra uma [Issue](../../issues) com:
+
+- Descrição clara do problema
+- Localização no guia (qual seção)
+- Sugestão de correção (se possível)
+
+**Exemplo:**
+
+```
+Título: Erro na explicação de Z-Ordering
+Descrição: Na Section 3, a sintaxe do ZORDER BY está incorreta...
+```
+
+### 2. ✨ Sugerir Melhorias
+
+Tem ideias para melhorar o guia? Adoraríamos ouvir!
+
+- Abra uma Issue com tag `enhancement`
+- Descreva sua sugestão
+- Explique o benefício
+
+### 3. 📝 Contribuir com Conteúdo
+
+Quer adicionar ou melhorar conteúdo?
+
+**Passo a passo:**
+
+1. Faça um **Fork** do repositório
+1. Crie uma **branch** para sua feature:
+   
+   ```bash
+   git checkout -b feature/melhoria-delta-lake
+   ```
+1. Faça suas alterações no `index.html`
+1. **Teste** o arquivo localmente (abra no navegador)
+1. Faça **commit** com mensagem descritiva:
+   
+   ```bash
+   git commit -m "Adiciona exemplos de MERGE INTO"
+   ```
+1. Faça **push** para seu fork:
+   
+   ```bash
+   git push origin feature/melhoria-delta-lake
+   ```
+1. Abra um **Pull Request** com descrição clara
+
+### 4. 🌐 Traduções
+
+Quer traduzir o guia para outro idioma?
+
+- Abra uma Issue primeiro para discussão
+- Sugerimos criar uma versão `index-en.html` (inglês), `index-es.html` (espanhol), etc.
+
+## ✅ Diretrizes
+
+### Conteúdo
+
+- ✅ Baseado no **Exam Guide oficial** da Databricks
+- ✅ Exemplos práticos e testados
+- ✅ Explicações claras e concisas
+- ✅ Código formatado corretamente
+- ❌ Não adicione informações não relacionadas ao exame
+
+### Código
+
+- ✅ Mantenha o estilo existente (dark theme, CSS inline)
+- ✅ Teste em diferentes navegadores
+- ✅ Verifique responsividade mobile
+- ✅ Valide HTML (use https://validator.w3.org/)
+
+### Commits
+
+- ✅ Use mensagens claras em português ou inglês
+- ✅ Um commit por funcionalidade
+- ✅ Referencie Issues quando relevante (#123)
+
+**Bons exemplos:**
+
+```
+✅ Corrige sintaxe SQL na seção de OPTIMIZE
+✅ Adiciona exemplos de Delta Live Tables
+✅ Melhora explicação de Unity Catalog
+✅ Fix #42: Corrige link quebrado
+```
+
+**Maus exemplos:**
+
+```
+❌ update
+❌ fix stuff
+❌ mudanças
+```
+
+## 🎯 Áreas que Precisam de Ajuda
+
+- [ ] Mais exemplos práticos de PySpark
+- [ ] Diagramas visuais de arquitetura
+- [ ] Exercícios práticos
+- [ ] Questões de exemplo
+- [ ] Melhorias na seção de Unity Catalog
+- [ ] Tradução para inglês
+
+## 🐞 Reportando Bugs
+
+Antes de reportar, verifique se:
+
+1. O bug ainda existe na versão mais recente
+1. Não há Issue duplicada
+1. Você testou em diferentes navegadores
+
+**Template de Issue:**
+
+```markdown
+**Descrição do Bug:**
+[Descreva o problema]
+
+**Como Reproduzir:**
+1. Vá para '...'
+2. Clique em '...'
+3. Veja o erro
+
+**Comportamento Esperado:**
+[O que deveria acontecer]
+
+**Screenshots:**
+[Se aplicável]
+
+**Navegador:**
+- OS: [ex: Windows 10]
+- Browser: [ex: Chrome 120]
+```
+
+## 💡 Sugerindo Features
+
+**Template de Feature Request:**
+
+```markdown
+**Feature:**
+[Nome da feature]
+
+**Problema que Resolve:**
+[Qual problema esta feature resolve]
+
+**Solução Proposta:**
+[Como você imagina que funcione]
+
+**Alternativas Consideradas:**
+[Outras formas de resolver]
+
+**Contexto Adicional:**
+[Qualquer outra informação relevante]
+```
+
+## 📧 Dúvidas?
+
+Tem alguma dúvida sobre como contribuir?
+
+- Abra uma [Discussion](../../discussions)
+- Entre em contato pelo [LinkedIn](https://linkedin.com/in/esdras-rocha)
+
+## 🏆 Reconhecimento
+
+Todos os contribuidores serão reconhecidos no README! 🎉
+
+Obrigado por ajudar a melhorar este guia! 🚀
+
+-----
+
+## 📜 Código de Conduta
+
+Esperamos que todos os contribuidores:
+
+- 🤝 Sejam respeitosos e inclusivos
+- 💡 Aceitem feedback construtivo
+- 🎯 Foquem no que é melhor para a comunidade
+- 🙏 Sejam agradecidos pelas contribuições dos outros
+
+-----
+
+**Lembre-se:** Não há contribuição pequena demais! Desde corrigir um typo até adicionar uma seção completa, toda ajuda é bem-vinda! ❤️
