@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Lake: OPTIMIZE, Z-ORDER, VACUUM e AUTO OPTIMIZE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        
+        .command-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .command-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .optimize-title { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); }
+        .zorder-title { background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%); }
+        .vacuum-title { background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); }
+        .auto-title { background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%); }
+        
+        .section {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid #4299e1;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        pre {
+            background: #1a202c;
+            color: #68d391;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        
+        .visual-demo {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .file-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .file-small { background: #fed7d7; border-color: #fc8181; }
+        .file-medium { background: #feebc8; border-color: #f6ad55; }
+        .file-large { background: #c6f6d5; border-color: #68d391; }
+        
+        .arrow {
+            text-align: center;
+            font-size: 30px;
+            color: #4299e1;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .warning strong {
+            color: #c05621;
+            font-size: 18px;
+        }
+        
+        .danger {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .danger strong {
+            color: #c53030;
+            font-size: 18px;
+        }
+        
+        .success {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .success strong {
+            color: #2f855a;
+            font-size: 18px;
+        }
+        
+        .exam-tip {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .exam-tip strong {
+            color: #2c5282;
+            font-size: 18px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        th {
+            background: #4299e1;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .pros-cons {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #4299e1;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #4299e1;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #4299e1;
+        }
+        
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box {
+            background: #fef5e7;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .metric-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4299e1;
+        }
+        .metric-label {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Delta Lake: Comandos de Otimização</h1>
+        <p class="subtitle">OPTIMIZE, Z-ORDER, VACUUM e AUTO OPTIMIZE - Detalhes Completos para a Prova</p>
+
+        <!-- OPTIMIZE Command -->
+        <div class="command-section">
+            <div class="command-title optimize-title">
+                <span style="font-size: 40px;">📦</span>
+                <span>1. OPTIMIZE - Compactação de Arquivos</span>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🎯</span>
+                    O que é OPTIMIZE?
+                </div>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>OPTIMIZE</strong> é um comando que <strong>compacta arquivos pequenos em arquivos maiores</strong> para melhorar performance de leitura.
+                </p>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>Problema que resolve:</strong> Delta Lake cria muitos arquivos pequenos ao longo do tempo (cada write, update, delete gera novos arquivos). Muitos arquivos pequenos = performance ruim.
+                </p>
+            </div>
+
+            <div class="visual-demo">
+                <h4>📊 Visualização: Como OPTIMIZE Funciona</h4>
+                
+                <p><strong>ANTES do OPTIMIZE:</strong></p>
+                <div class="file-grid">
+                    <div class="file-box file-small">file1.parquet<br>10 MB</div>
+                    <div class="file-box file-small">file2.parquet<br>5 MB</div>
+                    <div class="file-box file-small">file3.parquet<br>8 MB</div>
+                    <div class="file-box file-small">file4.parquet<br>12 MB</div>
+                    <div class="file-box file-small">file5.parquet<br>3 MB</div>
+                    <div class="file-box file-small">file6.parquet<br>7 MB</div>
+                    <div class="file-box file-small">file7.parquet<br>9 MB</div>
+                    <div class="file-box file-small">file8.parquet<br>11 MB</div>
+                    <div class="file-box file-small">file9.parquet<br>4 MB</div>
+                    <div class="file-box file-small">file10.parquet<br>6 MB</div>
+                </div>
+                <p style="color: #c53030; font-weight: 600;">❌ Problema: 10 arquivos pequenos = 10 operações I/O = LENTO!</p>
+
+                <div class="arrow">⬇️ OPTIMIZE ⬇️</div>
+
+                <p><strong>DEPOIS do OPTIMIZE:</strong></p>
+                <div class="file-grid" style="grid-template-columns: 1fr;">
+                    <div class="file-box file-large" style="max-width: 400px; margin: 0 auto;">
+                        file_optimized_001.parquet<br>
+                        <strong>1 GB (todos os dados compactados)</strong>
+                    </div>
+                </div>
+                <p style="color: #2f855a; font-weight: 600;">✅ Solução: 1 arquivo grande = 1 operação I/O = RÁPIDO!</p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">💻</span>
+                    Como usar OPTIMIZE
+                </div>
+                
+                <h4>Sintaxe Básica:</h4>
+                <pre>-- Otimizar tabela inteira
+OPTIMIZE nome_da_tabela;
+
+-- Otimizar apenas uma partição específica
+OPTIMIZE nome_da_tabela WHERE ano = 2025 AND mes = 10;
+
+-- Ver estatísticas do OPTIMIZE
+OPTIMIZE nome_da_tabela;
+-- Retorna: número de arquivos antes/depois, dados lidos/escritos</pre>
+
+                <h4>Exemplo Real:</h4>
+                <pre>-- Tabela com muitos inserts/updates
+OPTIMIZE vendas;
+
+-- Resultado (exemplo):
+-- num_files_added: 1
+-- num_files_removed: 153
+-- min_file_size: 512 KB → 1 GB
+-- max_file_size: 45 MB → 1 GB
+-- total_files_skipped: 0</pre>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🔬</span>
+                    Como OPTIMIZE Funciona Internamente
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Passo 1: Identificação</strong><br>
+                        OPTIMIZE identifica arquivos pequenos (< 1 GB padrão)
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Passo 2: Leitura</strong><br>
+                        Lê todos os arquivos pequenos identificados
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Passo 3: Merge</strong><br>
+                        Combina os dados em arquivos maiores (~1 GB cada)
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Passo 4: Escrita</strong><br>
+                        Escreve novos arquivos otimizados
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Passo 5: Atualização Transaction Log</strong><br>
+                        Marca arquivos antigos como "removidos" (logicamente)<br>
+                        Adiciona novos arquivos ao log
+                    </div>
+                </div>
+
+                <div class="danger">
+                    <strong>⚠️ CRÍTICO PARA A PROVA:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8;">
+                        <strong>OPTIMIZE NÃO DELETA ARQUIVOS FISICAMENTE!</strong><br>
+                        Ele apenas marca os arquivos antigos como "removidos" no transaction log.<br>
+                        Os arquivos físicos continuam no storage!<br>
+                        Para deletar fisicamente, você precisa rodar <code>VACUUM</code> depois.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">📊</span>
+                    Quando Usar OPTIMIZE
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cenário</th>
+                            <th>Deve usar OPTIMIZE?</th>
+                            <th>Por quê?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Muitos writes pequenos (streaming)</td>
+                            <td>✅ SIM</td>
+                            <td>Streaming gera muitos arquivos pequenos</td>
+                        </tr>
+                        <tr>
+                            <td>Muitos UPDATE/DELETE</td>
+                            <td>✅ SIM</td>
+                            <td>Updates geram novos arquivos (copy-on-write)</td>
+                        </tr>
+                        <tr>
+                            <td>Queries lentas mesmo com bons filtros</td>
+                            <td>✅ SIM</td>
+                            <td>Muitos arquivos = muito I/O overhead</td>
+                        </tr>
+                        <tr>
+                            <td>Tabela read-heavy (muitas leituras)</td>
+                            <td>✅ SIM</td>
+                            <td>Benefício direto na performance de leitura</td>
+                        </tr>
+                        <tr>
+                            <td>Carga batch única sem updates</td>
+                            <td>❌ TALVEZ NÃO</td>
+                            <td>Se arquivos já estão bem dimensionados, skip</td>
+                        </tr>
+                        <tr>
+                            <td>Tabela write-only (append sem leitura)</td>
+                            <td>❌ NÃO PRIORITÁRIO</td>
+                            <td>Otimize apenas quando for ler</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="exam-tip">
+                <strong>🎯 PERGUNTA TÍPICA DE PROVA:</strong><br>
+                <p style="margin-top: 10px;">
+                    <em>"Após executar OPTIMIZE em uma tabela, você nota que o espaço em disco não diminuiu. Por quê?"</em>
+                </p>
+                <p style="margin-top: 10px; color: #2f855a;">
+                    <strong>✅ RESPOSTA:</strong> OPTIMIZE não deleta arquivos físicos, apenas marca como removidos no transaction log. Para liberar espaço, execute VACUUM.
+                </p>
+            </div>
+        </div>
+
+        <!-- Z-ORDER -->
+        <div class="command-section">
+            <div class="command-title zorder-title">
+                <span style="font-size: 40px;">🎯</span>
+                <span>2. Z-ORDER - Organização por Colunas</span>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🎯</span>
+                    O que é Z-ORDER?
+                </div>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>Z-ORDER</strong> (ou Z-ORDERING) é uma técnica de <strong>co-localização de dados relacionados</strong> dentro dos arquivos Delta.<br>
+                    Organiza os dados usando uma curva Z-order (space-filling curve) para agrupar valores similares de múltiplas colunas.
+                </p>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>Resultado:</strong> Queries com filtros nessas colunas pulam mais dados (data skipping) = mais rápidas.
+                </p>
+            </div>
+
+            <div class="visual-demo">
+                <h4>📊 Visualização: Diferença com e sem Z-ORDER</h4>
+                
+                <div class="comparison-grid">
+                    <div>
+                        <h5 style="color: #c53030;">❌ SEM Z-ORDER</h5>
+                        <div style="background: #fff5f5; padding: 15px; border-radius: 8px;">
+                            <p style="font-size: 13px; margin: 5px 0;"><strong>Arquivo 1:</strong> produto=A, cidade=SP (10 linhas), produto=B, cidade=RJ (15 linhas)</p>
+                            <p style="font-size: 13px; margin: 5px 0;"><strong>Arquivo 2:</strong> produto=A, cidade=RJ (8 linhas), produto=C, cidade=SP (20 linhas)</p>
+                            <p style="font-size: 13px; margin: 5px 0;"><strong>Arquivo 3:</strong> produto=B, cidade=SP (12 linhas), produto=A, cidade=MG (5 linhas)</p>
+                        </div>
+                        <p style="color: #c53030; margin-top: 10px; font-weight: 600;">
+                            Query: WHERE produto='A' AND cidade='SP'<br>
+                            → Precisa ler OS 3 ARQUIVOS! (dados de A+SP espalhados)
+                        </p>
+                    </div>
+
+                    <div>
+                        <h5 style="color: #2f855a;">✅ COM Z-ORDER BY (produto, cidade)</h5>
+                        <div style="background: #f0fff4; padding: 15px; border-radius: 8px;">
+                            <p style="font-size: 13px; margin: 5px 0;"><strong>Arquivo 1:</strong> produto=A, cidade=SP (10 linhas), produto=A, cidade=SP (mais 5 linhas)</p>
+                            <p style="font-size: 13px; margin: 5px 0;"><strong>Arquivo 2:</strong> produto=A, cidade=RJ (8 linhas), produto=A, cidade=MG (5 linhas)</p>
+                            <p style="font-size: 13px; margin: 5px 0;"><strong>Arquivo 3:</strong> produto=B, cidade=SP (12 linhas), produto=C, cidade=RJ (20 linhas)</p>
+                        </div>
+                        <p style="color: #2f855a; margin-top: 10px; font-weight: 600;">
+                            Query: WHERE produto='A' AND cidade='SP'<br>
+                            → Lê APENAS ARQUIVO 1! (todos A+SP juntos)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">💻</span>
+                    Como usar Z-ORDER
+                </div>
+                
+                <h4>Sintaxe:</h4>
+                <pre>-- Z-ORDER sempre é usado JUNTO com OPTIMIZE
+OPTIMIZE nome_da_tabela
+ZORDER BY (coluna1, coluna2, coluna3);
+
+-- Exemplo real
+OPTIMIZE vendas
+ZORDER BY (produto_id, data_venda);
+
+-- Z-ORDER em partição específica
+OPTIMIZE vendas
+WHERE ano = 2025
+ZORDER BY (produto_id, cidade);</pre>
+
+                <h4>Exemplo Prático:</h4>
+                <pre>-- Tabela com queries frequentes por produto e região
+CREATE TABLE vendas (
+    id BIGINT,
+    produto_id STRING,
+    regiao STRING,
+    valor DOUBLE,
+    data DATE
+) USING DELTA;
+
+-- Muitos inserts...
+-- Agora otimizar para queries tipo:
+-- SELECT * FROM vendas WHERE produto_id = 'X' AND regiao = 'Y'
+
+OPTIMIZE vendas
+ZORDER BY (produto_id, regiao);
+
+-- Performance de queries com filtros nessas colunas melhora significativamente!</pre>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">⚙️</span>
+                    Como Z-ORDER Funciona (Algoritmo)
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; border: 2px solid #4299e1;">
+                    <h4>🔬 Z-Order Curve (Curva Z)</h4>
+                    <p style="line-height: 1.8;">
+                        O algoritmo mapeia valores multidimensionais (múltiplas colunas) em uma única dimensão usando uma curva Z:
+                    </p>
+                    <ol style="line-height: 2;">
+                        <li>Pega os valores de cada coluna</li>
+                        <li>Converte em representação binária</li>
+                        <li>Intercala os bits das colunas (bit interleaving)</li>
+                        <li>Resultado: valores similares em múltiplas colunas ficam próximos</li>
+                    </ol>
+                    
+                    <div style="background: #edf2f7; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <strong>Exemplo Simplificado:</strong>
+                        <pre style="background: #1a202c; color: #68d391; font-size: 12px;">Dados originais:
+produto=A (binário: 00), cidade=SP (binário: 01) → Z-value: 0001
+produto=A (binário: 00), cidade=RJ (binário: 10) → Z-value: 0100
+produto=B (binário: 01), cidade=SP (binário: 01) → Z-value: 0101
+
+Após ordenação por Z-value:
+0001, 0100, 0101
+→ Dados com produto=A ficam próximos!
+→ Dados com cidade=SP também ficam próximos!</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ CRÍTICO PARA A PROVA - Limite de Colunas:</strong><br>
+                <p style="margin-top: 10px; line-height: 1.8;">
+                    <strong>Z-ORDER funciona bem com ATÉ 4 COLUNAS!</strong><br>
+                    • 1-2 colunas: Excelente<br>
+                    • 3-4 colunas: Bom, mas retorno diminui<br>
+                    • 5+ colunas: ❌ Performance piora! (curse of dimensionality)<br>
+                    <br>
+                    <strong>Por quê?</strong> Com muitas dimensões, os dados ficam espalhados novamente. O benefício do data skipping diminui drasticamente.
+                </p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🎯</span>
+                    Escolhendo Colunas para Z-ORDER
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Critério</th>
+                            <th>Boa Escolha?</th>
+                            <th>Explicação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Coluna usada em WHERE frequentemente</td>
+                            <td>✅✅✅ EXCELENTE</td>
+                            <td>Máximo benefício de data skipping</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna com alta cardinalidade</td>
+                            <td>✅✅ BOM</td>
+                            <td>Mais valores únicos = melhor distribuição</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna usada em JOINs</td>
+                            <td>✅✅ BOM</td>
+                            <td>Co-localiza dados relacionados</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna de particionamento</td>
+                            <td>❌ NÃO</td>
+                            <td>Já está particionado, Z-ORDER redundante</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna com poucos valores únicos</td>
+                            <td>⚠️ LIMITADO</td>
+                            <td>Baixa cardinalidade limita benefícios</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna raramente usada em queries</td>
+                            <td>❌ NÃO</td>
+                            <td>Desperdício, não traz benefício</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="exam-tip">
+                <strong>🎯 PERGUNTA TÍPICA DE PROVA:</strong><br>
+                <p style="margin-top: 10px;">
+                    <em>"Você tem uma tabela particionada por ano. Suas queries filtram por produto_id, cidade, categoria, vendedor_id e região. Como otimizar?"</em>
+                </p>
+                <p style="margin-top: 10px; color: #c53030;">
+                    <strong>❌ ERRADO:</strong> ZORDER BY (produto_id, cidade, categoria, vendedor_id, região)<br>
+                    <em>Motivo: 5 colunas é demais!</em>
+                </p>
+                <p style="margin-top: 10px; color: #2f855a;">
+                    <strong>✅ CORRETO:</strong> ZORDER BY (produto_id, cidade, categoria)<br>
+                    <em>Escolha as 3-4 colunas MAIS USADAS em filtros. Não use ano (já particionado).</em>
+                </p>
+            </div>
+        </div>
+
+        <!-- VACUUM -->
+        <div class="command-section">
+            <div class="command-title vacuum-title">
+                <span style="font-size: 40px;">🗑️</span>
+                <span>3. VACUUM - Limpeza Física de Arquivos</span>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🎯</span>
+                    O que é VACUUM?
+                </div>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>VACUUM</strong> é o comando que <strong>DELETA FISICAMENTE</strong> arquivos antigos que não são mais referenciados pelo transaction log.
+                </p>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>Por que precisa?</strong> Operações como OPTIMIZE, UPDATE, DELETE, MERGE marcam arquivos como "removidos" logicamente, mas não deletam do storage. VACUUM faz a limpeza física.
+                </p>
+            </div>
+
+            <div class="visual-demo">
+                <h4>📊 Visualização: Como VACUUM Funciona</h4>
+                
+                <p><strong>Storage ANTES do VACUUM:</strong></p>
+                <div style="background: #fff5f5; padding: 20px; border-radius: 8px;">
+                    <p style="font-weight: 600; margin-bottom: 10px;">Arquivos no S3/ADLS:</p>
+                    <div class="file-grid">
+                        <div class="file-box" style="background: #c6f6d5; border-color: #68d391;">
+                            new_001.parquet<br>
+                            <small>✅ Ativo (v10)</small>
+                        </div>
+                        <div class="file-box" style="background: #fed7d7; border-color: #fc8181;">
+                            old_001.parquet<br>
+                            <small>❌ Removido (v5)</small>
+                        </div>
+                        <div class="file-box" style="background: #fed7d7; border-color: #fc8181;">
+                            old_002.parquet<br>
+                            <small>❌ Removido (v7)</small>
+                        </div>
+                        <div class="file-box" style="background: #c6f6d5; border-color: #68d391;">
+                            new_002.parquet<br>
+                            <small>✅ Ativo (v10)</small>
+                        </div>
+                        <div class="file-box" style="background: #fed7d7; border-color: #fc8181;">
+                            old_003.parquet<br>
+                            <small>❌ Removido (v8)</small>
+                        </div>
+                    </div>
+                    <p style="color: #c53030; font-weight: 600; margin-top: 10px;">
+                        ❌ Problema: Arquivos old_* ocupam espaço mas não são usados!
+                    </p>
+                </div>
+
+                <div class="arrow">⬇️ VACUUM ⬇️</div>
+
+                <p><strong>Storage DEPOIS do VACUUM:</strong></p>
+                <div style="background: #f0fff4; padding: 20px; border-radius: 8px;">
+                    <p style="font-weight: 600; margin-bottom: 10px;">Arquivos no S3/ADLS:</p>
+                    <div class="file-grid">
+                        <div class="file-box file-large">
+                            new_001.parquet<br>
+                            <small>✅ Ativo</small>
+                        </div>
+                        <div class="file-box file-large">
+                            new_002.parquet<br>
+                            <small>✅ Ativo</small>
+                        </div>
+                    </div>
+                    <p style="color: #2f855a; font-weight: 600; margin-top: 10px;">
+                        ✅ Arquivos antigos DELETADOS fisicamente! Espaço liberado!
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">💻</span>
+                    Como usar VACUUM
+                </div>
+                
+                <h4>Sintaxe:</h4>
+                <pre>-- VACUUM com retention padrão (7 dias)
+VACUUM nome_da_tabela;
+
+-- VACUUM com retention customizado
+VACUUM nome_da_tabela RETAIN 168 HOURS;  -- 7 dias
+VACUUM nome_da_tabela RETAIN 24 HOURS;   -- 1 dia
+
+-- Dry run (ver o que seria deletado sem deletar)
+VACUUM nome_da_tabela DRY RUN;</pre>
+
+                <h4>Exemplo Real:</h4>
+                <pre>-- Passo 1: OPTIMIZE gera novos arquivos
+OPTIMIZE vendas;
+
+-- Storage tem agora:
+-- - Arquivos antigos (marcados como removidos)
+-- - Arquivos novos (otimizados)
+-- Espaço ocupado: 2x o necessário!
+
+-- Passo 2: VACUUM deleta arquivos antigos
+VACUUM vendas RETAIN 168 HOURS;
+
+-- Resultado:
+-- deleted_files: 153
+-- space_freed: 1.2 TB</pre>
+            </div>
+
+            <div class="danger">
+                <strong>🚨 CRÍTICO PARA A PROVA - VACUUM vs Time Travel:</strong><br>
+                <p style="margin-top: 10px; line-height: 1.8; font-size: 16px;">
+                    <strong>VACUUM IMPEDE TIME TRAVEL das versões removidas!</strong><br>
+                    <br>
+                    Se você rodar <code>VACUUM RETAIN 7 DAYS</code>, você:<br>
+                    ✅ Pode fazer Time Travel dos últimos 7 dias<br>
+                    ❌ NÃO pode fazer Time Travel de mais de 7 dias atrás<br>
+                    <br>
+                    <strong>Por quê?</strong> VACUUM deletou os arquivos físicos! Não tem como restaurar sem os arquivos.
+                </p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">⏰</span>
+                    Retention Period (Período de Retenção)
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Retention</th>
+                            <th>Quando Usar?</th>
+                            <th>Trade-off</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>7 dias (padrão)</strong></td>
+                            <td>Produção normal</td>
+                            <td>✅ Balanceado: Time Travel razoável + economia de espaço</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30 dias</strong></td>
+                            <td>Compliance, auditoria</td>
+                            <td>✅ Mais Time Travel<br>❌ Mais espaço ocupado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>24 horas</strong></td>
+                            <td>Ambiente dev/test</td>
+                            <td>✅ Libera espaço rápido<br>❌ Time Travel limitado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>0 horas (⚠️)</strong></td>
+                            <td>❌ Evite! Perigoso!</td>
+                            <td>❌ Sem Time Travel<br>❌ Pode corromper queries em execução</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <strong>⚠️ Configuração Importante:</strong><br>
+                    <p style="margin-top: 10px;">
+                        Delta Lake tem uma proteção: não deixa VACUUM com retention < 7 dias por padrão.<br>
+                        Para usar retention menor, precisa desabilitar a proteção:
+                    </p>
+                    <pre style="font-size: 12px;">-- Desabilitar proteção (use com cuidado!)
+SET spark.databricks.delta.retentionDurationCheck.enabled = false;
+
+-- Agora pode usar retention menor
+VACUUM minha_tabela RETAIN 0 HOURS;
+
+-- Reabilitar proteção (recomendado!)
+SET spark.databricks.delta.retentionDurationCheck.enabled = true;</pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🔄</span>
+                    VACUUM: Quando e Com Que Frequência
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="pros-cons">
+                        <h4 style="color: #2f855a;">✅ Execute VACUUM quando:</h4>
+                        <ul style="line-height: 2;">
+                            <li>Após várias operações de OPTIMIZE</li>
+                            <li>Após muitos UPDATE/DELETE/MERGE</li>
+                            <li>Storage está crescendo rapidamente</li>
+                            <li>Custos de storage estão altos</li>
+                            <li>Periodicamente (ex: semanalmente)</li>
+                        </ul>
+                    </div>
+                    <div class="pros-cons">
+                        <h4 style="color: #c53030;">❌ NÃO execute VACUUM quando:</h4>
+                        <ul style="line-height: 2;">
+                            <li>Há queries long-running na tabela</li>
+                            <li>Você precisa de Time Travel extenso</li>
+                            <li>Durante horário de pico</li>
+                            <li>Tabela mudou pouco recentemente</li>
+                            <li>Sem planejar retention adequado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>📅 Recomendação de Frequência:</strong>
+                    <ul style="line-height: 2; margin-top: 10px;">
+                        <li><strong>Tabelas hot (muito write):</strong> VACUUM semanal com RETAIN 7 dias</li>
+                        <li><strong>Tabelas warm (write moderado):</strong> VACUUM quinzenal com RETAIN 14 dias</li>
+                        <li><strong>Tabelas cold (pouco write):</strong> VACUUM mensal com RETAIN 30 dias</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exam-tip">
+                <strong>🎯 PERGUNTA TÍPICA DE PROVA:</strong><br>
+                <p style="margin-top: 10px;">
+                    <em>"Você executou VACUUM RETAIN 0 HOURS e agora não consegue fazer Time Travel de ontem. O que aconteceu?"</em>
+                </p>
+                <p style="margin-top: 10px; color: #2f855a;">
+                    <strong>✅ RESPOSTA:</strong> VACUUM deletou os arquivos físicos necessários para Time Travel. Com RETAIN 0 HOURS, todos os arquivos antigos foram removidos imediatamente, impossibilitando o acesso a versões anteriores.
+                </p>
+            </div>
+        </div>
+
+        <!-- AUTO OPTIMIZE -->
+        <div class="command-section">
+            <div class="command-title auto-title">
+                <span style="font-size: 40px;">⚡</span>
+                <span>4. AUTO OPTIMIZE - Otimização Automática</span>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🎯</span>
+                    O que é AUTO OPTIMIZE?
+                </div>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>AUTO OPTIMIZE</strong> é uma feature que executa <strong>OPTIMIZE automaticamente durante a escrita</strong>.<br>
+                    Você habilita e o Databricks compacta arquivos pequenos automaticamente em background.
+                </p>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>Composto por 2 features:</strong><br>
+                    1. <strong>Optimized Writes</strong> - escreve arquivos maiores desde o início<br>
+                    2. <strong>Auto Compaction</strong> - compacta arquivos pequenos automaticamente após write
+                </p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">💻</span>
+                    Como Habilitar AUTO OPTIMIZE
+                </div>
+                
+                <h4>Opção 1: Ao criar a tabela</h4>
+                <pre>CREATE TABLE vendas (
+    id BIGINT,
+    produto STRING,
+    valor DOUBLE
+) USING DELTA
+TBLPROPERTIES (
+    'delta.autoOptimize.optimizeWrite' = 'true',
+    'delta.autoOptimize.autoCompact' = 'true'
+);</pre>
+
+                <h4>Opção 2: Em tabela existente</h4>
+                <pre>ALTER TABLE vendas SET TBLPROPERTIES (
+    'delta.autoOptimize.optimizeWrite' = 'true',
+    'delta.autoOptimize.autoCompact' = 'true'
+);</pre>
+
+                <h4>Opção 3: Session-level (todas as tabelas)</h4>
+                <pre>-- Habilitar para sessão
+SET spark.databricks.delta.optimizeWrite.enabled = true;
+SET spark.databricks.delta.autoCompact.enabled = true;
+
+-- Agora todas as escritas nesta sessão usarão auto optimize</pre>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">🔍</span>
+                    Optimized Writes vs Auto Compaction
+                </div>
+                
+                <div class="code-comparison">
+                    <div>
+                        <h4 style="color: #805ad5;">1️⃣ Optimized Writes</h4>
+                        <div style="background: #faf5ff; padding: 15px; border-radius: 8px; border-left: 3px solid #9f7aea;">
+                            <p><strong>O que faz:</strong></p>
+                            <p style="font-size: 14px; line-height: 1.6;">
+                                Reorganiza dados DURANTE a escrita para criar arquivos maiores (~128MB) desde o início.
+                            </p>
+                            <p style="margin-top: 10px;"><strong>Quando acontece:</strong></p>
+                            <p style="font-size: 14px;">Durante o write operation (parte do job)</p>
+                            <p style="margin-top: 10px;"><strong>Overhead:</strong></p>
+                            <p style="font-size: 14px;">⚠️ Pequeno overhead na escrita (~5-10%)</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="color: #805ad5;">2️⃣ Auto Compaction</h4>
+                        <div style="background: #faf5ff; padding: 15px; border-radius: 8px; border-left: 3px solid #9f7aea;">
+                            <p><strong>O que faz:</strong></p>
+                            <p style="font-size: 14px; line-height: 1.6;">
+                                Roda OPTIMIZE automaticamente em background APÓS o write, se detectar muitos arquivos pequenos.
+                            </p>
+                            <p style="margin-top: 10px;"><strong>Quando acontece:</strong></p>
+                            <p style="font-size: 14px;">Após write, assíncrono em background</p>
+                            <p style="margin-top: 10px;"><strong>Overhead:</strong></p>
+                            <p style="font-size: 14px;">⚠️ Overhead mínimo (compacta só se necessário)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ CRÍTICO PARA A PROVA - Trade-off:</strong><br>
+                <p style="margin-top: 10px; line-height: 1.8; font-size: 16px;">
+                    <strong>AUTO OPTIMIZE adiciona PEQUENO overhead na escrita, mas GRANDE ganho na leitura!</strong><br>
+                    <br>
+                    <strong>Write performance:</strong> ⬇️ ~5-10% mais lento (reorganização)<br>
+                    <strong>Read performance:</strong> ⬆️ 3-10x mais rápido (arquivos otimizados)<br>
+                    <br>
+                    <strong>Quando vale a pena?</strong><br>
+                    ✅ Tabelas read-heavy (muito mais leitura que escrita)<br>
+                    ✅ Streaming contínuo (muitos arquivos pequenos)<br>
+                    ✅ Workloads analíticos<br>
+                    <br>
+                    <strong>Quando NÃO vale?</strong><br>
+                    ❌ Tabelas write-heavy com poucas leituras<br>
+                    ❌ ETL batch rápido onde write time é crítico<br>
+                    ❌ Tabelas de staging temporárias
+                </p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span style="font-size: 28px;">⚖️</span>
+                    Comparação: Manual vs Auto Optimize
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>OPTIMIZE Manual</th>
+                            <th>AUTO OPTIMIZE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Quando otimiza</strong></td>
+                            <td>Quando você executar o comando</td>
+                            <td>Automaticamente após writes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Controle</strong></td>
+                            <td>✅ Total (você decide quando/como)</td>
+                            <td>⚠️ Limitado (automático)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Overhead na escrita</strong></td>
+                            <td>Nenhum (otimiza separadamente)</td>
+                            <td>~5-10% (otimiza durante/após write)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Manutenção</strong></td>
+                            <td>❌ Precisa agendar/gerenciar</td>
+                            <td>✅ Zero (automático)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custo computacional</strong></td>
+                            <td>Pontual (quando roda)</td>
+                            <td>Distribuído (sempre ativo)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ideal para</strong></td>
+                            <td>Batch ETL, controle fino</td>
+                            <td>Streaming, analytics, zero-maintenance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="exam-tip">
+                <strong>🎯 PERGUNTA TÍPICA DE PROVA:</strong><br>
+                <p style="margin-top: 10px;">
+                    <em>"Você habilitou AUTO OPTIMIZE em uma tabela de streaming e notou que o write latency aumentou 10%. Isso é esperado?"</em>
+                </p>
+                <p style="margin-top: 10px; color: #2f855a;">
+                    <strong>✅ RESPOSTA:</strong> Sim, é esperado. AUTO OPTIMIZE adiciona pequeno overhead na escrita (~5-10%) porque reorganiza dados para criar arquivos otimizados. O benefício é na leitura, que fica 3-10x mais rápida.
+                </p>
+            </div>
+        </div>
+
+        <!-- Comparison Matrix -->
+        <div class="section" style="margin-top: 40px;">
+            <div class="section-title">
+                <span style="font-size: 28px;">📊</span>
+                Matriz de Comparação: Todos os Comandos
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Comando</th>
+                        <th>O que faz</th>
+                        <th>Deletafísico?</th>
+                        <th>Impacta Time Travel?</th>
+                        <th>Quando usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>OPTIMIZE</strong></td>
+                        <td>Compacta arquivos pequenos</td>
+                        <td>❌ Não</td>
+                        <td>❌ Não</td>
+                        <td>Muitos writes, updates, deletes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Z-ORDER</strong></td>
+                        <td>Co-localiza dados por colunas</td>
+                        <td>❌ Não</td>
+                        <td>❌ Não</td>
+                        <td>Queries com filtros específicos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>VACUUM</strong></td>
+                        <td>Deleta arquivos antigos</td>
+                        <td>✅ Sim!</td>
+                        <td>✅ Sim! (remove versões antigas)</td>
+                        <td>Após OPTIMIZE, liberar espaço</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AUTO OPTIMIZE</strong></td>
+                        <td>OPTIMIZE automático</td>
+                        <td>❌ Não (mas precisa VACUUM depois)</td>
+                        <td>❌ Não</td>
+                        <td>Streaming, zero-maintenance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Best Practices Workflow -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; margin-top: 40px;">
+            <div class="section-title" style="color: white;">
+                <span style="font-size: 28px;">🎯</span>
+                Workflow Recomendado de Otimização
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong style="color: white;">Etapa 1: Habilitar AUTO OPTIMIZE (se apropriado)</strong><br>
+                    <span style="color: #e2e8f0;">Para tabelas streaming ou com writes frequentes</span>
+                    <pre style="margin-top: 10px;">ALTER TABLE vendas SET TBLPROPERTIES (
+  'delta.autoOptimize.optimizeWrite' = 'true',
+  'delta.autoOptimize.autoCompact' = 'true'
+);</pre>
+                </div>
+                
+                <div class="timeline-item">
+                    <strong style="color: white;">Etapa 2: OPTIMIZE manual periodicamente</strong><br>
+                    <span style="color: #e2e8f0;">Semanal ou após grandes cargas</span>
+                    <pre style="margin-top: 10px;">-- Com Z-ORDER para queries específicas
+OPTIMIZE vendas
+ZORDER BY (produto_id, regiao, data);</pre>
+                </div>
+                
+                <div class="timeline-item">
+                    <strong style="color: white;">Etapa 3: VACUUM para liberar espaço</strong><br>
+                    <span style="color: #e2e8f0;">Após OPTIMIZE, respeitando retention</span>
+                    <pre style="margin-top: 10px;">-- 7 dias = balanço entre Time Travel e espaço
+VACUUM vendas RETAIN 168 HOURS;</pre>
+                </div>
+                
+                <div class="timeline-item">
+                    <strong style="color: white;">Etapa 4: Monitorar e ajustar</strong><br>
+                    <span style="color: #e2e8f0;">Verificar métricas e ajustar frequência</span>
+                    <pre style="margin-top: 10px;">-- Verificar tamanho de arquivos
+DESCRIBE DETAIL vendas;
+
+-- Ver histórico de operações
+DESCRIBE HISTORY vendas;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Summary -->
+        <div class="section" style="margin-top: 40px;">
+            <div class="section-title">
+                <span style="font-size: 28px;">🎓</span>
+                Resumo para a Prova - Pontos Críticos
+            </div>
+            
+            <div style="display: grid; gap: 20px;">
+                <div class="exam-tip">
+                    <strong>1. OPTIMIZE não deleta arquivos fisicamente</strong><br>
+                    <p style="margin-top: 10px;">
+                        ✅ Marca como removido no transaction log<br>
+                        ❌ Arquivos físicos continuam no storage<br>
+                        🔧 Use VACUUM para deletar fisicamente
+                    </p>
+                </div>
+
+                <div class="exam-tip">
+                    <strong>2. Z-ORDER funciona bem com até 4 colunas</strong><br>
+                    <p style="margin-top: 10px;">
+                        ✅ 1-2 colunas: Excelente<br>
+                        ⚠️ 3-4 colunas: Bom, mas retorno diminui<br>
+                        ❌ 5+ colunas: Performance piora (curse of dimensionality)
+                    </p>
+                </div>
+
+                <div class="exam-tip">
+                    <strong>3. VACUUM impede Time Travel das versões removidas</strong><br>
+                    <p style="margin-top: 10px;">
+                        ⏰ RETAIN 7 dias (padrão) = Time Travel até 7 dias atrás<br>
+                        ⚠️ VACUUM deleta arquivos = não consegue restaurar versões antigas<br>
+                        🚨 RETAIN 0 = remove Time Travel completamente
+                    </p>
+                </div>
+
+                <div class="exam-tip">
+                    <strong>4. AUTO OPTIMIZE: overhead na escrita, ganho na leitura</strong><br>
+                    <p style="margin-top: 10px;">
+                        ⬇️ Write: ~5-10% mais lento<br>
+                        ⬆️ Read: 3-10x mais rápido<br>
+                        ✅ Ideal para tabelas read-heavy<br>
+                        ❌ Evite em tabelas write-only
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="section" style="background: #2d3748; color: white; border: none; margin-top: 40px;">
+            <div class="section-title" style="color: white;">
+                <span style="font-size: 28px;">⚡</span>
+                Guia Rápido de Comandos
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #68d391; margin-top: 0;">✅ Comandos Principais</h4>
+                    <pre style="font-size: 13px; background: rgba(0,0,0,0.3);">-- Compactar arquivos
+OPTIMIZE tabela;
+
+-- Compactar + Z-ORDER
+OPTIMIZE tabela
+ZORDER BY (col1, col2);
+
+-- Limpar arquivos antigos
+VACUUM tabela RETAIN 168 HOURS;
+
+-- Habilitar auto optimize
+ALTER TABLE tabela SET TBLPROPERTIES (
+  'delta.autoOptimize.optimizeWrite' = 'true',
+  'delta.autoOptimize.autoCompact' = 'true'
+);</pre>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #fbd38d; margin-top: 0;">📋 Comandos de Diagnóstico</h4>
+                    <pre style="font-size: 13px; background: rgba(0,0,0,0.3);">-- Ver detalhes da tabela
+DESCRIBE DETAIL tabela;
+
+-- Ver histórico de operações
+DESCRIBE HISTORY tabela;
+
+-- Dry run do VACUUM
+VACUUM tabela DRY RUN;
+
+-- Ver configurações
+SHOW TBLPROPERTIES tabela;</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
