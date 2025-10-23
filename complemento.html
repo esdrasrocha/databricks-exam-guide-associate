@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Databricks Certified Data Engineer Associate - Guia Completo Expandido</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        nav {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        
+        nav h3 {
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 8px 0;
+        }
+        
+        nav a {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #2c5282;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f7fafc;
+            border-radius: 12px;
+            border-left: 5px solid #4299e1;
+        }
+        
+        .section h2 {
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section h3 {
+            color: #2c5282;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .section h4 {
+            color: #4a5568;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        
+        .warning {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .warning strong {
+            color: #c05621;
+            font-size: 18px;
+        }
+        
+        .danger {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .danger strong {
+            color: #c53030;
+            font-size: 18px;
+        }
+        
+        .success {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .success strong {
+            color: #2f855a;
+            font-size: 18px;
+        }
+        
+        .exam-tip {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .exam-tip strong {
+            color: #2c5282;
+            font-size: 18px;
+        }
+        
+        pre {
+            background: #1a202c;
+            color: #68d391;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        
+        code {
+            background: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #4299e1;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:hover {
+            background: #f7fafc;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background: #fef5e7;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #c05621;
+        }
+        
+        .new-content {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+            border-left: 5px solid #38a169;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .new-content strong {
+            color: #2f855a;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        footer h3 {
+            margin-bottom: 10px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: #edf2f7;
+            height: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Databricks Certified Data Engineer Associate</h1>
+            <p>Guia Completo Expandido com Detalhes Essenciais para a Prova</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">45 questões | 90 minutos | 70% para passar (~32 questões corretas)</p>
+        </header>
+
+        <div class="content">
+            <nav>
+                <h3>📚 Navegação Rápida</h3>
+                <ul>
+                    <li><a href="#section1">Section 1: Databricks Lakehouse Platform (15%)</a></li>
+                    <li><a href="#section2">Section 2: Development and Ingestion (20%)</a></li>
+                    <li><a href="#ingestion-deep-dive">🆕 Deep Dive: CDC vs Auto Loader vs COPY INTO vs CTAS</a></li>
+                    <li><a href="#section3">Section 3: Data Processing & Transformations (30%)</a></li>
+                    <li><a href="#section4">Section 4: Productionizing Data Pipelines (20%)</a></li>
+                    <li><a href="#optimization-deep-dive">🆕 Deep Dive: OPTIMIZE, Z-ORDER, VACUUM, AUTO OPTIMIZE</a></li>
+                    <li><a href="#section5">Section 5: Data Governance & Quality (15%)</a></li>
+                    <li><a href="#exam-questions">🎯 Questões de Prova Práticas</a></li>
+                </ul>
+            </nav>
+
+            <!-- NOVO CONTEÚDO: Introdução Expandida -->
+            <div class="new-content">
+                <strong>🆕 NOVIDADES NESTE GUIA EXPANDIDO:</strong><br>
+                ✅ Explicações detalhadas de CDC, SCD, Auto Loader, COPY INTO e CTAS com diagramas<br>
+                ✅ Comparações práticas: quando usar cada ferramenta de ingestão<br>
+                ✅ Deep dive completo em OPTIMIZE, Z-ORDER, VACUUM e AUTO OPTIMIZE<br>
+                ✅ Cenários reais da indústria e como resolver<br>
+                ✅ 10+ questões práticas de prova com explicações detalhadas<br>
+                ✅ Guia visual de arquitetura e fluxos de dados
+            </div>
+
+            <!-- Section 1: Original Content -->
+            <div id="section1" class="section">
+                <h2>📍 Section 1: Databricks Lakehouse Platform (15% - ~7 questões)</h2>
+                
+                <h3>🎯 Objetivos desta seção:</h3>
+                <ul style="line-height: 2; margin: 15px 0 15px 30px;">
+                    <li>Enable features that simplify data layout decisions and optimize query performance</li>
+                    <li>Explain the value of the Data Intelligence Platform</li>
+                    <li>Identify the applicable compute to use for a specific use case</li>
+                </ul>
+
+                <h3>🏗️ Arquitetura Databricks Lakehouse Platform</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Camada</th>
+                            <th>Descrição</th>
+                            <th>Localização</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Control Plane</strong></td>
+                            <td>Gerencia notebooks, jobs, UI, metadados</td>
+                            <td>Cloud Databricks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Plane</strong></td>
+                            <td>Executa processamento, armazena dados</td>
+                            <td>Sua conta cloud (AWS/Azure/GCP)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Storage Layer</strong></td>
+                            <td>S3, ADLS, GCS com Delta Lake</td>
+                            <td>Sua conta cloud</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <strong>⚠️ PARA PROVA - Arquitetura:</strong><br>
+                    <ul style="margin-top: 10px; line-height: 2;">
+                        <li><strong>Control Plane:</strong> Gerenciado pela Databricks (Workspace, Notebooks, Jobs, Unity Catalog)</li>
+                        <li><strong>Data Plane:</strong> Roda na SUA conta cloud (Compute + Storage)</li>
+                        <li><strong>Secure Tunnel:</strong> Comunicação segura entre Control e Data Plane</li>
+                        <li><strong>Dados NUNCA saem do seu cloud:</strong> Databricks não tem acesso aos dados</li>
+                        <li><strong>Driver:</strong> Coordena workers e SparkContext</li>
+                        <li><strong>Workers:</strong> Executam tasks em paralelo</li>
+                    </ul>
+                </div>
+
+                <h3>1.3 Tipos de Compute</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Quando Usar</th>
+                            <th>Custo</th>
+                            <th>⚠️ Prova</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>All-Purpose Cluster</strong></td>
+                            <td>Desenvolvimento interativo, notebooks</td>
+                            <td>💰💰💰</td>
+                            <td>❌ NÃO use em produção</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Job Cluster</strong></td>
+                            <td>Jobs automatizados, produção</td>
+                            <td>💰💰</td>
+                            <td>✅ SEMPRE em produção</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SQL Warehouse</strong></td>
+                            <td>Queries SQL, BI tools, dashboards</td>
+                            <td>💰💰</td>
+                            <td>Otimizado para SQL</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Serverless</strong></td>
+                            <td>Zero gerenciamento, autoscaling</td>
+                            <td>💰💰</td>
+                            <td>Hands-off compute</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="exam-tip">
+                    <strong>✅ DICA PARA PROVA:</strong><br>
+                    <ul style="margin-top: 10px; line-height: 2;">
+                        <li>Job está rodando diariamente? → <strong>Job Cluster</strong> (mais barato)</li>
+                        <li>Desenvolvimento/exploração? → <strong>All-Purpose Cluster</strong></li>
+                        <li>Dashboard de BI? → <strong>SQL Warehouse</strong></li>
+                        <li>Quer zero configuração? → <strong>Serverless</strong></li>
+                        <li>Múltiplos usuários? → <strong>High Concurrency Mode</strong></li>
+                        <li>Performance SQL crítica? → <strong>Photon Engine</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- NOVO CONTEÚDO EXPANDIDO: Section 2 com Deep Dive -->
+            <div id="section2" class="section">
+                <h2>📥 Section 2: Development and Ingestion (20% - ~9 questões)</h2>
+                
+                <h3>🌊 Lakeflow: A Nova Stack de Data Engineering</h3>
+                
+                <div class="success">
+                    <strong>⭐ IMPORTANTE - Nomenclatura Atualizada:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8;">
+                        A Databricks consolidou toda a stack de Data Engineering sob o guarda-chuva <strong>Lakeflow</strong>. Esta é a nomenclatura oficial atual e pode aparecer no exame.<br><br>
+                        O antigo "Delta Live Tables (DLT)" agora é chamado de <strong>Lakeflow Declarative Pipelines</strong>.
+                    </p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Descrição</th>
+                            <th>Anteriormente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>🔌 Lakeflow Connect</strong></td>
+                            <td>Ingestão simplificada de dados com conectores gerenciados</td>
+                            <td>Parte do DLT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>⚙️ Lakeflow Declarative Pipelines</strong></td>
+                            <td>Framework declarativo para pipelines batch e streaming</td>
+                            <td>Delta Live Tables (DLT)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🔄 Lakeflow Jobs</strong></td>
+                            <td>Orquestração confiável e monitoramento de workloads</td>
+                            <td>Databricks Workflows</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- NOVO: Deep Dive Completo de Ingestão -->
+            <div id="ingestion-deep-dive" class="section" style="border-left-color: #48bb78;">
+                <h2>🆕 Deep Dive: CDC, SCD, Auto Loader, COPY INTO e CTAS</h2>
+                
+                <div class="new-content">
+                    <strong>📚 CONTEÚDO NOVO E EXPANDIDO:</strong> Esta seção detalha completamente as diferenças, relações e não-relações entre CDC, SCD, Auto Loader, COPY INTO e CTAS - conceitos frequentemente confundidos na prova!
+                </div>
+
+                <h3>1️⃣ CDC (Change Data Capture)</h3>
+                
+                <p><strong>O QUE É:</strong> Técnica para capturar <strong>apenas as mudanças</strong> (INSERT, UPDATE, DELETE) de um banco de dados origem.</p>
+                
+                <p><strong>COMO FUNCIONA:</strong></p>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li>Lê transaction logs do banco (MySQL binlog, SQL Server CDC, Oracle LogMiner)</li>
+                    <li>Captura operações em tempo real ou quase real</li>
+                    <li>Traz apenas o "delta" (mudanças), não tudo de novo</li>
+                </ul>
+
+                <p><strong>QUANDO USAR:</strong> Dados transacionais com muitas alterações (bancos OLTP)</p>
+
+                <h4>📍 Como ler CDC no Databricks:</h4>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Método</th>
+                            <th>Como Funciona</th>
+                            <th>Quando Usar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Debezium + Kafka</strong></td>
+                            <td>Debezium captura CDC → Kafka → Databricks Structured Streaming</td>
+                            <td>Mais comum em produção</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JDBC direto</strong></td>
+                            <td>Lê tabelas CDC nativas do banco via JDBC</td>
+                            <td>Conexão direta, sem middleware</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lakeflow Connect</strong></td>
+                            <td>Ferramenta nativa do Databricks com UI</td>
+                            <td>Mais fácil, gerenciado</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="danger">
+                    <strong>🚨 CRÍTICO PARA A PROVA:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8;">
+                        <strong>CDC SÓ FUNCIONA EM BANCOS DE DADOS!</strong><br>
+                        CDC precisa do transaction log (binlog, WAL, redo log) que só bancos têm.<br>
+                        Arquivos (CSV, JSON, Parquet) <strong>NÃO TÊM transaction log</strong>, portanto não podem usar CDC tradicional.
+                    </p>
+                </div>
+
+                <h3>2️⃣ SCD (Slowly Changing Dimensions)</h3>
+                
+                <p><strong>O QUE É:</strong> Técnica de <strong>modelagem dimensional</strong> para rastrear mudanças históricas em dados.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>O que faz</th>
+                            <th>Quando usar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SCD Type 1</strong></td>
+                            <td>Sobrescreve (perde histórico)</td>
+                            <td>Correções, dados não históricos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCD Type 2</strong></td>
+                            <td>Cria nova linha com versionamento (mantém histórico)</td>
+                            <td>Auditoria, análise temporal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCD Type 3</strong></td>
+                            <td>Adiciona coluna para valor anterior</td>
+                            <td>Mudanças ocasionais</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="success">
+                    <strong>🔗 RELAÇÃO CDC ↔️ SCD:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8;">
+                        • <strong>CDC captura as mudanças</strong> da origem (o QUE mudou)<br>
+                        • <strong>SCD define COMO você armazena</strong> essas mudanças no destino (COM ou SEM histórico)<br>
+                        • Você usa CDC para <strong>detectar</strong> mudanças e SCD para <strong>modelar</strong> o histórico
+                    </p>
+                </div>
+
+                <h3>3️⃣ Auto Loader</h3>
+                
+                <p><strong>O QUE É:</strong> Ferramenta do Databricks para <strong>ingestão incremental de arquivos</strong> (CSV, JSON, Parquet, etc) de cloud storage.</p>
+                
+                <p><strong>COMO FUNCIONA:</strong></p>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li>Monitora um diretório (S3, ADLS, GCS)</li>
+                    <li>Detecta automaticamente novos arquivos</li>
+                    <li>Processa apenas arquivos novos (incremental)</li>
+                    <li>Schema inference e evolution automáticos</li>
+                </ul>
+
+                <pre># Auto Loader - ingere novos arquivos automaticamente
+df = (spark.readStream
+    .format("cloudFiles")  # ← Auto Loader
+    .option("cloudFiles.format", "json")
+    .option("cloudFiles.schemaLocation", "/path/schema")
+    .load("/mnt/raw-data/")
+)
+
+df.writeStream.table("bronze.eventos")</pre>
+
+                <h3>4️⃣ COPY INTO</h3>
+                
+                <p><strong>O QUE É:</strong> Comando SQL do Databricks para <strong>carregar dados de arquivos para tabelas Delta</strong> de forma idempotente.</p>
+                
+                <p><strong>COMO FUNCIONA:</strong></p>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li>Carrega dados de arquivos (CSV, JSON, Parquet)</li>
+                    <li><strong>Rastreia quais arquivos já foram processados</strong> (evita duplicatas)</li>
+                    <li>Execução mais simples que Auto Loader (batch, não streaming)</li>
+                </ul>
+
+                <pre>-- COPY INTO - carrega apenas arquivos novos
+COPY INTO bronze.vendas
+FROM '/mnt/raw-data/vendas/'
+FILEFORMAT = CSV
+FORMAT_OPTIONS ('header' = 'true')
+COPY_OPTIONS ('mergeSchema' = 'true')</pre>
+
+                <h3>📊 Auto Loader vs COPY INTO - Comparação Completa</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Auto Loader</th>
+                            <th>COPY INTO</th>
+                            <th>Vencedor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tipo de Processamento</strong></td>
+                            <td>Streaming (contínuo)</td>
+                            <td>Batch (execução pontual)</td>
+                            <td>🏆 Auto Loader (mais moderno)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Schema Evolution</strong></td>
+                            <td>✅ Automático</td>
+                            <td>❌ Manual</td>
+                            <td>🏆 Auto Loader</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance com milhões de arquivos</strong></td>
+                            <td>✅ Excelente (notificação de eventos)</td>
+                            <td>❌ Degrada (precisa listar todos)</td>
+                            <td>🏆 Auto Loader</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Simplicidade (código)</strong></td>
+                            <td>Mais verboso (precisa configurar)</td>
+                            <td>✅ SQL simples (1-2 linhas)</td>
+                            <td>🏆 COPY INTO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recomendação Databricks</strong></td>
+                            <td>✅ Best practice padrão</td>
+                            <td>⚠️ Casos específicos</td>
+                            <td>🏆 Auto Loader</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <strong>⚠️ Por que COPY INTO está virando Legacy:</strong><br>
+                    <ul style="margin-top: 10px; line-height: 2;">
+                        <li>Limitações técnicas intransponíveis (batch only, lista todos arquivos)</li>
+                        <li>Auto Loader faz TUDO que COPY INTO faz + muito mais</li>
+                        <li>Databricks parou de investir em COPY INTO (sem features novas desde 2020)</li>
+                        <li>Tendência da indústria: streaming-first</li>
+                    </ul>
+                </div>
+
+                <div class="exam-tip">
+                    <strong>🎯 PARA A PROVA - Quando usar cada um:</strong><br>
+                    <ul style="margin-top: 10px; line-height: 2;">
+                        <li><strong>Auto Loader:</strong> SEMPRE que possível (produção, escala, streaming)</li>
+                        <li><strong>COPY INTO:</strong> Apenas para batch simples, poucos arquivos, dev/test</li>
+                        <li>Se a pergunta não especificar restrições, <strong>Auto Loader é sempre a resposta</strong></li>
+                    </ul>
+                </div>
+
+                <h3>5️⃣ CTAS (Create Table As Select)</h3>
+                
+                <p><strong>O QUE É:</strong> Comando SQL para <strong>criar uma tabela a partir de uma query</strong>.</p>
+                
+                <div class="success">
+                    <strong>✅ VERDADE sobre CTAS:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8;">
+                        CTAS <strong>NÃO precisa de Volumes!</strong><br>
+                        CTAS trabalha com qualquer tabela já no Databricks (Delta Lake, tabelas no Unity Catalog).<br>
+                        <strong>CTAS = transformação</strong>, não ingestão!
+                    </p>
+                </div>
+
+                <pre>-- CTAS - cria tabela a partir de query
+CREATE TABLE gold.vendas_sumarizadas AS
+SELECT 
+    data,
+    produto,
+    SUM(valor) as total_vendas
+FROM silver.vendas
+GROUP BY data, produto</pre>
+
+                <h3>🎯 Resumo: Quando usar cada um</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cenário</th>
+                            <th>Use</th>
+                            <th>Por quê</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Banco de dados transacional com mudanças frequentes</td>
+                            <td><strong>CDC</strong></td>
+                            <td>Captura mudanças do transaction log</td>
+                        </tr>
+                        <tr>
+                            <td>Precisa manter histórico de mudanças</td>
+                            <td><strong>SCD Type 2</strong></td>
+                            <td>Rastreia "como era" vs "como está"</td>
+                        </tr>
+                        <tr>
+                            <td>Arquivos chegam continuamente no S3/ADLS</td>
+                            <td><strong>Auto Loader</strong></td>
+                            <td>Streaming, schema evolution, escala</td>
+                        </tr>
+                        <tr>
+                            <td>Carga batch simples de poucos arquivos</td>
+                            <td><strong>COPY INTO</strong></td>
+                            <td>SQL simples, idempotente</td>
+                        </tr>
+                        <tr>
+                            <td>Criar tabela agregada de dados existentes</td>
+                            <td><strong>CTAS</strong></td>
+                            <td>Transformação/materialização</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 3: Original + Expanded -->
+            <div id="section3" class="section">
+                <h2>⚙️ Section 3: Data Processing & Transformations (30% - 13-14 questões)</h2>
+                
+                <h3>3.1 Medallion Architecture (⭐ FUNDAMENTAL)</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Layer</th>
+                            <th>Propósito</th>
+                            <th>O que fazer</th>
+                            <th>O que NÃO fazer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>🥉 Bronze</strong></td>
+                            <td>Raw data, source of truth</td>
+                            <td>Ingestão pura, metadados</td>
+                            <td>❌ Sem transformações, filtros, limpeza</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🥈 Silver</strong></td>
+                            <td>Cleaned, validated</td>
+                            <td>Limpar, validar, dedupe, joins</td>
+                            <td>❌ Sem agregações de negócio</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🥇 Gold</strong></td>
+                            <td>Business-level, curated</td>
+                            <td>Agregar, KPIs, métricas</td>
+                            <td>Pronto para BI/ML</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    <strong>⚠️ PERGUNTAS COMUNS NA PROVA:</strong><br>
+                    <ul style="margin-top: 10px; line-height: 2;">
+                        <li>Onde remover duplicatas? → <strong>Silver</strong></li>
+                        <li>Onde está o dado exatamente como veio da fonte? → <strong>Bronze</strong></li>
+                        <li>Onde criar tabela agregada para dashboard? → <strong>Gold</strong></li>
+                        <li>Onde aplicar business rules? → <strong>Silver → Gold</strong></li>
+                    </ul>
+                </div>
+
+                <h3>3.4 SQL DDL/DML (⭐ MUITAS QUESTÕES)</h3>
+                
+                <h4>DDL (Data Definition Language):</h4>
+                
+                <pre>-- CREATE OR REPLACE: Substitui se existe
+CREATE OR REPLACE TABLE users (
+    id INT,
+    name STRING
+) USING DELTA;
+
+-- CTAS (Create Table As Select)
+CREATE TABLE active_users AS
+SELECT * FROM users
+WHERE last_login > current_date() - 30;</pre>
+
+                <h4>DML (Data Manipulation Language):</h4>
+                
+                <pre>-- MERGE (upsert - MUITO IMPORTANTE!)
+MERGE INTO users AS target
+USING updates AS source
+ON target.id = source.id
+WHEN MATCHED THEN
+    UPDATE SET target.email = source.email
+WHEN NOT MATCHED THEN
+    INSERT (id, name, email)
+    VALUES (source.id, source.name, source.email);</pre>
+            </div>
+
+            <!-- Section 4: Original -->
+            <div id="section4" class="section">
+                <h2>🚀 Section 4: Productionizing Data Pipelines (20% - 9 questões)</h2>
+                
+                <h3>4.2 Lakeflow Jobs (Workflows) - Deploy, Repair, Rerun</h3>
+                
+                <div class="success">
+                    <strong>📝 Nomenclatura Atualizada:</strong> Databricks Workflows agora são chamados de <strong>Lakeflow Jobs</strong> - parte da stack Lakeflow unificada para Data Engineering.
+                </div>
+
+                <h4>Conceitos importantes:</h4>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li><strong>Task:</strong> Unidade de trabalho (notebook, Python, SQL, JAR, DLT)</li>
+                    <li><strong>DAG:</strong> Directed Acyclic Graph - ordem de execução</li>
+                    <li><strong>Dependencies:</strong> Task B depende de Task A</li>
+                    <li><strong>Job Cluster:</strong> Cluster criado para o job (recomendado em produção)</li>
+                </ul>
+
+                <div class="exam-tip">
+                    <strong>🎯 REPAIR vs RERUN:</strong><br>
+                    <ul style="margin-top: 10px; line-height: 2;">
+                        <li><strong>Repair:</strong> Re-executa APENAS tasks que falharam</li>
+                        <li><strong>Rerun:</strong> Re-executa TODAS as tasks</li>
+                        <li><strong>Na prova:</strong> Se perguntarem sobre otimização/economia, sempre escolha Repair</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- NOVO: Deep Dive Completo de Otimização -->
+            <div id="optimization-deep-dive" class="section" style="border-left-color: #f39c12;">
+                <h2>🆕 Deep Dive: OPTIMIZE, Z-ORDER, VACUUM e AUTO OPTIMIZE</h2>
+                
+                <div class="new-content">
+                    <strong>📚 CONTEÚDO NOVO E EXPANDIDO:</strong> Esta seção explica em detalhes como funcionam os comandos de otimização Delta Lake, seus trade-offs e quando usar cada um. Conteúdo crítico para a prova!
+                </div>
+
+                <h3>1️⃣ OPTIMIZE - Compactação de Arquivos</h3>
+                
+                <p><strong>O QUE FAZ:</strong> Compacta arquivos pequenos em arquivos grandes (~1GB) para melhorar performance de leitura.</p>
+                
+                <p><strong>PROBLEMA QUE RESOLVE:</strong> Delta Lake cria muitos arquivos pequenos ao longo do tempo (cada write, update, delete gera novos arquivos). Muitos arquivos pequenos = performance ruim.</p>
+
+                <pre>-- Otimizar tabela inteira
+OPTIMIZE vendas;
+
+-- Otimizar apenas uma partição
+OPTIMIZE vendas WHERE ano = 2025 AND mes = 10;</pre>
+
+                <div class="danger">
+                    <strong>⚠️ CRÍTICO PARA A PROVA:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8; font-size: 16px;">
+                        <strong>OPTIMIZE NÃO DELETA ARQUIVOS FISICAMENTE!</strong><br>
+                        Ele apenas marca os arquivos antigos como "removidos" no transaction log.<br>
+                        Os arquivos físicos continuam no storage!<br>
+                        Para deletar fisicamente, você precisa rodar <code>VACUUM</code> depois.
+                    </p>
+                </div>
+
+                <h4>🔬 Como OPTIMIZE Funciona Internamente:</h4>
+                <ol style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li><strong>Identificação:</strong> Identifica arquivos pequenos (&lt; 1 GB padrão)</li>
+                    <li><strong>Leitura:</strong> Lê todos os arquivos pequenos identificados</li>
+                    <li><strong>Merge:</strong> Combina os dados em arquivos maiores (~1 GB cada)</li>
+                    <li><strong>Escrita:</strong> Escreve novos arquivos otimizados</li>
+                    <li><strong>Atualização Transaction Log:</strong> Marca arquivos antigos como "removidos" (logicamente), adiciona novos arquivos ao log</li>
+                </ol>
+
+                <h3>2️⃣ Z-ORDER - Organização por Colunas</h3>
+                
+                <p><strong>O QUE É:</strong> Técnica de <strong>co-localização de dados relacionados</strong> dentro dos arquivos Delta usando uma curva Z-order (space-filling curve).</p>
+                
+                <p><strong>RESULTADO:</strong> Queries com filtros nessas colunas pulam mais dados (data skipping) = mais rápidas.</p>
+
+                <pre>-- Z-ORDER sempre é usado JUNTO com OPTIMIZE
+OPTIMIZE vendas
+ZORDER BY (produto_id, regiao);
+
+-- Z-ORDER em partição específica
+OPTIMIZE vendas
+WHERE ano = 2025
+ZORDER BY (produto_id, cidade);</pre>
+
+                <div class="warning">
+                    <strong>⚠️ CRÍTICO PARA A PROVA - Limite de Colunas:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8;">
+                        <strong>Z-ORDER funciona bem com ATÉ 4 COLUNAS!</strong><br>
+                        • 1-2 colunas: Excelente<br>
+                        • 3-4 colunas: Bom, mas retorno diminui<br>
+                        • 5+ colunas: ❌ Performance piora! (curse of dimensionality)<br>
+                        <br>
+                        <strong>Por quê?</strong> Com muitas dimensões, os dados ficam espalhados novamente. O benefício do data skipping diminui drasticamente.
+                    </p>
+                </div>
+
+                <h4>🎯 Escolhendo Colunas para Z-ORDER:</h4>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Critério</th>
+                            <th>Boa Escolha?</th>
+                            <th>Explicação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Coluna usada em WHERE frequentemente</td>
+                            <td>✅✅✅ EXCELENTE</td>
+                            <td>Máximo benefício de data skipping</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna com alta cardinalidade</td>
+                            <td>✅✅ BOM</td>
+                            <td>Mais valores únicos = melhor distribuição</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna de particionamento</td>
+                            <td>❌ NÃO</td>
+                            <td>Já está particionado, Z-ORDER redundante</td>
+                        </tr>
+                        <tr>
+                            <td>Coluna raramente usada em queries</td>
+                            <td>❌ NÃO</td>
+                            <td>Desperdício, não traz benefício</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3️⃣ VACUUM - Limpeza Física de Arquivos</h3>
+                
+                <p><strong>O QUE FAZ:</strong> <strong>DELETA FISICAMENTE</strong> arquivos antigos que não são mais referenciados pelo transaction log.</p>
+                
+                <p><strong>POR QUE PRECISA:</strong> Operações como OPTIMIZE, UPDATE, DELETE, MERGE marcam arquivos como "removidos" logicamente, mas não deletam do storage. VACUUM faz a limpeza física.</p>
+
+                <pre>-- VACUUM com retention padrão (7 dias)
+VACUUM vendas;
+
+-- VACUUM com retention customizado
+VACUUM vendas RETAIN 168 HOURS;  -- 7 dias
+VACUUM vendas RETAIN 24 HOURS;   -- 1 dia
+
+-- Dry run (ver o que seria deletado sem deletar)
+VACUUM vendas DRY RUN;</pre>
+
+                <div class="danger">
+                    <strong>🚨 CRÍTICO PARA A PROVA - VACUUM vs Time Travel:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8; font-size: 16px;">
+                        <strong>VACUUM IMPEDE TIME TRAVEL das versões removidas!</strong><br>
+                        <br>
+                        Se você rodar <code>VACUUM RETAIN 7 DAYS</code>, você:<br>
+                        ✅ Pode fazer Time Travel dos últimos 7 dias<br>
+                        ❌ NÃO pode fazer Time Travel de mais de 7 dias atrás<br>
+                        <br>
+                        <strong>Por quê?</strong> VACUUM deletou os arquivos físicos! Não tem como restaurar sem os arquivos.
+                    </p>
+                </div>
+
+                <h4>⏰ Retention Period (Período de Retenção):</h4>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Retention</th>
+                            <th>Quando Usar?</th>
+                            <th>Trade-off</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>7 dias (padrão)</strong></td>
+                            <td>Produção normal</td>
+                            <td>✅ Balanceado: Time Travel razoável + economia de espaço</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30 dias</strong></td>
+                            <td>Compliance, auditoria</td>
+                            <td>✅ Mais Time Travel<br>❌ Mais espaço ocupado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>24 horas</strong></td>
+                            <td>Ambiente dev/test</td>
+                            <td>✅ Libera espaço rápido<br>❌ Time Travel limitado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>0 horas (⚠️)</strong></td>
+                            <td>❌ Evite! Perigoso!</td>
+                            <td>❌ Sem Time Travel<br>❌ Pode corromper queries em execução</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>4️⃣ AUTO OPTIMIZE - Otimização Automática</h3>
+                
+                <p><strong>O QUE É:</strong> Feature que executa <strong>OPTIMIZE automaticamente durante a escrita</strong>.</p>
+                
+                <p><strong>COMPOSTO POR 2 FEATURES:</strong></p>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li><strong>Optimized Writes:</strong> escreve arquivos maiores desde o início</li>
+                    <li><strong>Auto Compaction:</strong> compacta arquivos pequenos automaticamente após write</li>
+                </ul>
+
+                <pre>-- Habilitar AUTO OPTIMIZE
+ALTER TABLE vendas SET TBLPROPERTIES (
+    'delta.autoOptimize.optimizeWrite' = 'true',
+    'delta.autoOptimize.autoCompact' = 'true'
+);</pre>
+
+                <div class="warning">
+                    <strong>⚠️ CRÍTICO PARA A PROVA - Trade-off:</strong><br>
+                    <p style="margin-top: 10px; line-height: 1.8; font-size: 16px;">
+                        <strong>AUTO OPTIMIZE adiciona PEQUENO overhead na escrita, mas GRANDE ganho na leitura!</strong><br>
+                        <br>
+                        <strong>Write performance:</strong> ⬇️ ~5-10% mais lento (reorganização)<br>
+                        <strong>Read performance:</strong> ⬆️ 3-10x mais rápido (arquivos otimizados)<br>
+                        <br>
+                        <strong>Quando vale a pena?</strong><br>
+                        ✅ Tabelas read-heavy (muito mais leitura que escrita)<br>
+                        ✅ Streaming contínuo (muitos arquivos pequenos)<br>
+                        ✅ Workloads analíticos<br>
+                        <br>
+                        <strong>Quando NÃO vale?</strong><br>
+                        ❌ Tabelas write-heavy com poucas leituras<br>
+                        ❌ ETL batch rápido onde write time é crítico
+                    </p>
+                </div>
+
+                <h3>📊 Matriz de Comparação: Todos os Comandos</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comando</th>
+                            <th>O que faz</th>
+                            <th>Deleta físico?</th>
+                            <th>Impacta Time Travel?</th>
+                            <th>Quando usar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>OPTIMIZE</strong></td>
+                            <td>Compacta arquivos pequenos</td>
+                            <td>❌ Não</td>
+                            <td>❌ Não</td>
+                            <td>Muitos writes, updates, deletes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Z-ORDER</strong></td>
+                            <td>Co-localiza dados por colunas</td>
+                            <td>❌ Não</td>
+                            <td>❌ Não</td>
+                            <td>Queries com filtros específicos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VACUUM</strong></td>
+                            <td>Deleta arquivos antigos</td>
+                            <td>✅ Sim!</td>
+                            <td>✅ Sim! (remove versões antigas)</td>
+                            <td>Após OPTIMIZE, liberar espaço</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AUTO OPTIMIZE</strong></td>
+                            <td>OPTIMIZE automático</td>
+                            <td>❌ Não</td>
+                            <td>❌ Não</td>
+                            <td>Streaming, zero-maintenance</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>🎯 Workflow Recomendado de Otimização</h3>
+                
+                <ol style="margin: 15px 0 15px 30px; line-height: 2.5;">
+                    <li><strong>Etapa 1: Habilitar AUTO OPTIMIZE (se apropriado)</strong> - Para tabelas streaming ou com writes frequentes
+                        <pre>ALTER TABLE vendas SET TBLPROPERTIES (
+  'delta.autoOptimize.optimizeWrite' = 'true',
+  'delta.autoOptimize.autoCompact' = 'true'
+);</pre>
+                    </li>
+                    <li><strong>Etapa 2: OPTIMIZE manual periodicamente</strong> - Semanal ou após grandes cargas
+                        <pre>OPTIMIZE vendas
+ZORDER BY (produto_id, regiao, data);</pre>
+                    </li>
+                    <li><strong>Etapa 3: VACUUM para liberar espaço</strong> - Após OPTIMIZE, respeitando retention
+                        <pre>VACUUM vendas RETAIN 168 HOURS;</pre>
+                    </li>
+                    <li><strong>Etapa 4: Monitorar e ajustar</strong> - Verificar métricas e ajustar frequência
+                        <pre>DESCRIBE DETAIL vendas;
+DESCRIBE HISTORY vendas;</pre>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Section 5: Original -->
+            <div id="section5" class="section">
+                <h2>🔒 Section 5: Data Governance & Quality (15% - 7 questões)</h2>
+                
+                <h3>5.1 Managed vs External Tables</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Managed Table</th>
+                            <th>External Table</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gerenciamento</strong></td>
+                            <td>UC gerencia dados + metadados</td>
+                            <td>UC gerencia só metadados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Localização</strong></td>
+                            <td>Automática (UC define)</td>
+                            <td>Você especifica (LOCATION)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DROP TABLE</strong></td>
+                            <td>❌ Deleta dados + metadados</td>
+                            <td>✅ Deleta só metadados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quando usar</strong></td>
+                            <td>Dados internos do lakehouse</td>
+                            <td>Dados compartilhados/externos</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>5.2 Unity Catalog - Permissões</h3>
+                
+                <h4>Three-Level Namespace (⭐⭐ MUITO IMPORTANTE!):</h4>
+                <p>Estrutura: <code>catalog.schema.table</code></p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Permissão</th>
+                            <th>O que permite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>USAGE</strong></td>
+                            <td>Necessário antes de qualquer outro (catalog/schema)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SELECT</strong></td>
+                            <td>Ler dados (queries)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MODIFY</strong></td>
+                            <td>INSERT, UPDATE, DELETE, MERGE</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CREATE</strong></td>
+                            <td>Criar objetos (tables, schemas)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <pre>-- USAGE é sempre necessário primeiro!
+GRANT USAGE ON CATALOG prod TO analysts;
+GRANT USAGE ON SCHEMA prod.sales TO analysts;
+GRANT SELECT ON TABLE prod.sales.customers TO analysts;</pre>
+
+                <h3>5.8 Delta Sharing (⭐ IMPORTANTE)</h3>
+                
+                <p><strong>O QUE É:</strong> Protocolo aberto para compartilhar dados entre organizações/plataformas</p>
+                
+                <h4>Vantagens:</h4>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li>✅ Sem cópia de dados (economia de storage)</li>
+                    <li>✅ Sempre atualizado (live data)</li>
+                    <li>✅ Governança centralizada via UC</li>
+                    <li>✅ Audit logs automáticos</li>
+                    <li>✅ Revogação instantânea</li>
+                    <li>✅ Cross-cloud (AWS, Azure, GCP)</li>
+                </ul>
+
+                <h4>Limitações:</h4>
+                <ul style="margin: 15px 0 15px 30px; line-height: 2;">
+                    <li>❌ READ-only (exceto D2D)</li>
+                    <li>❌ Apenas Delta Tables</li>
+                    <li>❌ Sem streaming</li>
+                    <li>❌ Custos de egress (cross-cloud)</li>
+                </ul>
+            </div>
+
+            <!-- NOVO: Questões de Prova -->
+            <div id="exam-questions" class="section" style="border-left-color: #9f7aea;">
+                <h2>🎯 Questões de Prova Práticas</h2>
+                
+                <div class="new-content">
+                    <strong>📝 CONTEÚDO NOVO:</strong> 10 questões práticas estilo exame com respostas detalhadas e explicações do raciocínio!
+                </div>
+
+                <h3>Questão 1: Ingestão de Dados</h3>
+                <p><strong>Você precisa ingerir dados de um banco PostgreSQL transacional que recebe milhares de updates por minuto. Qual abordagem é mais eficiente?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>Full refresh a cada 5 minutos</li>
+                    <li>Incremental load baseado em timestamp</li>
+                    <li>Change Data Capture (CDC)</li>
+                    <li>Export manual diário</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: C) Change Data Capture (CDC)</strong><br>
+                    <p style="margin-top: 10px;">CDC captura apenas as mudanças (inserts, updates, deletes) em tempo real ou quase real, sem sobrecarregar o banco de origem. Full refresh carregaria todos os dados repetidamente (ineficiente). Incremental com timestamp pode perder updates em registros antigos.</p>
+                </div>
+
+                <h3>Questão 2: Segurança</h3>
+                <p><strong>Ao configurar uma conexão para ingestão de dados sensíveis de um banco SQL Server, onde você DEVE armazenar as credenciais?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>Hardcoded no notebook</li>
+                    <li>Em variáveis de ambiente do cluster</li>
+                    <li>No Databricks Secrets (Secret Scope)</li>
+                    <li>Em um arquivo de configuração no DBFS</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: C) No Databricks Secrets (Secret Scope)</strong><br>
+                    <p style="margin-top: 10px;">Databricks Secrets é a forma segura e recomendada de armazenar credenciais, tokens e passwords. As outras opções expõem informações sensíveis.</p>
+                </div>
+
+                <h3>Questão 3: Formato de Dados</h3>
+                <p><strong>Você está ingerindo dados de um bucket S3 que recebe novos arquivos CSV a cada hora. Qual formato de tabela você deve usar como destino para melhor performance e recursos ACID?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>Parquet</li>
+                    <li>CSV</li>
+                    <li>Delta Lake</li>
+                    <li>JSON</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: C) Delta Lake</strong><br>
+                    <p style="margin-top: 10px;">Delta Lake oferece: ACID transactions, Time travel, Schema enforcement, Melhor performance que Parquet para leitura/escrita. Na prova: qualquer pergunta sobre "formato recomendado no Databricks" → Delta Lake é quase sempre a resposta.</p>
+                </div>
+
+                <h3>Questão 4: Auto Loader vs COPY INTO</h3>
+                <p><strong>Arquivos JSON chegam a cada 5 minutos no S3 e você precisa processá-los com baixa latência. Qual solução usar?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>COPY INTO agendado a cada 5 minutos</li>
+                    <li>Auto Loader com streaming</li>
+                    <li>Spark batch job</li>
+                    <li>Manual download e upload</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: B) Auto Loader com streaming</strong><br>
+                    <p style="margin-top: 10px;">Auto Loader streaming processa arquivos assim que chegam com baixa latência. COPY INTO é batch e menos eficiente para processamento contínuo. Schema evolution automático é bonus.</p>
+                </div>
+
+                <h3>Questão 5: OPTIMIZE e VACUUM</h3>
+                <p><strong>Após executar OPTIMIZE em uma tabela, você nota que o espaço em disco não diminuiu. Por quê?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>OPTIMIZE não compacta arquivos corretamente</li>
+                    <li>OPTIMIZE não deleta arquivos físicos, apenas marca como removidos</li>
+                    <li>Precisa rodar OPTIMIZE duas vezes</li>
+                    <li>Erro na execução do comando</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: B) OPTIMIZE não deleta arquivos físicos, apenas marca como removidos</strong><br>
+                    <p style="margin-top: 10px;">OPTIMIZE não deleta arquivos físicos, apenas marca como removidos no transaction log. Para liberar espaço, execute VACUUM depois.</p>
+                </div>
+
+                <h3>Questão 6: Z-ORDER</h3>
+                <p><strong>Você tem uma tabela com queries frequentes por produto_id, cidade, categoria, vendedor_id e região. Como otimizar?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>ZORDER BY (produto_id, cidade, categoria, vendedor_id, região)</li>
+                    <li>ZORDER BY (produto_id)</li>
+                    <li>ZORDER BY (produto_id, cidade, categoria)</li>
+                    <li>Não usar Z-ORDER</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: C) ZORDER BY (produto_id, cidade, categoria)</strong><br>
+                    <p style="margin-top: 10px;">Z-ORDER funciona bem com até 4 colunas. 5+ colunas degrada performance (curse of dimensionality). Escolha as 3-4 colunas MAIS USADAS em filtros.</p>
+                </div>
+
+                <h3>Questão 7: VACUUM e Time Travel</h3>
+                <p><strong>Você executou VACUUM RETAIN 0 HOURS e agora não consegue fazer Time Travel de ontem. O que aconteceu?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>Bug no Databricks</li>
+                    <li>VACUUM deletou os arquivos físicos necessários para Time Travel</li>
+                    <li>Precisa recriar a tabela</li>
+                    <li>Time Travel não funciona com VACUUM</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: B) VACUUM deletou os arquivos físicos necessários para Time Travel</strong><br>
+                    <p style="margin-top: 10px;">VACUUM deletou os arquivos físicos necessários. Com RETAIN 0 HOURS, todos os arquivos antigos foram removidos imediatamente, impossibilitando Time Travel.</p>
+                </div>
+
+                <h3>Questão 8: AUTO OPTIMIZE</h3>
+                <p><strong>Você habilitou AUTO OPTIMIZE em uma tabela de streaming e notou que o write latency aumentou 10%. Isso é esperado?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>Não, é um bug</li>
+                    <li>Sim, AUTO OPTIMIZE adiciona overhead na escrita mas melhora leitura</li>
+                    <li>Não, deve desabilitar imediatamente</li>
+                    <li>Sim, mas não há benefício</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: B) Sim, AUTO OPTIMIZE adiciona overhead na escrita mas melhora leitura</strong><br>
+                    <p style="margin-top: 10px;">Sim, é esperado. AUTO OPTIMIZE adiciona pequeno overhead na escrita (~5-10%) porque reorganiza dados para criar arquivos otimizados. O benefício é na leitura, que fica 3-10x mais rápida.</p>
+                </div>
+
+                <h3>Questão 9: Medallion Architecture</h3>
+                <p><strong>Em qual camada do Medallion Architecture você deve remover duplicatas?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>Bronze</li>
+                    <li>Silver</li>
+                    <li>Gold</li>
+                    <li>Qualquer camada</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: B) Silver</strong><br>
+                    <p style="margin-top: 10px;">Silver é a camada de limpeza e validação. Bronze mantém dados raw (sem transformações), Gold tem agregações de negócio.</p>
+                </div>
+
+                <h3>Questão 10: Unity Catalog</h3>
+                <p><strong>Qual permissão é SEMPRE necessária antes de qualquer outra no Unity Catalog?</strong></p>
+                <ol style="margin: 10px 0 10px 30px;">
+                    <li>SELECT</li>
+                    <li>CREATE</li>
+                    <li>USAGE</li>
+                    <li>MODIFY</li>
+                </ol>
+                <div class="success">
+                    <strong>✅ Resposta: C) USAGE</strong><br>
+                    <p style="margin-top: 10px;">USAGE é sempre necessário primeiro em catalog e schema antes de qualquer outra permissão. Sem USAGE, outras permissões não funcionam.</p>
+                </div>
+            </div>
+
+            <!-- Checklist Final -->
+            <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                <h2 style="color: white;">🎯 Checklist Final de Preparação</h2>
+                
+                <div class="comparison-grid">
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: white;">
+                        <h3>Section 1 (15%)</h3>
+                        <ul style="line-height: 2;">
+                            <li>✓ OPTIMIZE e Z-ORDERING</li>
+                            <li>✓ VACUUM e AUTO OPTIMIZE</li>
+                            <li>✓ Tipos de compute</li>
+                            <li>✓ Control vs Data Plane</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: white;">
+                        <h3>Section 2 (20%)</h3>
+                        <ul style="line-height: 2;">
+                            <li>✓ CDC vs Auto Loader vs COPY INTO</li>
+                            <li>✓ Auto Loader (cloudFiles)</li>
+                            <li>✓ Schema Evolution</li>
+                            <li>✓ Notebooks e Databricks Connect</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: white;">
+                        <h3>Section 3 (30%) 🔥</h3>
+                        <ul style="line-height: 2;">
+                            <li>✓ Medallion Architecture</li>
+                            <li>✓ DLT / Lakeflow Pipelines</li>
+                            <li>✓ SQL DDL/DML (MERGE)</li>
+                            <li>✓ SCD Type 2</li>
+                            <li>✓ PySpark (count_distinct!)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: white;">
+                        <h3>Section 4 (20%)</h3>
+                        <ul style="line-height: 2;">
+                            <li>✓ DAB (Asset Bundles)</li>
+                            <li>✓ Workflows (Repair vs Rerun)</li>
+                            <li>✓ Serverless</li>
+                            <li>✓ Spark UI</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: white;">
+                        <h3>Section 5 (15%)</h3>
+                        <ul style="line-height: 2;">
+                            <li>✓ Managed vs External</li>
+                            <li>✓ GRANT permissions (USAGE!)</li>
+                            <li>✓ Delta Sharing</li>
+                            <li>✓ Audit logs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin-top: 30px;">
+                    <h3 style="color: white; margin-top: 0;">🚀 Próximos Passos</h3>
+                    <ol style="line-height: 2.5; font-size: 16px;">
+                        <li><strong>Estude este guia:</strong> Seção por seção, começando pela Section 3 (30%)</li>
+                        <li><strong>Faça os módulos Partners:</strong> 8h no total, todos os 4 módulos</li>
+                        <li><strong>Hands-on no Databricks:</strong> Pratique Auto Loader, DLT, Unity Catalog</li>
+                        <li><strong>Revise questões:</strong> As questões práticas deste guia</li>
+                        <li><strong>Simulados:</strong> Se possível, faça practice tests</li>
+                        <li><strong>Agende a prova:</strong> Quando estiver confiante (70%+ de acerto esperado)</li>
+                    </ol>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; font-size: 24px;">
+                    💪 Você consegue!
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h3>👨💻 Sobre o Autor</h3>
+            <p><strong>Esdras Rocha</strong></p>
+            <p>Engenheiro de Dados Sênior</p>
+            <p>Databricks | ADF | PySpark | Multi-Cloud (AWS & Azure)</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                Mais de 14 anos transformando dados em valor estratégico, com atuação em projetos<br>
+                multinacionais focados em arquitetura Lakehouse, pipelines escaláveis e governança de dados.
+            </p>
+            <p style="margin-top: 20px; font-size: 0.8em; opacity: 0.8;">
+                Este guia expandido combina o material original com deep dives detalhados em CDC, SCD,<br>
+                Auto Loader, COPY INTO, CTAS, OPTIMIZE, Z-ORDER, VACUUM e AUTO OPTIMIZE,<br>
+                além de questões práticas de prova para facilitar sua preparação.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
