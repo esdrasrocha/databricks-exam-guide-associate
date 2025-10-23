@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relação entre CDC, SCD, Auto Loader, COPY INTO e CTAS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        /* Section Styles */
+        .section {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #4299e1;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .icon {
+            font-size: 28px;
+        }
+        
+        /* Flow Diagram */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .box {
+            background: white;
+            border: 3px solid #4299e1;
+            border-radius: 10px;
+            padding: 20px 30px;
+            min-width: 150px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .box-title {
+            font-weight: bold;
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        .box-desc {
+            font-size: 13px;
+            color: #718096;
+        }
+        
+        /* Color Variants */
+        .box.source { border-color: #48bb78; background: #f0fff4; }
+        .box.ingestion { border-color: #ed8936; background: #fffaf0; }
+        .box.storage { border-color: #9f7aea; background: #faf5ff; }
+        .box.modeling { border-color: #f56565; background: #fff5f5; }
+        .box.transform { border-color: #4299e1; background: #ebf8ff; }
+        
+        .arrow {
+            font-size: 30px;
+            color: #4299e1;
+            font-weight: bold;
+        }
+        
+        /* Legend */
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .legend-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .legend-item.cdc { border-color: #48bb78; }
+        .legend-item.scd { border-color: #f56565; }
+        .legend-item.autoloader { border-color: #ed8936; }
+        .legend-item.copyinto { border-color: #ecc94b; }
+        .legend-item.ctas { border-color: #4299e1; }
+        
+        .legend-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+        .legend-desc {
+            font-size: 13px;
+            color: #718096;
+        }
+        .legend-when {
+            font-size: 12px;
+            color: #4a5568;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+            font-weight: 600;
+        }
+
+        /* Comparison Table */
+        .comparison {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #4299e1;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        tr:hover {
+            background: #f7fafc;
+        }
+        .check { color: #48bb78; font-weight: bold; }
+        .cross { color: #f56565; font-weight: bold; }
+
+        /* Key Insights */
+        .insights {
+            background: #edf2f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .insight-item {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .insight-icon {
+            font-size: 24px;
+            margin-top: 2px;
+        }
+        .insight-text {
+            flex: 1;
+        }
+        .insight-text strong {
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 CDC, SCD, Auto Loader, COPY INTO e CTAS</h1>
+        <p class="subtitle">Entendendo a relação (e não-relação) entre esses conceitos</p>
+
+        <!-- Main Flow Diagram -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📊</span>
+                Fluxo Completo de Ingestão
+            </div>
+            <div class="flow">
+                <div class="box source">
+                    <div class="box-title">ORIGEM</div>
+                    <div class="box-desc">Banco de Dados ou Arquivos</div>
+                </div>
+                <span class="arrow">→</span>
+                <div class="box ingestion">
+                    <div class="box-title">INGESTÃO</div>
+                    <div class="box-desc">CDC, Auto Loader ou COPY INTO</div>
+                </div>
+                <span class="arrow">→</span>
+                <div class="box storage">
+                    <div class="box-title">BRONZE</div>
+                    <div class="box-desc">Delta Lake (dados brutos)</div>
+                </div>
+                <span class="arrow">→</span>
+                <div class="box modeling">
+                    <div class="box-title">SILVER</div>
+                    <div class="box-desc">Aplicar SCD (se necessário)</div>
+                </div>
+                <span class="arrow">→</span>
+                <div class="box transform">
+                    <div class="box-title">GOLD</div>
+                    <div class="box-desc">CTAS para agregações</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Separate Paths -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🔀</span>
+                Caminhos Diferentes Baseados na Origem
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <!-- Path 1: Database -->
+                <div style="background: #f0fff4; border: 2px solid #48bb78; border-radius: 10px; padding: 20px;">
+                    <h3 style="color: #2f855a; margin-top: 0;">🗄️ Origem: Banco de Dados</h3>
+                    <div class="flow" style="flex-direction: column; align-items: start;">
+                        <div>✅ MySQL, PostgreSQL, Oracle, SQL Server</div>
+                        <span class="arrow" style="transform: rotate(90deg);">→</span>
+                        <div style="background: white; padding: 10px; border-radius: 5px; width: 100%;">
+                            <strong>Use CDC</strong><br>
+                            <small>Captura mudanças do transaction log</small>
+                        </div>
+                        <span class="arrow" style="transform: rotate(90deg);">→</span>
+                        <div>Bronze Layer (Delta)</div>
+                        <span class="arrow" style="transform: rotate(90deg);">→</span>
+                        <div style="background: white; padding: 10px; border-radius: 5px; width: 100%;">
+                            <strong>Aplique SCD Type 2</strong><br>
+                            <small>Se precisar rastrear histórico</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Path 2: Files -->
+                <div style="background: #fffaf0; border: 2px solid #ed8936; border-radius: 10px; padding: 20px;">
+                    <h3 style="color: #c05621; margin-top: 0;">📁 Origem: Arquivos (S3, ADLS, GCS)</h3>
+                    <div class="flow" style="flex-direction: column; align-items: start;">
+                        <div>✅ CSV, JSON, Parquet, Avro</div>
+                        <span class="arrow" style="transform: rotate(90deg);">→</span>
+                        <div style="background: white; padding: 10px; border-radius: 5px; width: 100%;">
+                            <strong>Escolha:</strong><br>
+                            • <strong>Auto Loader</strong> - contínuo, grande volume<br>
+                            • <strong>COPY INTO</strong> - batch, volume menor
+                        </div>
+                        <span class="arrow" style="transform: rotate(90deg);">→</span>
+                        <div>Bronze Layer (Delta)</div>
+                        <span class="arrow" style="transform: rotate(90deg);">→</span>
+                        <div style="background: white; padding: 10px; border-radius: 5px; width: 100%;">
+                            <strong>SCD é opcional</strong><br>
+                            <small>Arquivos geralmente não têm "updates"</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📋</span>
+                Comparação Rápida
+            </div>
+            <div class="comparison">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Conceito</th>
+                            <th>Tipo</th>
+                            <th>Origem</th>
+                            <th>Propósito</th>
+                            <th>Layer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CDC</strong></td>
+                            <td>Técnica de Captura</td>
+                            <td>Bancos de Dados</td>
+                            <td>Capturar mudanças (INSERT/UPDATE/DELETE)</td>
+                            <td>Bronze (ingestão)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auto Loader</strong></td>
+                            <td>Ferramenta de Ingestão</td>
+                            <td>Arquivos (Cloud Storage)</td>
+                            <td>Processar arquivos novos automaticamente</td>
+                            <td>Bronze (ingestão)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>COPY INTO</strong></td>
+                            <td>Comando SQL</td>
+                            <td>Arquivos (Cloud Storage)</td>
+                            <td>Carregar arquivos de forma idempotente</td>
+                            <td>Bronze (ingestão)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCD</strong></td>
+                            <td>Técnica de Modelagem</td>
+                            <td>Dados já ingeridos</td>
+                            <td>Rastrear histórico de mudanças</td>
+                            <td>Silver (transformação)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CTAS</strong></td>
+                            <td>Comando SQL</td>
+                            <td>Tabelas existentes no Databricks</td>
+                            <td>Criar tabelas derivadas/agregadas</td>
+                            <td>Silver/Gold (transformação)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📖</span>
+                Quando Usar Cada Um
+            </div>
+            <div class="legend">
+                <div class="legend-item cdc">
+                    <div class="legend-title">🔄 CDC (Change Data Capture)</div>
+                    <div class="legend-desc">Captura mudanças de bancos de dados em tempo real</div>
+                    <div class="legend-when">✅ Use quando: banco de dados com muitas atualizações, precisa de baixa latência</div>
+                </div>
+                
+                <div class="legend-item scd">
+                    <div class="legend-title">📚 SCD (Slowly Changing Dimensions)</div>
+                    <div class="legend-desc">Técnica para modelar histórico de mudanças</div>
+                    <div class="legend-when">✅ Use quando: precisa rastrear "como era antes" vs "como está agora"</div>
+                </div>
+                
+                <div class="legend-item autoloader">
+                    <div class="legend-title">⚡ Auto Loader</div>
+                    <div class="legend-desc">Ingestão streaming de arquivos novos</div>
+                    <div class="legend-when">✅ Use quando: arquivos chegam continuamente, grande escala, schema evolui</div>
+                </div>
+                
+                <div class="legend-item copyinto">
+                    <div class="legend-title">📥 COPY INTO</div>
+                    <div class="legend-desc">Carregamento batch de arquivos</div>
+                    <div class="legend-when">✅ Use quando: carga batch simples, volume pequeno/médio, não precisa streaming</div>
+                </div>
+                
+                <div class="legend-item ctas">
+                    <div class="legend-title">🎨 CTAS (Create Table As Select)</div>
+                    <div class="legend-desc">Cria tabelas a partir de queries</div>
+                    <div class="legend-when">✅ Use quando: materializar agregações, criar tabelas derivadas, dados JÁ no Databricks</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CDC Reading Methods -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🔍</span>
+                Como Ler CDC no Databricks
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                <!-- Method 1 -->
+                <div style="background: #f0fff4; border: 2px solid #48bb78; border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #2f855a; margin-top: 0;">📦 1. Debezium + Kafka</h4>
+                    <div style="font-size: 14px; color: #2d3748;">
+                        <p><strong>Como funciona:</strong></p>
+                        <ul>
+                            <li>Debezium captura CDC do banco</li>
+                            <li>Publica eventos no Kafka</li>
+                            <li>Databricks lê do Kafka via Structured Streaming</li>
+                        </ul>
+                        <p><strong>Código exemplo:</strong></p>
+                        <pre style="background: #1a202c; color: #68d391; padding: 10px; border-radius: 5px; font-size: 12px; overflow-x: auto;">df = spark.readStream \
+  .format("kafka") \
+  .option("kafka.bootstrap.servers", "...") \
+  .option("subscribe", "mysql.db.users") \
+  .load()
+
+# Processa eventos CDC
+changes = df.selectExpr(
+  "CAST(value AS STRING) as json"
+).select(from_json("json", schema))</pre>
+                    </div>
+                </div>
+
+                <!-- Method 2 -->
+                <div style="background: #fffaf0; border: 2px solid #ed8936; border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #c05621; margin-top: 0;">🔗 2. Databricks SQL Connector</h4>
+                    <div style="font-size: 14px; color: #2d3748;">
+                        <p><strong>Como funciona:</strong></p>
+                        <ul>
+                            <li>Usa JDBC/ODBC direto no banco</li>
+                            <li>Lê tabela CDC nativa do banco (SQL Server CDC, Oracle LogMiner)</li>
+                            <li>Incremental por timestamp ou watermark</li>
+                        </ul>
+                        <p><strong>Código exemplo:</strong></p>
+                        <pre style="background: #1a202c; color: #fbd38d; padding: 10px; border-radius: 5px; font-size: 12px; overflow-x: auto;">df = spark.read.format("jdbc") \
+  .option("url", "jdbc:sqlserver://...") \
+  .option("dbtable", "cdc.dbo_users_CT") \
+  .option("user", "...") \
+  .option("password", "...") \
+  .load()
+
+# Filtra apenas mudanças novas
+new_changes = df.filter(
+  col("__$start_lsn") > last_lsn
+)</pre>
+                    </div>
+                </div>
+
+                <!-- Method 3 -->
+                <div style="background: #ebf8ff; border: 2px solid #4299e1; border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #2c5282; margin-top: 0;">⚡ 3. Lakehouse Connect (Nativo)</h4>
+                    <div style="font-size: 14px; color: #2d3748;">
+                        <p><strong>Como funciona:</strong></p>
+                        <ul>
+                            <li>Ferramenta nativa do Databricks</li>
+                            <li>Configura CDC via UI</li>
+                            <li>Gerencia tudo automaticamente</li>
+                        </ul>
+                        <p><strong>Setup:</strong></p>
+                        <pre style="background: #1a202c; color: #63b3ed; padding: 10px; border-radius: 5px; font-size: 12px; overflow-x: auto;"># Via UI no Databricks:
+1. Catalog > Create Connection
+2. Escolhe fonte (MySQL, Postgres, etc)
+3. Configura credenciais
+4. Habilita CDC
+5. Dados fluem automaticamente!</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #fef5e7; border-left: 4px solid #f39c12; padding: 15px; margin-top: 20px; border-radius: 5px;">
+                <strong>⚠️ Importante:</strong> CDC só funciona em bancos de dados porque precisa do <strong>transaction log</strong> (binlog, WAL, redo log). Arquivos não têm transaction log!
+            </div>
+        </div>
+
+        <!-- Real World Scenario -->
+        <div class="section" style="background: #fff5f5; border-left: 5px solid #f56565;">
+            <div class="section-title" style="color: #c53030;">
+                <span class="icon">🏢</span>
+                CENÁRIO REAL: CSV com Updates + SCD (Seu Caso!)
+            </div>
+            
+            <div style="background: white; border-radius: 10px; padding: 20px; margin-top: 15px; border: 2px solid #fc8181;">
+                <h4 style="color: #c53030; margin-top: 0;">📋 Situação:</h4>
+                <p style="font-size: 15px; line-height: 1.6;">
+                    Você recebe arquivos CSV diariamente no S3 com dados de clientes. <strong>Os arquivos podem conter:</strong><br>
+                    • Novos clientes (INSERT)<br>
+                    • Clientes com dados alterados (UPDATE) - mesma chave, valores diferentes<br>
+                    • Você precisa manter <strong>histórico de mudanças por ano/mês (SCD Type 2)</strong>
+                </p>
+
+                <h4 style="color: #c53030;">📁 Estrutura dos Arquivos:</h4>
+                <pre style="background: #1a202c; color: #68d391; padding: 15px; border-radius: 5px; font-size: 13px; overflow-x: auto;">
+# Arquivo: clientes_2025_10_22.csv
+cliente_id,nome,cidade,status,data_processamento
+1001,João Silva,São Paulo,Ativo,2025-10-22
+1002,Maria Santos,Rio de Janeiro,Ativo,2025-10-22
+1003,Pedro Costa,Belo Horizonte,Inativo,2025-10-22
+
+# Arquivo: clientes_2025_10_23.csv (próximo dia - tem UPDATE!)
+cliente_id,nome,cidade,status,data_processamento
+1001,João Silva,Campinas,Ativo,2025-10-23  ← mudou cidade!
+1002,Maria Santos,Rio de Janeiro,Inativo,2025-10-23  ← mudou status!
+1004,Ana Lima,Salvador,Ativo,2025-10-23  ← novo cliente!
+</pre>
+
+                <h4 style="color: #c53030;">🔧 Solução Completa no Databricks:</h4>
+                
+                <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h5 style="margin-top: 0;">PASSO 1: Ingestão com Auto Loader (Bronze)</h5>
+                    <pre style="background: #1a202c; color: #63b3ed; padding: 15px; border-radius: 5px; font-size: 12px; overflow-x: auto;">from pyspark.sql.functions import *
+
+# Auto Loader lê arquivos CSV novos automaticamente
+df_bronze = (spark.readStream
+    .format("cloudFiles")
+    .option("cloudFiles.format", "csv")
+    .option("cloudFiles.schemaLocation", "/mnt/schemas/clientes")
+    .option("header", "true")
+    .load("s3://meu-bucket/raw/clientes/")
+    .withColumn("ano", year(col("data_processamento")))
+    .withColumn("mes", month(col("data_processamento")))
+    .withColumn("arquivo_origem", input_file_name())
+    .withColumn("data_ingestao", current_timestamp())
+)
+
+# Escreve na camada Bronze (append only)
+df_bronze.writeStream \
+    .format("delta") \
+    .option("checkpointLocation", "/mnt/checkpoints/bronze_clientes") \
+    .outputMode("append") \
+    .table("bronze.clientes")</pre>
+                </div>
+
+                <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h5 style="margin-top: 0;">PASSO 2: Aplicar SCD Type 2 (Silver) - Batch Processing</h5>
+                    <pre style="background: #1a202c; color: #f6ad55; padding: 15px; border-radius: 5px; font-size: 12px; overflow-x: auto;">from delta.tables import DeltaTable
+from pyspark.sql.functions import *
+
+# Lê novos dados do Bronze
+df_novos = spark.read.table("bronze.clientes") \
+    .filter("data_ingestao >= current_date()")
+
+# Tabela Silver com SCD Type 2
+if not spark.catalog.tableExists("silver.clientes_scd"):
+    # Primeira carga - cria tabela
+    df_novos.withColumn("valido_de", col("data_processamento")) \
+        .withColumn("valido_ate", lit(None).cast("date")) \
+        .withColumn("eh_atual", lit(True)) \
+        .withColumn("versao", lit(1)) \
+        .write.format("delta") \
+        .partitionBy("ano", "mes") \
+        .saveAsTable("silver.clientes_scd")
+else:
+    # Merge com lógica SCD Type 2
+    silver_table = DeltaTable.forName(spark, "silver.clientes_scd")
+    
+    # Identifica mudanças
+    silver_table.alias("target").merge(
+        df_novos.alias("source"),
+        """
+        target.cliente_id = source.cliente_id 
+        AND target.eh_atual = true
+        AND target.ano = source.ano
+        AND target.mes = source.mes
+        """
+    ).whenMatchedUpdate(
+        condition = """
+        (target.nome != source.nome OR 
+         target.cidade != source.cidade OR 
+         target.status != source.status)
+        """,
+        set = {
+            "valido_ate": "source.data_processamento",
+            "eh_atual": "false"
+        }
+    ).execute()
+    
+    # Insere novos registros (novos clientes + versões novas)
+    df_para_inserir = df_novos.alias("source").join(
+        silver_table.toDF().filter("eh_atual = true").alias("target"),
+        (col("source.cliente_id") == col("target.cliente_id")) &
+        (col("source.ano") == col("target.ano")) &
+        (col("source.mes") == col("target.mes")),
+        "left"
+    ).filter(
+        # Novo cliente OU dados mudaram
+        col("target.cliente_id").isNull() |
+        (col("source.nome") != col("target.nome")) |
+        (col("source.cidade") != col("target.cidade")) |
+        (col("source.status") != col("target.status"))
+    ).select(
+        col("source.*"),
+        col("source.data_processamento").alias("valido_de"),
+        lit(None).cast("date").alias("valido_ate"),
+        lit(True).alias("eh_atual"),
+        (coalesce(col("target.versao"), lit(0)) + 1).alias("versao")
+    )
+    
+    df_para_inserir.write.format("delta") \
+        .mode("append") \
+        .partitionBy("ano", "mes") \
+        .saveAsTable("silver.clientes_scd")</pre>
+                </div>
+
+                <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h5 style="margin-top: 0;">PASSO 3: Resultado Final - Histórico Completo</h5>
+                    <pre style="background: #1a202c; color: #68d391; padding: 15px; border-radius: 5px; font-size: 12px; overflow-x: auto;">SELECT * FROM silver.clientes_scd WHERE cliente_id = 1001 ORDER BY versao
+
+# Resultado:
+cliente_id | nome        | cidade       | status | valido_de  | valido_ate | eh_atual | versao | ano  | mes
+-----------+-------------+--------------+--------+------------+------------+----------+--------+------+-----
+1001       | João Silva  | São Paulo    | Ativo  | 2025-10-22 | 2025-10-23 | false    | 1      | 2025 | 10
+1001       | João Silva  | Campinas     | Ativo  | 2025-10-23 | NULL       | true     | 2      | 2025 | 10
+
+# ✅ Histórico preservado! Você pode ver que João morava em SP e agora mora em Campinas</pre>
+                </div>
+
+                <h4 style="color: #c53030;">🎯 Por que isso NÃO é CDC?</h4>
+                <div style="background: #fef5e7; border-left: 4px solid #f39c12; padding: 15px; margin-top: 15px; border-radius: 5px;">
+                    <p style="margin: 0; font-size: 14px; line-height: 1.6;">
+                        <strong>CDC = captura mudanças em tempo real do transaction log do banco</strong><br>
+                        <strong>Seu caso = detecta mudanças comparando arquivo novo com arquivo anterior</strong><br><br>
+                        Você está fazendo <strong>"pseudo-CDC" ou "file-based change detection"</strong>:<br>
+                        • Auto Loader traz os arquivos novos<br>
+                        • Você compara (MERGE) com dados existentes<br>
+                        • Aplica SCD Type 2 para manter histórico<br><br>
+                        É uma técnica válida e muito usada! Mas tecnicamente não é CDC porque não há transaction log.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="insights">
+            <h3 style="margin-top: 0; color: #2d3748;">💡 Insights Importantes para a Prova</h3>
+            
+            <div class="insight-item">
+                <span class="insight-icon">🔗</span>
+                <div class="insight-text">
+                    <strong>CDC e SCD trabalham juntos:</strong> CDC captura as mudanças da origem, SCD define como você armazena essas mudanças (com histórico ou sobrescrevendo)
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <span class="insight-icon">⚔️</span>
+                <div class="insight-text">
+                    <strong>Auto Loader vs COPY INTO:</strong> Ambos ingerem arquivos, mas Auto Loader é streaming (contínuo) e COPY INTO é batch (pontual)
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <span class="insight-icon">❌</span>
+                <div class="insight-text">
+                    <strong>CDC ≠ Auto Loader:</strong> CDC é para bancos de dados, Auto Loader é para arquivos. Não confunda!
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <span class="insight-icon">🎯</span>
+                <div class="insight-text">
+                    <strong>CTAS não é ingestão:</strong> CTAS cria tabelas a partir de dados JÁ no Databricks, não traz dados de fora
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <span class="insight-icon">🏗️</span>
+                <div class="insight-text">
+                    <strong>Arquitetura Medallion:</strong> Bronze = ingestão (CDC/Auto Loader/COPY INTO) → Silver = limpeza/SCD → Gold = agregações (CTAS)
+                </div>
+            </div>
+
+            <div class="insight-item">
+                <span class="insight-icon">📝</span>
+                <div class="insight-text">
+                    <strong>Na prova:</strong> Se mencionar "banco de dados transacional" → pense CDC. Se mencionar "arquivos no S3/ADLS" → pense Auto Loader ou COPY INTO
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
